@@ -1,0 +1,399 @@
+#root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .logo {
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
+  }
+  .logo:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+  }
+  .logo.react:hover {
+    filter: drop-shadow(0 0 2em #61dafbaa);
+  }
+  
+  @keyframes logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    a:nth-of-type(2) .logo {
+      animation: logo-spin infinite 20s linear;
+    }
+  }
+  
+  .card {
+    padding: 2em;
+  }
+  
+  .read-the-docs {
+    color: #888;
+  }
+  
+
+  /* src/styles/LoginPage.css */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #e9ecef;
+  }
+  
+  .login-form {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .login-form h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 24px;
+  }
+  
+  .login-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #495057;
+  }
+  
+  .login-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+  
+  .login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .login-form button:hover {
+    background-color: #0056b3;
+  }
+  
+
+  /* src/styles/RegisterPage.css */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #e9ecef;
+  }
+  
+  .register-form {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .register-form h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 24px;
+  }
+  
+  .register-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #495057;
+  }
+  
+  .register-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+  
+  .register-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .register-form button:hover {
+    background-color: #218838;
+  }
+  
+
+  /* src/styles/HomePage.css */
+.home-container {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  
+  .home-container h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .home-container p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #6c757d;
+  }
+  
+  .home-container .links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .home-container .links a {
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 16px;
+  }
+  
+  .home-container .links .login-link {
+    background-color: #007bff;
+  }
+  
+  .home-container .links .login-link:hover {
+    background-color: #0056b3;
+  }
+  
+  .home-container .links .register-link {
+    background-color: #28a745;
+  }
+  
+  .home-container .links .register-link:hover {
+    background-color: #218838;
+  }
+  
+  /* src/styles/Header.css */
+.header {
+    background-color: #343a40;
+    padding: 10px 0;
+    color: #ffffff;
+  }
+  
+  .header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header nav a {
+    margin-right: 20px;
+    color: #ffffff;
+    font-size: 16px;
+  }
+  
+  .header nav a:hover {
+    text-decoration: underline;
+  }
+  
+  .header nav .auth-links a {
+    margin-left: 20px;
+  }
+  
+  /* src/styles/Footer.css */
+.footer {
+  background-color: #343a40;
+  padding: 20px 0;
+  color: #ffffff;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 14px;
+}
+
+
+/* src/styles/ArticlePage.css */
+.articles-container {
+  padding: 20px;
+}
+
+.articles-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.articles-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.article-item {
+  width: 100%;
+  max-width: 300px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.article-item h3 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.article-item p {
+  margin: 5px 0;
+}
+
+
+/* src/styles/ArticleForm.css */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #e9ecef;
+}
+
+.article-form {
+  width: 100%;
+  max-width: 400px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.article-form h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 24px;
+}
+
+.article-form label {
+  display: block;
+  margin-bottom: 5px;
+  color: #495057;
+}
+
+.article-form input,
+.article-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.article-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.article-form button:hover {
+  background-color: #0056b3;
+}
+
+
+/* src/styles/Notification.css */
+.notification {
+  background-color: #28a745;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  animation: fadeIn 0.5s, fadeOut 0.5s 4.5s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+
+/* src/styles/SearchBar.css */
+.searchbar-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.search-form {
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+}
+
+.search-form input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px 0 0 4px;
+}
+
+.search-form button {
+  padding: 10px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  font-size: 16px;
+}
+
+.search-form button:hover {
+  background-color: #0056b3;
+}
+
