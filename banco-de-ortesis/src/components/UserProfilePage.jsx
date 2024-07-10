@@ -1,5 +1,6 @@
 // src/pages/UserProfilePage.jsx
 import React from 'react';
+import '../styles/Styles.css';
 
 const UserProfilePage = () => {
   return (
