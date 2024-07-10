@@ -1,15 +1,13 @@
 // src/components/Footer.jsx
-import React from 'react';
 import '../styles/Styles.css';
+import React from 'react';
 
 const Footer = () => {
   return (
     <footer className="footer">
-      <div className="container">
-        <p>&copy; 2024 Banco de Ortesis. Todos los derechos reservados.</p>
-      </div>
+      <p>© 2024 Red Solidaria de Equipamiento Ortopédico</p>
     </footer>
   );
 };
 
-export default Footer
+export default Footer;
