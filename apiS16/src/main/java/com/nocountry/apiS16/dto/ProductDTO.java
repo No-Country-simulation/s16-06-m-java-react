@@ -2,9 +2,13 @@ package com.nocountry.apiS16.dto;
 
 import com.nocountry.apiS16.model.Category;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import java.util.Date;
+import lombok.Setter;
 
+import java.util.Date;
+@Getter
+@Setter
 @Data
 @NoArgsConstructor
 public class ProductDTO {

@@ -1,6 +1,9 @@
 package com.nocountry.apiS16.service.implementations;
+import com.nocountry.apiS16.dto.ProductDTO;
 import com.nocountry.apiS16.exceptions.ResourceNotFoundException;
+import com.nocountry.apiS16.model.Category;
 import com.nocountry.apiS16.model.Product;
+import com.nocountry.apiS16.repository.ICategoryRepository;
 import com.nocountry.apiS16.repository.IProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,18 +15,29 @@ public class ProductService {
     @Autowired
     private IProductRepository productRepository;
 
-    public Product createProduct(Product product) throws ResourceNotFoundException {
-        if (product == null) {
-            throw new ResourceNotFoundException("Product object cannot be null");
+    private ICategoryRepository iCategoryRepository;
+
+    public Product createProduct(ProductDTO productDTO) throws ResourceNotFoundException {
+        if (productDTO == null) {
+            throw new IllegalArgumentException("ProductDTO object cannot be null");
         }
-        if (product.getName() == null || product.getName().isEmpty()) {
+        if (productDTO.getName() == null || productDTO.getName().isEmpty()) {
             throw new ResourceNotFoundException("Product name required");
         }
-        if (nameAlreadyInUse(product.getName())) {
-            throw new ResourceNotFoundException("A Product with that name already exists in the database");
-        }
+
+        Category category = iCategoryRepository.findById(productDTO.getCategory().getIdCategory())
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + productDTO.getCategory().getIdCategory()));
+
+        Product product = new Product();
+        product.setName(productDTO.getName());
+        product.setDescription(productDTO.getDescription());
+        product.setCreationDate(productDTO.getCreationDate());
+        product.setAvailable(productDTO.isAvailable());
+        product.setState(productDTO.isState());
+        product.setCategory(category);
 
         return productRepository.save(product);
+
     }
 
     public List<Product> getAllProduct() {
@@ -46,15 +60,21 @@ public class ProductService {
         return product;
     }
 
-    public Product updateProduct(Product product) throws ResourceNotFoundException {
-        Product existingProduct = productRepository.findById(product.getIdProduct()).orElse(null);
-        if (existingProduct != null) {
-            existingProduct.setName(product.getName());
-            existingProduct.setDescription(product.getDescription());
-            return productRepository.save(existingProduct);
-        } else {
-            throw new ResourceNotFoundException("Product with ID " + product.getIdProduct() + " not found");
-        }
+    public Product updateProduct(Long id, ProductDTO productDTO) throws  ResourceNotFoundException{
+        Product existingProduct = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
+
+        Category category = iCategoryRepository.findById(productDTO.getCategory().getIdCategory())
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + productDTO.getCategory().getIdCategory()));
+
+        existingProduct.setName(productDTO.getName());
+        existingProduct.setDescription(productDTO.getDescription());
+        existingProduct.setCreationDate(productDTO.getCreationDate());
+        existingProduct.setAvailable(productDTO.isAvailable());
+        existingProduct.setState(productDTO.isState());
+        existingProduct.setCategory(category);
+
+        return productRepository.save(existingProduct);
     }
 
     public void deleteProductById(Long id) throws ResourceNotFoundException {
@@ -67,9 +87,5 @@ public class ProductService {
 
     }
 
-    private boolean nameAlreadyInUse(String name) {
-        return productRepository.findByName(name).isPresent();
-
-    }
 }
 
