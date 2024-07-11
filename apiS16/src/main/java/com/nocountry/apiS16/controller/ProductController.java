@@ -3,7 +3,6 @@ package com.nocountry.apiS16.controller;
 import com.nocountry.apiS16.exceptions.ResourceNotFoundException;
 import com.nocountry.apiS16.model.Product;
 import com.nocountry.apiS16.service.implementations.ProductService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,12 +31,12 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable Long id,@RequestBody Product product) throws ResourceNotFoundException {
+    public Product updateProduct(@PathVariable Long id, @RequestBody Product product) throws ResourceNotFoundException {
         product.setIdProduct(id);
         return productService.updateProduct(product);
     }
 
-    @GetMapping("/products/{id}")
+    @GetMapping("/{id}")
     public Product getProductById(@PathVariable Long id) throws ResourceNotFoundException {
         return productService.getProductById(id);
     }

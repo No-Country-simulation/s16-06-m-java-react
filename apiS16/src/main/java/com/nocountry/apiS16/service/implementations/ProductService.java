@@ -12,18 +12,18 @@ public class ProductService {
     @Autowired
     private IProductRepository productRepository;
 
-    public Product createProduct(Product producto) throws ResourceNotFoundException {
-        if (producto == null) {
+    public Product createProduct(Product product) throws ResourceNotFoundException {
+        if (product == null) {
             throw new ResourceNotFoundException("Product object cannot be null");
         }
-        if (producto.getName() == null || producto.getName().isEmpty()) {
+        if (product.getName() == null || product.getName().isEmpty()) {
             throw new ResourceNotFoundException("Product name required");
         }
-        if (nameAlreadyInUse(producto.getName())) {
+        if (nameAlreadyInUse(product.getName())) {
             throw new ResourceNotFoundException("A Product with that name already exists in the database");
         }
 
-        return productRepository.save(producto);
+        return productRepository.save(product);
     }
 
     public List<Product> getAllProduct() {

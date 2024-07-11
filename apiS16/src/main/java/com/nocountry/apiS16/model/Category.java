@@ -16,8 +16,10 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCategory;
+
     @Column(unique = true)
     private String name;
+
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-    private List<CategoryXProduct> categoryXProducts;
+    private List<Product> products;
 }

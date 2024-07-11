@@ -3,9 +3,10 @@ package com.nocountry.apiS16.service.implementations;
 import com.nocountry.apiS16.model.Category;
 import com.nocountry.apiS16.repository.ICategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class CategoryService {
     @Autowired
     private ICategoryRepository iCategoryRepository;
