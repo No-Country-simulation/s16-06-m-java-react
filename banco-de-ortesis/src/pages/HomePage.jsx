@@ -5,8 +5,10 @@ import React from 'react';
 const HomePage = () => {
   return (
     <div>
-      <h1>Bienvenido a la Red Solidaria</h1>
-      <p>Accede a equipamiento ortopédico de manera fácil y rápida.</p>
+<div class="text-tahiti">
+<h1 class="text-4xl font-bold text-purple mb-4">Título Principal</h1>
+
+</div>
     </div>
   );
 };

@@ -36,9 +36,12 @@ const Login = ({ handleLogin }) => {
   };
 
   return (
-    <div className="login-container">
-      <div className="logo">Logo</div>
-      <form className="login-form" onSubmit={handleSubmit}>
+    <div className="register-container">
+      <div className="register-form">
+        <div className="logo">
+          <h2>Logo</h2>
+        </div>
+        <form onSubmit={handleSubmit}>
         <h2>Login</h2>
         <label>Email:</label>
         <input
@@ -56,7 +59,7 @@ const Login = ({ handleLogin }) => {
         />
         <button type="submit">Login</button>
       </form>
-    </div>
+    </div>    </div>
   );
 };
 
