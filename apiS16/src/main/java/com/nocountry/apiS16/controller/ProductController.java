@@ -33,6 +33,7 @@ public class ProductController {
         return productService.getProductByName(name);
     }
 
+
     @PutMapping("/{id}")
     public Product updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) throws ResourceNotFoundException{
         return productService.updateProduct(id, productDTO);
@@ -42,6 +43,7 @@ public class ProductController {
     public Product getProductById(@PathVariable Long id) throws ResourceNotFoundException {
         return productService.getProductById(id);
     }
+
 
     @DeleteMapping("/{id}")
     public void deleteProductById(@PathVariable Long id) throws ResourceNotFoundException {

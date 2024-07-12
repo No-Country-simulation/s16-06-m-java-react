@@ -5,14 +5,15 @@ import com.nocountry.apiS16.exceptions.ResourceNotFoundException;
 import com.nocountry.apiS16.model.Category;
 import com.nocountry.apiS16.repository.ICategoryRepository;
 import com.nocountry.apiS16.repository.IProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+@RequiredArgsConstructor
 @Service
 public class CategoryService {
     @Autowired
     private ICategoryRepository iCategoryRepository;
-
+    @Autowired
     private IProductRepository iProductRepository;
 
     public Category createCategory(CategoryDTO categoryDTO) {

@@ -27,8 +27,6 @@ public class Product {
     private boolean available;
     private boolean state;
 
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "category_id")
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
