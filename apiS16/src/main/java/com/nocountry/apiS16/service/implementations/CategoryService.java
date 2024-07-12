@@ -8,6 +8,9 @@ import com.nocountry.apiS16.repository.IProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class CategoryService {
@@ -27,6 +30,10 @@ public class CategoryService {
         return iCategoryRepository.save(category);
     }
 
+    public List<Category> getAllCategory() {
+        return iCategoryRepository.findAll();
+    }
+
         public Category getCategoryById(Long id)throws ResourceNotFoundException {
             Category category = iCategoryRepository.findById(id).orElse(null);
             if (category == null) {
@@ -34,6 +41,14 @@ public class CategoryService {
             }
             return category;
         }
+
+    public Category getCategoryByName(String name) throws ResourceNotFoundException {
+        Category category = iCategoryRepository.findByName(name).orElse(null);
+        if (category == null) {
+            throw new ResourceNotFoundException("Category not found with id: " + name);
+        }
+        return category;
+    }
     public Category updateCategory(Long id, CategoryDTO categoryDTO) throws ResourceNotFoundException {
         Category existingCategory = iCategoryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + id));

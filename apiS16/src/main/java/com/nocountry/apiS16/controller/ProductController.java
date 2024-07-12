@@ -6,7 +6,6 @@ import com.nocountry.apiS16.model.Product;
 import com.nocountry.apiS16.service.implementations.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,8 +39,12 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public Product getProductById(@PathVariable Long id) throws ResourceNotFoundException {
-        return productService.getProductById(id);
+    public Product getProductById(@PathVariable Long id) throws ResourceNotFoundException  {
+        Product product = productService.getProductById(id);
+        if (product == null) {
+            throw new ResourceNotFoundException("Category not found with id: " + id);
+        }
+        return product;
     }
 
 

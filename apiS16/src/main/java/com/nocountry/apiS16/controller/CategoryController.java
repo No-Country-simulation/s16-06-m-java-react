@@ -25,6 +25,16 @@ public class CategoryController {
         }
         return category;
     }
+
+    @GetMapping
+    public List<Category> getAllCategories() {
+        return categoryService.getAllCategory();
+    }
+
+    @GetMapping("/name/{name}")
+    public Category getCategoryByName(@PathVariable String name) throws ResourceNotFoundException {
+        return categoryService.getCategoryByName(name);
+    }
     @PostMapping()
     public Category createCategory (@RequestBody CategoryDTO categoryDTO) throws ResourceNotFoundException {
         return categoryService.createCategory(categoryDTO);

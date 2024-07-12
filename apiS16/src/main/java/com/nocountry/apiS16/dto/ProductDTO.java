@@ -1,8 +1,5 @@
 package com.nocountry.apiS16.dto;
 
-import com.nocountry.apiS16.model.Category;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PastOrPresent;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,4 +19,5 @@ public class ProductDTO {
     private boolean available;
     private boolean state;
     private Long categoryId;
+    private CategoryDTO category;
 }

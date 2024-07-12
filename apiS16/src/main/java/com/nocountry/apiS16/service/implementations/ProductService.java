@@ -20,19 +20,19 @@ public class ProductService {
     private ICategoryRepository iCategoryRepository;
 
 
-//        if (productDTO == null) {
-//            throw new IllegalArgumentException("ProductDTO object cannot be null");
-//        }
-//        if (productDTO.getName() == null || productDTO.getName().isEmpty()) {
-//            throw new ResourceNotFoundException("Product name required");
-//        }
-//        if (productDTO.getCategory() == null) {
-//            throw new ResourceNotFoundException("Category cannot be null");
-//        }
+
     public Product createProduct(ProductDTO productDTO) throws ResourceNotFoundException {
         Category category = iCategoryRepository.findById(productDTO.getIdProduct())
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + productDTO.getIdProduct()));
-
+        if (productDTO == null) {
+            throw new ResourceNotFoundException("ProductDTO object cannot be null");
+        }
+        if (productDTO.getName() == null || productDTO.getName().isEmpty()) {
+            throw new ResourceNotFoundException("Product name required");
+        }
+        if (productDTO.getCategory() == null) {
+            throw new ResourceNotFoundException("Category cannot be null");
+        }
         Product product = new Product();
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());
@@ -65,9 +65,9 @@ public class ProductService {
         return product;
     }
 
-    public Product updateProduct(Long id, ProductDTO productDTO) throws  ResourceNotFoundException{
-        Product existingProduct = iProductRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
+    public Product updateProduct(Long idProduct, ProductDTO productDTO) throws  ResourceNotFoundException{
+        Product existingProduct = iProductRepository.findById(idProduct)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + idProduct));
 
         Category category = iCategoryRepository.findById(productDTO.getCategoryId())
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + productDTO.getCategoryId()));

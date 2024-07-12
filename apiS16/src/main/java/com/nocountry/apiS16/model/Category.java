@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -21,7 +19,6 @@ public class Category {
     @Column(unique = true)
     private String name;
 
-    //@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Product> products;
 }
