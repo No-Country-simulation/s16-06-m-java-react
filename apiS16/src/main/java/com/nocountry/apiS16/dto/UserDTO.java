@@ -1,9 +1,6 @@
 package com.nocountry.apiS16.dto;
 
 
-import com.nocountry.apiS16.model.Comments;
-import jakarta.persistence.Column;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
