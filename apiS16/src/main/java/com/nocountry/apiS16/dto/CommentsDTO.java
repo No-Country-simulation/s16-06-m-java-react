@@ -11,13 +11,14 @@ import lombok.Setter;
 import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDate;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Validated
-public class CommentsDTO {
+public class CommentsDTO implements Serializable {
 
     private Long id_user;
 
