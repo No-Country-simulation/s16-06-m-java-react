@@ -46,10 +46,10 @@ const Register = () => {
               checked={acceptedTerms}
               onChange={handleTermsChange}
             />
-            <label htmlFor="terms">
+          </div>
+          <label htmlFor="terms">
               <a href="#" onClick={() => setShowModal(true)}>Acepto los términos y condiciones</a>
             </label>
-          </div>
           <button type="submit"  disabled={!acceptedTerms}>Registrarse</button>
         </form>
         <div className="login-link">

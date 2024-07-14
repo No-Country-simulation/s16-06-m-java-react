@@ -12,13 +12,11 @@ import ArticleForm from './components/ArticleForm';
 import SearchBar from './components/SearchBar';
 import Notification from './components/Notification';
 
-
 function App() {
   return (
     <Router>
       <Header />
       <main className="container mx-auto p-4">
-        <SearchBar onSearch={(query) => console.log(query)} />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
