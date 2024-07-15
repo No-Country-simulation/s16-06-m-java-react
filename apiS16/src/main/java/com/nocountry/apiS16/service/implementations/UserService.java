@@ -24,6 +24,7 @@ public class UserService implements IUserService {
                 .email(userDTO.getEmail())
                 .birthday(userDTO.getBirthday())
                 .phoneNumber(userDTO.getPhoneNumber())
+                 .province(userDTO.getProvince())
                 .build();
 
          return this.userRepository.save(userCreated);

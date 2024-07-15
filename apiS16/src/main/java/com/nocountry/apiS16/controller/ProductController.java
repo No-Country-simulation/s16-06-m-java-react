@@ -12,22 +12,22 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/products")
+@RequestMapping("/api/v1/products")
 public class ProductController {
-@Autowired
-    private ProductService productService;
 
-    @PostMapping
+    private final ProductService productService;
+
+    @PostMapping("/add")
     public Product createProduct(@RequestBody ProductDTO productDTO) throws ResourceNotFoundException {
         return productService.createProduct(productDTO);
     }
 
-    @GetMapping
+    @GetMapping("/get")
     public List<Product> getAllProducts() {
         return productService.getAllProduct();
     }
 
-    @GetMapping("/name/{name}")
+    @GetMapping("/get/name/{name}")
     public Product getProductByName(@PathVariable String name) throws ResourceNotFoundException {
         return productService.getProductByName(name);
     }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/categories")
+@RequestMapping("/api/v1/categories")
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
@@ -35,7 +35,7 @@ public class CategoryController {
     public Category getCategoryByName(@PathVariable String name) throws ResourceNotFoundException {
         return categoryService.getCategoryByName(name);
     }
-    @PostMapping()
+    @PostMapping("/add")
     public Category createCategory (@RequestBody CategoryDTO categoryDTO) throws ResourceNotFoundException {
         return categoryService.createCategory(categoryDTO);
     }
