@@ -24,7 +24,10 @@ public class Comments {
     @JsonBackReference
     private Users user;
 
-    //@ManyToOne(targetEntity = Products.class)
+    @ManyToOne(targetEntity = Product.class)
+    @JoinColumn(name = "product_id")
+    @JsonBackReference
+    private Product product;
 
     private String description;
 

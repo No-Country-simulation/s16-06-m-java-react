@@ -8,6 +8,6 @@ public interface ICommentsService {
 
     public List<Comments> getComments();
     public Comments findComments(Long id_comments);
-    public Comments saveComments (Long idUser, String description);
+    public Comments saveComments (Long idUser,Long idProduct, String description);
     public Boolean deleteComments(Long id_comments);
 }

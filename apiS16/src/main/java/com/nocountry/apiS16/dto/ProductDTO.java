@@ -15,9 +15,10 @@ public class ProductDTO {
     private String name;
     private Long idUser;
     private String description;
-    private Date CreationDate;
+    private Date creationDate;
     private boolean available;
     private boolean state;
+    private String imageURL;
     private Long categoryId;
     private CategoryDTO category;
 }
