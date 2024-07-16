@@ -16,7 +16,6 @@ function App() {
   return (
     <Router>
       <Header />
-      <main className="container mx-auto p-4">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -25,9 +24,8 @@ function App() {
           <Route path="/profile" element={<UserProfilePage />} />
           <Route path="/upload" element={<ArticleForm />} />
         </Routes>
-      </main>
       <Footer />
-      <Notification message="Esto es una notificación!" />
+      {/* <Notification message="Esto es una notificación!" /> */}
     </Router>
   );
 }
