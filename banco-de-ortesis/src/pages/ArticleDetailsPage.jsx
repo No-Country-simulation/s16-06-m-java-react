@@ -1,5 +1,4 @@
 // src/pages/ArticleDetailsPage.jsx
-import '../styles/Styles.css';
 import React from 'react';
 
 const ArticleDetailsPage = () => {
