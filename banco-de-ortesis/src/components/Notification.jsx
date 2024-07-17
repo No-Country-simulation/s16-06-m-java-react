@@ -1,11 +1,11 @@
 // src/components/Notification.jsx
 import React from 'react';
-import '../styles/Styles.css';
+import { MdOutlineNotifications } from "react-icons/md";
 
 const Notification = ({ message }) => {
   return (
-    <div className="notification">
-      {message}
+    <div>
+      <MdOutlineNotifications className='h-6 w-6' />
     </div>
   );
 };

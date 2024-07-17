@@ -1,6 +1,6 @@
 // src/components/SearchBar.jsx
 import React, { useState } from 'react';
-import '../styles/Styles.css';
+import { IoMdSearch } from "react-icons/io";
 
 const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
@@ -11,17 +11,16 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <div className="searchbar-container">
-      <form onSubmit={handleSubmit} className="search-form">
-        <input
+      <form onSubmit={handleSubmit} className="flex justify-evenly items-center w-84 gap-2 rounded-3xl bg-stone-300">
+        <input className='border-none outline-none bg-transparent'
           type="text"
-          placeholder="Buscar artículos..."
+          placeholder="Buscador"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button type="submit">Buscar</button>
+        {/* <button className='text-midnight border-none bg-transparent' type="submit">Buscar</button> */}
+        <IoMdSearch className='w-6 h-6' />
       </form>
-    </div>
   );
 };
 
