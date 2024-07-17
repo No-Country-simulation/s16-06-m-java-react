@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.validation.annotation.Validated;
+import java.io.Serializable;
 
 import java.time.LocalDate;
 
@@ -16,9 +17,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Validated
-public class UserDTO {
+public class UserDTO implements Serializable {
 
 
+    @Size(min = 3)
     @NotBlank(message = "Name is required")
     private String name;
 
@@ -32,6 +34,12 @@ public class UserDTO {
     @Email
     @NotNull(message = "Email valid is required")
     private String email;
+
+    @Size(min = 8)
+    private String password;
+
+    @Size(min = 8)
+    private String repeatedPassword;
 
     @Past
     @NotNull(message = "Birth day is required")

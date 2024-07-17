@@ -1,11 +1,16 @@
 package com.nocountry.apiS16.service.implementations;
 
 import com.nocountry.apiS16.dto.UserDTO;
+import com.nocountry.apiS16.exception.InvalidPasswordException;
 import com.nocountry.apiS16.model.Users;
 import com.nocountry.apiS16.repository.IUserRepository;
 import com.nocountry.apiS16.service.interfaces.IUserService;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -13,21 +18,40 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService implements IUserService {
 
+    @Autowired
     private final IUserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public Users saveUser(UserDTO userDTO) {
-         Users userCreated = Users.builder()
-                .name(userDTO.getName())
-                .lastName(userDTO.getLastName())
-                .dni(userDTO.getDni())
-                .email(userDTO.getEmail())
-                .birthday(userDTO.getBirthday())
-                .phoneNumber(userDTO.getPhoneNumber())
-                 .province(userDTO.getProvince())
-                .build();
 
-         return this.userRepository.save(userCreated);
+
+        validatePassword(userDTO);
+
+        Users userCreated = new Users();
+
+        userCreated.setName(userDTO.getName());
+        userCreated.setLastName(userDTO.getLastName());
+        userCreated.setEmail(userDTO.getEmail());
+        userCreated.setDni(userDTO.getDni());
+        userCreated.setBirthday(userDTO.getBirthday());
+        userCreated.setPhoneNumber(userDTO.getPhoneNumber());
+        userCreated.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+
+         return userRepository.save(userCreated);
+    }
+
+    private void validatePassword(UserDTO dto) {
+        
+        if(!StringUtils.hasText(dto.getPassword()) || !StringUtils.hasText(dto.getRepeatedPassword())){
+            throw new InvalidPasswordException("Passwords don't match");
+        }
+
+        if(!dto.getPassword().equals(dto.getRepeatedPassword())){
+            throw new InvalidPasswordException("Passwords don't match");
+        }
     }
 
     @Override
