@@ -7,10 +7,9 @@ import Button2 from '../components/Buttons/Button2';
 import Carousel from '../components/Carousel';
 
 const ArticlePage = () => {
-  const items = ['https://www.enfoquedenegocios.com.ar/wp-content/uploads/2019/09/ortopedia-2.jpg', 'https://8e93beb6.rocketcdn.me/storage/2023/01/ortopedia.jpg'];
+  const items = ['https://www.enfoquedenegocios.com.ar/wp-content/uploads/2019/09/ortopedia-2.jpg', 'https://8e93beb6.rocketcdn.me/storage/2023/01/ortopedia.jpg', 'https://8e93beb6.rocketcdn.me/storage/2023/01/ortopedia.jpg'];
   return (
-    <div className='flex flex-col'>
-      {/* <img src="" alt="imagen producto" /> */}
+    <div className='flex flex-col gap-4'>
       <Carousel items={items} />
       <div className='flex flex-col gap-5 p-6 text-lg'>
         <div className='flex items-center text-xl'>
