@@ -6,7 +6,6 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ArticlePage from './pages/ArticlePage';
 import UserProfilePage from './pages/UserProfilePage';
-import Footer from './components/Footer';
 import ArticleForm from './components/ArticleForm';
 import MobileNav from './components/MobileNav';
 import HeaderNav from './components/HeaderNav';
