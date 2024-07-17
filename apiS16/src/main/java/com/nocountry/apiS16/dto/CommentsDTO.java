@@ -1,5 +1,4 @@
 package com.nocountry.apiS16.dto;
-
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,6 +17,7 @@ import java.io.Serializable;
 public class CommentsDTO implements Serializable {
 
     private Long id_user;
+    private Long id_product;
 
     @NotBlank(message = "Increase a description")
     private String description;

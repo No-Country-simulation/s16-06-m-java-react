@@ -49,4 +49,7 @@ public class UserDTO implements Serializable {
     @Size(min = 10, max = 11) //3571416413
     private String phoneNumber;
 
+    @NotBlank(message = "Increase a Province please!")
+    private String province;
+
 }
