@@ -1,14 +1,19 @@
 // src/pages/HomePage.jsx
-import '../styles/Styles.css';
+import ProductCard from '../components/ProductCard';
 import React from 'react';
 
 const HomePage = () => {
   return (
-    <div>
-<div class="text-tahiti">
-<h1 class="text-4xl font-bold text-purple mb-4">Título Principal</h1>
-
-</div>
+    <div className='flex flex-col w-full items-center mb-24'>
+      <h1 class="text-lg self-start font-bold mx-4">Más buscados</h1>
+      <div className='flex flex-col m-4 gap-3'>
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+      </div>
     </div>
   );
 };

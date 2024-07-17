@@ -1,4 +1,4 @@
-/* src/styles/Styles.css */
+/* src/styles/Styles.css
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -12,7 +12,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
+} */
 
 a {
   font-weight: 500;
@@ -74,12 +74,12 @@ button:focus-visible {
   }
 }
 
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-}
+} */
 
 .logo {
   height: 6em;
@@ -227,20 +227,31 @@ button:focus-visible {
   margin-bottom: 20px;
 }
 
-.login-button, .register-button, .register-submit, .logout-button {
+.login-button,.logout-button {
   width: 100%;
   padding: 15px;
   margin: 10px 0;
   border: none;
   border-radius: 10px;
-  background-color: #007bff;
-  color: white;
+  background-color: #6D6D6D;
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+}
+
+.register-button, .register-submit{
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 10px;
+  background-color: #6D6D6D;
+  color: rgb(0, 0, 0);
   font-size: 18px;
 }
 
 .register-button {
-  background-color: #6c757d;
-  color: white;
+  background-color: #DFDFDF;
+  color: rgb(0, 0, 0);
 }
 
 .profile-header {
@@ -252,7 +263,7 @@ button:focus-visible {
 .profile-pic {
   width: 150px;
   height: 150px;
-  background-color: #007bff;
+  background-color: #D9D9D9;
   color: #ffffff;
   border-radius: 50%;
   display: flex;
@@ -354,7 +365,7 @@ button:focus-visible {
 .purpose-terms-container {
   margin-top: 20px;
   padding: 20px;
-  background-color: #f8f9fa;
+  background-color: #000000;
   border-radius: 8px;
 }
 
@@ -393,7 +404,7 @@ button:focus-visible {
   width: 150px;
   height: 150px;
   background-color: #007bff;
-  color: #ffffff;
+  color: #000000;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -451,12 +462,28 @@ button:focus-visible {
 }
 
 .register-form button:hover {
-  background-color: #218838;
+  background-color: #6D6D6D;
 }
 
 .register-form .login-link {
   margin-top: 20px;
   text-align: center;
+}
+
+.continue-without-registering {
+  text-align: center; /* Centra el contenido horizontalmente */
+  margin-top: 10px; /* Ajusta el margen superior según sea necesario */
+  color: #000000;
+}
+.continue-link {
+  color: black; /* Color del texto */
+  text-decoration: none; /* Quita el subrayado predeterminado */
+  border-bottom: 1px solid black; /* Añade un borde inferior negro */
+  padding-bottom: 2px; /* Espacio entre el texto y el borde inferior */
+}
+
+.continue-link:hover {
+  text-decoration: underline; /* Subrayado al pasar el mouse */
 }
 
 .register-form .login-link a {
@@ -466,6 +493,8 @@ button:focus-visible {
 .register-form .login-link a:hover {
   color: #0056b3;
 }
+
+
 
 .purpose-terms-container h2,
 .purpose-terms-container h3 {

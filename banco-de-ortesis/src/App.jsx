@@ -6,17 +6,16 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ArticlePage from './pages/ArticlePage';
 import UserProfilePage from './pages/UserProfilePage';
-import Header from './components/Header';
 import Footer from './components/Footer';
 import ArticleForm from './components/ArticleForm';
-import SearchBar from './components/SearchBar';
-import Notification from './components/Notification';
+import MobileNav from './components/MobileNav';
+import HeaderNav from './components/HeaderNav';
 
 function App() {
   return (
     <Router>
-      <Header />
-      <main className="container mx-auto p-4">
+      {/* <Header /> */}
+      <HeaderNav />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -25,9 +24,9 @@ function App() {
           <Route path="/profile" element={<UserProfilePage />} />
           <Route path="/upload" element={<ArticleForm />} />
         </Routes>
-      </main>
-      <Footer />
-      <Notification message="Esto es una notificación!" />
+      {/* <Footer /> */}
+      <MobileNav />
+      {/* <Notification message="Esto es una notificación!" /> */}
     </Router>
   );
 }

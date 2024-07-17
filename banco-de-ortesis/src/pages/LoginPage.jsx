@@ -2,7 +2,6 @@ import '../styles/Styles.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
 const Login = ({ handleLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -36,30 +35,22 @@ const Login = ({ handleLogin }) => {
   };
 
   return (
-    <div className="register-container">
-      <div className="register-form">
-        <div className="logo">
-          <h2>Logo</h2>
+    <div className="login-container">
+      <div className="profile-header">
+        <div className="profile-pic">Logo</div>
+      </div>
+      <form onSubmit={handleSubmit}>
+        <button type="submit" className="login-button">Iniciar Sesión</button>
+        <button type="button" className="register-button" onClick={() => navigate('/register')}>Registrarme</button>
+        <div className="continue-without-registering">
+          <label htmlFor="terms">
+            <a href="#" className="continue-link" onClick={() => navigate('/Home')}>
+              Continuar sin registrarme
+            </a>
+          </label>
         </div>
-        <form onSubmit={handleSubmit}>
-        <h2>Login</h2>
-        <label>Email:</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Login</button>
       </form>
-    </div>    </div>
+    </div>
   );
 };
 
