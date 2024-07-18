@@ -802,47 +802,68 @@ button:focus-visible {
   right: 10px;
 }
 
+
 /* src/styles/Onboarding.css */
 .onboarding-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
 }
 
-.content {
+.onboarding-step {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.onboarding-step h2 {
+  margin-bottom: 10px;
+}
+
+.onboarding-step p,
+.onboarding-step ul {
   margin-bottom: 20px;
 }
 
-.controls {
+.onboarding-navigation {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
+  width: 100%;
 }
 
-button {
-  padding: 10px 20px;
+.progress-indicators {
+  display: flex;
+  gap: 10px;
   margin-bottom: 10px;
-  background-color: #333;
-  color: white;
+}
+
+.circle {
+  width: 12px;
+  height: 12px;
+  background-color: #000;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.circle.active {
+  background-color: #656668;
+}
+
+.progress-button {
+  padding: 10px 20px;
+  background-color: #656668;
+  color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.dots {
-  display: flex;
-  gap: 10px;
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  background-color: #ddd;
-  border-radius: 50%;
-}
-
-.dot.active {
-  background-color: #333;
+.progress-button:hover {
+  background-color: #656668;
 }
