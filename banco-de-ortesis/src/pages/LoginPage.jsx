@@ -23,6 +23,10 @@ const Login = ({ handleLogin }) => {
     }
   };
 
+  if (showOnboarding) {
+    return <Onboarding onFinish={() => navigate('/')} />;
+  }
+
   return (
     <div className="login-container">
       <div className="profile-header">
