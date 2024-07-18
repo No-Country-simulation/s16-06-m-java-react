@@ -1,5 +1,5 @@
 
-![Pasos firmes 2.svg]()
+![Pasos firmes 2.svg](https://github.com/No-Country-simulation/s16-06-m-java-react/tree/maria.giraldo/ImgLogo)
 ### Introducción
 
 En América latina, se observa una problemática generalizada.
