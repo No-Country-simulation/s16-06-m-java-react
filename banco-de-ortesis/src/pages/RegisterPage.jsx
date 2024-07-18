@@ -1,7 +1,8 @@
+// src/pages/Register.jsx
 import '../styles/Styles.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useRegister } from '../hooks/useRegister';
+import { registerUser } from '../services/AuthService'; 
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +12,6 @@ const Register = () => {
     password: ''
   });
   const navigate = useNavigate();
-  const { register, loading, error } = useRegister();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -25,7 +25,7 @@ const Register = () => {
     event.preventDefault();
 
     try {
-      await register(formData);
+      await registerUser(formData);
       navigate('/profile');
     } catch (error) {
       alert('Error al registrarse');
@@ -75,10 +75,7 @@ const Register = () => {
             onChange={handleInputChange}
             required
           />
-          <button type="submit" className="register-button" disabled={loading}>
-            {loading ? 'Registrando...' : 'Registrarme'}
-          </button>
-          {error && <p className="error-message">{error}</p>}
+          <button type="submit" className="register-button">Registrarme</button>
           <div className="continue-without-registering">
             <label htmlFor="terms">
               <a href="#" className="continue-link" onClick={() => navigate('/home')}>

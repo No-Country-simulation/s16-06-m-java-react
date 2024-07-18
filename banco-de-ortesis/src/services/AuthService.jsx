@@ -1,3 +1,4 @@
+// src/services/UserService.js
 const API_URL = 'http://localhost:5000/api/users';
 
 export const registerUser = async (formData) => {
@@ -10,7 +11,8 @@ export const registerUser = async (formData) => {
   });
 
   if (!response.ok) {
-    throw new Error('Failed to register');
+    const errorText = await response.text();
+    throw new Error(`Failed to register: ${errorText}`);
   }
 
   return response.json();
@@ -26,8 +28,13 @@ export const loginUser = async (credentials) => {
   });
 
   if (!response.ok) {
-    throw new Error('Failed to login');
+    const errorText = await response.text();
+    throw new Error(`Failed to login: ${errorText}`);
   }
 
   return response.json();
+};
+
+export const logoutUser = () => {
+  localStorage.removeItem('token');
 };

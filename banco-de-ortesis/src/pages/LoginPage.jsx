@@ -1,20 +1,21 @@
+// src/pages/Login.jsx
 import '../styles/Styles.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useLogin } from '../hooks/useLogin';
+import { loginUser } from '../services/AuthService';
 
 const Login = ({ handleLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const { login, loading, error } = useLogin();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = { email, password };
 
     try {
-      await login(user);
+      const data = await loginUser(user);
+      localStorage.setItem('token', data.token);
       handleLogin();
       navigate('/profile');
     } catch (error) {
@@ -28,13 +29,8 @@ const Login = ({ handleLogin }) => {
         <div className="profile-pic">Logo</div>
       </div>
       <form onSubmit={handleSubmit}>
-        <button type="submit" className="login-button" disabled={loading}>
-          {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
-        </button>
-        {error && <p className="error-message">{error}</p>}
-        <button type="button" className="register-button" onClick={() => navigate('/register')}>
-          Registrarme
-        </button>
+        <button type="submit" className="login-button">Iniciar Sesión</button>
+        <button type="button" className="register-button" onClick={() => navigate('/register')}>Registrarme</button>
         <div className="continue-without-registering">
           <label htmlFor="terms">
             <a href="#" className="continue-link" onClick={() => navigate('/home')}>
@@ -48,3 +44,4 @@ const Login = ({ handleLogin }) => {
 };
 
 export default Login;
+
