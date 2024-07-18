@@ -1,10 +1,12 @@
 import '../styles/Styles.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Onboarding from '../components/Onboarding';
 
-const Login = ({ handleLogin }) => {
+const LoginPage = ({ handleLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -24,7 +26,7 @@ const Login = ({ handleLogin }) => {
         const data = await response.json();
         localStorage.setItem('token', data.token);
         handleLogin();
-        navigate('/profile');
+        setShowOnboarding(true);
       } else {
         alert('Login failed');
       }
@@ -33,6 +35,10 @@ const Login = ({ handleLogin }) => {
       alert('An error occurred');
     }
   };
+
+  if (showOnboarding) {
+    return <Onboarding onFinish={() => navigate('/home')} />;
+  }
 
   return (
     <div className="login-container">
@@ -44,7 +50,14 @@ const Login = ({ handleLogin }) => {
         <button type="button" className="register-button" onClick={() => navigate('/register')}>Registrarme</button>
         <div className="continue-without-registering">
           <label htmlFor="terms">
-            <a href="#" className="continue-link" onClick={() => navigate('/Home')}>
+            <a
+              href="#"
+              className="continue-link"
+              onClick={(e) => {
+                e.preventDefault();
+                setShowOnboarding(true);
+              }}
+            >
               Continuar sin registrarme
             </a>
           </label>
@@ -54,4 +67,4 @@ const Login = ({ handleLogin }) => {
   );
 };
 
-export default Login;
+export default LoginPage;
