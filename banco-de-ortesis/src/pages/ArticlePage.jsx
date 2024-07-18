@@ -1,19 +1,41 @@
 // src/pages/ArticlePage.jsx
 import '../styles/Styles.css';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdOutlineLocationOn } from "react-icons/md";
 import Button1 from '../components/Buttons/Button1';
 import Button2 from '../components/Buttons/Button2';
 import Carousel from '../components/Carousel';
+import { useParams } from 'react-router-dom';
+import { getArticleDetails } from '../services/ArticleService';
 
 const ArticlePage = () => {
-  const items = ['https://www.enfoquedenegocios.com.ar/wp-content/uploads/2019/09/ortopedia-2.jpg', 'https://8e93beb6.rocketcdn.me/storage/2023/01/ortopedia.jpg', 'https://8e93beb6.rocketcdn.me/storage/2023/01/ortopedia.jpg'];
+  const { id } = useParams();
+  const [product, setProduct] = useState(null)
+
+  useEffect(() => {
+    const getProductId = async () => {
+      try {
+        const product = await getArticleDetails(id);
+        setProduct(product);
+      } catch (error) {
+        console.error('Error al obtener el producto', error);
+      }
+    };
+
+    getProductId();
+  }, [id]);
+
+  if(!product) return null;
+
+  const {name, description, creationDate, available, state, category, img} = product;
+
+  const items = [img, img, img];
   return (
     <div className='flex flex-col gap-4'>
       <Carousel items={items} />
       <div className='flex flex-col gap-5 p-6 text-lg'>
         <div className='flex items-center text-xl'>
-          <h2>Nombre del producto</h2>
+          <h2>{name}</h2>
           {/* Usuario? */}
         </div>
         <div className='flex gap-2'>
@@ -21,9 +43,9 @@ const ArticlePage = () => {
           <span>Ubicación aprox</span>
         </div>
         <ul>
-          <li>Descripción</li>
-          <li>Categoría</li>
-          <li>Estado</li>
+          <li>{description}</li>
+          <li>{category}</li>
+          <li>{state}</li>
           <li>Cantidad</li>
         </ul>
 

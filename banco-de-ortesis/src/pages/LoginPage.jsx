@@ -37,7 +37,7 @@ const LoginPage = ({ handleLogin }) => {
   };
 
   if (showOnboarding) {
-    return <Onboarding onFinish={() => navigate('/home')} />;
+    return <Onboarding onFinish={() => navigate('/')} />;
   }
 
   return (
