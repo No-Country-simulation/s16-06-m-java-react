@@ -1,5 +1,5 @@
 
-![Pasos firmes 2.svg](..%2FPasos%20firmes%202.svg)
+![Pasos firmes 2.svg]()
 ### Introducción
 
 En América latina, se observa una problemática generalizada.
