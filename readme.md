@@ -176,11 +176,12 @@ El proyecto Banco de Ortesis, a través de la red solidaria "Pasos Firmes", busc
 Invitamos a todos a unirse a esta iniciativa, ya sea contribuyendo con dispositivos ortopédicos en desuso, participando activamente en la plataforma, o difundiendo el proyecto para llegar a más personas que puedan beneficiarse de esta red solidaria. Juntos, podemos hacer una diferencia significativa en la vida de muchas personas.
 ### Colaboradores
 
-- **Gonzalo Bolognese** - Backend - [LinkedIn](https://www.linkedin.com/in/gonzalo-bolognese/)
 - **Pablo Velasco** - Frontend - [LinkedIn](https://www.linkedin.com/in/pablo-r-velasco/)
-- **Lucia Florencia Gangi** - UX/UI - [LinkedIn](https://www.linkedin.com/in/luciagangi/)
+- **Ramiro Gonzalez** -  Frontend[Linkedin](https://www.linkedin.com/in/ramiro-gonzalez-98b28722a/)
+- **Gonzalo Bolognese** - Backend - [LinkedIn](https://www.linkedin.com/in/gonzalo-bolognese/)
 - **Maria Eugenia Giraldo** - Backend - [LinkedIn](https://www.linkedin.com/in/maria-eugenia-giraldo)
 - **Joaquin Brassinne** - Backend - [LinkedIn](https://www.linkedin.com/in/joaquin-brassinne-736a2b27b)
 - **Micaela Dallavia** - UX/UI - [LinkedIn](https://www.linkedin.com/in/micaela-dallavia-designer-ux-ui)
+- **Lucia Florencia Gangi** - UX/UI - [LinkedIn](https://www.linkedin.com/in/luciagangi/)
 
 Gracias a [Banco Mundial](https://www.worldbank.org/) y [Censo INDEC](https://www.indec.gob.ar/) por los datos estadísticos.
