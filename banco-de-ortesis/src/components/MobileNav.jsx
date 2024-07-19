@@ -24,7 +24,7 @@ export default function MobileNav() {
           <AiOutlinePlus className='h-7 w-7' />
         </div>
       </Link>
-      <Link to={'/'} className='flex text-black flex-col items-center justify-center'>
+      <Link to={'/userArticles'} className='flex text-black flex-col items-center justify-center'>
         <MdOutlineDns className='w-6 h-6' />
         Publicados
       </Link>

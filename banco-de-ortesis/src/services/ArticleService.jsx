@@ -51,22 +51,39 @@ export const createArticle = async(article) => {
   }
 };
 
-export const updateArticle = (id, updatedArticle) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      articles = articles.map(article =>
-        article.id === parseInt(id) ? { ...article, ...updatedArticle } : article
-      );
-      resolve(articles.find(article => article.id === parseInt(id)));
-    }, 1000);
-  });
+export const updateArticle = async(id, updatedArticle) => {
+  try {
+    const response = await fetch(`${API_URL}/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedArticle)
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log('Modificado con exito!');
+      return data;
+    }
+  } catch (error) {
+    console.error('Ocurrio un error al actualizar el producto', error);
+    throw error;
+  }
 };
 
-export const deleteArticle = (id) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      articles = articles.filter(article => article.id !== parseInt(id));
-      resolve(true);
-    }, 1000);
-  });
+export const deleteArticle = async(id) => {
+  try {
+    const response = await fetch(`${API_URL}/${id}`,{
+      method: 'DELETE'
+    })
+    if(response.ok){
+      const data = await response.json();
+      console.log('Producto borrado correctamente');
+      return data;
+    }
+  } catch (error) {
+    console.error('Ocurrio un errror al borrar el producto', error);
+    throw error;
+  }
 };

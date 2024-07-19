@@ -1,14 +1,16 @@
 // src/components/ArticleForm.jsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/Styles.css';
-import { createArticle } from '../services/ArticleService';
-import { useNavigate } from 'react-router-dom';
+import { createArticle, updateArticle } from '../services/ArticleService';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 const ArticleForm = () => {
-  //this is a temporal funcion, will delete when backend be connected.
-
   const navigate = useNavigate();
+  const{id} = useParams();
+  const location = useLocation();
+  const currentProduct = location.state?.product || null;
 
+  //this is a temporal funcion, will delete when backend be connected.
   const formatDate = (date) => {
     const d = new Date(date);
     let month = '' + (d.getMonth() + 1);
@@ -31,6 +33,13 @@ const ArticleForm = () => {
     img: ''
   });
 
+  useEffect(() => {
+    if (currentProduct) {
+      delete currentProduct.id;
+      setProduct(currentProduct);
+    }
+  }, [currentProduct]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProduct((prevProduct) => ({
@@ -39,13 +48,13 @@ const ArticleForm = () => {
     }));
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Lógica para subir el artículo
+    // ternary will decide wich operation will execute.
     try {
-      const response = await createArticle(product);
+      const response = currentProduct != null ? await updateArticle(id, product) : await createArticle(product);
       console.log(response);
-      if(response) alert('Articulo registrado exitosamente');
+      if (response) alert('Articulo registrado exitosamente');
       navigate('/');
     } catch (error) {
       console.error(error);

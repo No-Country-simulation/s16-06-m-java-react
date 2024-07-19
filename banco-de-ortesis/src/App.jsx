@@ -12,6 +12,7 @@ import MobileNav from './components/MobileNav';
 import HeaderNav from './components/HeaderNav';
 import { getAllArticles } from './services/ArticleService';
 import Onboarding from './components/Onboarding';
+import UserArticles from './pages/UserArticles';
 
 function App() {
   const [productList, setProductList] = useState([]);
@@ -42,6 +43,8 @@ function App() {
         <Route path="/article/:id" element={<ArticlePage />} />
         <Route path="/profile" element={<UserProfilePage />} />
         <Route path="/upload" element={<ArticleForm />} />
+        <Route path='/update/:id' element={<ArticleForm />} />
+        <Route path='/userArticles' element={<UserArticles />} />
       </Routes>
       <MobileNav />
       {/* <Notification message="Esto es una notificación!" /> */}
