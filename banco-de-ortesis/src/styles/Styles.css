@@ -233,7 +233,7 @@ button:focus-visible {
   margin: 10px 0;
   border: none;
   border-radius: 10px;
-  background-color: #6D6D6D;
+  background-color: #1F7A8C;
   color: rgb(255, 255, 255);
   font-size: 18px;
 }
@@ -244,13 +244,13 @@ button:focus-visible {
   margin: 10px 0;
   border: none;
   border-radius: 10px;
-  background-color: #6D6D6D;
+  background-color: #679436;
   color: rgb(0, 0, 0);
   font-size: 18px;
 }
 
 .register-button {
-  background-color: #DFDFDF;
+  background-color: #679436;
   color: rgb(0, 0, 0);
 }
 
