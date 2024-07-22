@@ -6,10 +6,15 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 const ArticleForm = () => {
   const navigate = useNavigate();
+<<<<<<< HEAD
   const { id } = useParams();
+=======
+  const{id} = useParams();
+>>>>>>> ec44b7a7a1bc066465ef196b24421498b33830cd
   const location = useLocation();
   const currentProduct = location.state?.product || null;
 
+  //this is a temporal funcion, will delete when backend be connected.
   const formatDate = (date) => {
     const d = new Date(date);
     let month = '' + (d.getMonth() + 1);
@@ -48,6 +53,7 @@ const ArticleForm = () => {
     }));
   };
 
+<<<<<<< HEAD
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -68,6 +74,15 @@ const ArticleForm = () => {
       const response = currentProduct != null ? await updateArticle(id, product) : await createArticle(product);
       console.log(response);
       if (response) alert('Artículo registrado exitosamente');
+=======
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // ternary will decide wich operation will execute.
+    try {
+      const response = currentProduct != null ? await updateArticle(id, product) : await createArticle(product);
+      console.log(response);
+      if (response) alert('Articulo registrado exitosamente');
+>>>>>>> ec44b7a7a1bc066465ef196b24421498b33830cd
       navigate('/');
     } catch (error) {
       console.error(error);
