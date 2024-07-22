@@ -23,10 +23,10 @@ export default function UpdateArticleCard({ product }) {
     }
 
     return (
-        <div className='flex items-center w-full gap-2 bg-stone-300 rounded-xl h-32'>
+        <div className='flex items-center w-full gap-2 bg-transparent border-solid border border-greenAccent rounded-xl h-32'>
             <img className='h-full w-40 object-cover rounded-xl' src={img != '' ? img : '/img/product.png'} alt={category} />
-            <div className='flex-grow flex flex-col text-black items-center justify-center text-start gap-2 p-2 text-wrap'>
-                <h3 className='self-start text-lg'>{name}</h3>
+            <div className='flex-grow flex flex-col text-blueSecond items-center justify-center text-start gap-2 p-1 text-wrap'>                
+                <h3 className='self-start text-lg font-semibold'>{name}</h3>
                 <p className='text-sm w-full'>Fecha publicación: {creationDate}</p>
                 <div className='flex w-full justify-evenly items-center text-sm'>
                     <Link to={`/article/${id}`}>Ver Publicación</Link>

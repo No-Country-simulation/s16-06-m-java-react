@@ -7,21 +7,9 @@ export default {
     './src/**/*.{js,jsx}',
   ],
   theme: {
-    // colors: {
-    //   transparent: 'transparent',
-    //   current: 'currentColor',
-    //   'white': '#ffffff',
-    //   'purple': '#3f3cbb',
-    //   'midnight': '#121063',
-    //   'metal': '#565584',
-    //   'tahiti': '#3ab7bf',
-    //   'silver': '#ecebff',
-    //   'bubble-gum': '#ff77e9',
-    //   'bermuda': '#78dcca',
-    // },
     extend: {
       fontFamily: {
-        sans: ['Roboto', 'Arial', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
       },
       boxShadow: {
         'custom': '0 4px 6px rgba(0, 0, 0, 0.1)',
@@ -29,6 +17,12 @@ export default {
       spacing: {
         '72': '18rem',
         '84': '21rem',
+      },
+      colors: {
+        blueSecond: '#022B3A',
+        greenAccent: '#679436',
+        cyanMain: '#1F7A8C',
+        whiteBg: '#F5F5F5',
       },
     },
   },

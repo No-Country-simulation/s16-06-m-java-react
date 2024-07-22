@@ -11,7 +11,7 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-      <form onSubmit={handleSubmit} className="flex justify-evenly items-center w-84 gap-2 rounded-3xl bg-stone-300">
+      <form onSubmit={handleSubmit} className="flex justify-evenly items-center w-84 gap-2 rounded-3xl bg-white text-blueSecond border border-solid border-blueSecond">
         <input   className="
         border-none 
         outline-none 
@@ -20,6 +20,7 @@ const SearchBar = ({ onSearch }) => {
         focus:ring-0 
         active:ring-0 
         bg-transparent
+        placeholder-blueSecond
       "
           type="text"
           placeholder="Buscador"
