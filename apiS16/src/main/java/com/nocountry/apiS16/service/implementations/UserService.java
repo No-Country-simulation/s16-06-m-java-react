@@ -27,6 +27,7 @@ public class UserService implements IUserService {
     @Override
     public Users saveUser(UserDTO userDTO) {
 
+
         validatePassword(userDTO);
 
         Users userCreated = new Users();
@@ -51,7 +52,6 @@ public class UserService implements IUserService {
         if(!dto.getPassword().equals(dto.getRepeatedPassword())){
             throw new InvalidPasswordException("Passwords don't match");
         }
-
     }
 
     @Override

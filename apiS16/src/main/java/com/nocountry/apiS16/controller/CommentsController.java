@@ -19,7 +19,7 @@ public class CommentsController {
 
     @PostMapping("/add")
     public ResponseEntity<Comments> saveComments(@RequestBody CommentsDTO commentsDTO) {
-        return new ResponseEntity<>(this.commentsService.saveComments(commentsDTO.getId_user()
+        return new ResponseEntity<>(this.commentsService.saveComments(commentsDTO.getId_user(),commentsDTO.getId_product()
                 , commentsDTO.getDescription())
                 , HttpStatus.CREATED);
     }

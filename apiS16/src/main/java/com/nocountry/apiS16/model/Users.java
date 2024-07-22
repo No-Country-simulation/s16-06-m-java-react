@@ -32,9 +32,12 @@ public class Users implements UserDetails { //UserDetails representa al Usuario 
     private LocalDate birthday;
     @Column(name = "phone_number")
     private String phoneNumber;
+    private String province;
 
 
-    //@OneToMany with products!
+    @OneToMany(mappedBy = "users",cascade = CascadeType.PERSIST, targetEntity = Product.class)
+    @JsonManagedReference
+    private List<Product> productList;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, targetEntity = Comments.class)
     @JsonManagedReference
