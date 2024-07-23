@@ -85,17 +85,17 @@ const ArticleForm = () => {
   return (
     <div className="max-w-2xl mx-auto py-8">
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <div className="flex items-center mb-6">
+        <div className="flex items-center justify-center mb-6">
           <button
             type="button"
             onClick={handleBackClick}
-            className="mr-2 text-gray-700 hover:text-gray-900 focus:outline-none"
+            className="mr-2 bg-white text-gray-700 hover:text-gray-900 focus:outline-none rounded-full p-2"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
             </svg>
           </button>
-          <h2 className="text-center text-2xl font-bold">Publicar</h2>
+          <h2 className="text-center text-2xl font-bold flex-grow">Publicar</h2>
         </div>
         <div className="mb-4">
           <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Título:</label>
