@@ -1,7 +1,8 @@
 
-![Pasos firmes 2.svg]()
-### Introducción
 
+![Logo](./bancoOrtesis/s16/apis/src/main/resources/img/pasos_firmes.svg)
+### Introducción
+ 
 En América latina, se observa una problemática generalizada.
 
 En 2020, unas 85 millones de personas con discapacidad viven en América Latina y el Caribe, lo que representa el 14.7% de la población regional. Los datos indican que los hogares donde viven personas con discapacidad son más pobres y en 1 de cada 5 hogares en situación de pobreza extrema vive una persona con discapacidad. Se estima que en 1 de cada 3 hogares vive una persona con discapacidad. - fuente banco mundial
