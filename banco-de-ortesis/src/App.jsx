@@ -11,7 +11,7 @@ import ArticleForm from './components/ArticleForm';
 import MobileNav from './components/MobileNav';
 import HeaderNav from './components/HeaderNav';
 import { getAllArticles } from './services/ArticleService';
-import Onboarding from './components/Onboarding';
+import Onboarding from './pages/Onboarding';
 import UserArticles from './pages/UserArticles';
 
 function App() {

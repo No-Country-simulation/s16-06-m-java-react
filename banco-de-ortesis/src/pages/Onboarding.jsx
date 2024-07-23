@@ -1,15 +1,15 @@
-// src/components/Onboarding.jsx
-import '../styles/Styles.css';// src/components/Onboarding.jsx
+// src/pages/Onboarding.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Onboarding = () => {
+const Onboarding = ({ onFinish }) => {
   const [step, setStep] = useState(1);
 
   const nextStep = () => {
     if (step < 3) {
       setStep(step + 1);
     } else {
-      alert('Onboarding completado');
+      onFinish();
     }
   };
 
@@ -24,7 +24,7 @@ const Onboarding = () => {
     <div className="onboarding-container">
       {step === 1 && (
         <div className="onboarding-step">
-          <h2>Proposito de la plataforma</h2>
+          <h2 className="text-2xl font-bold">Propósito de la plataforma</h2>
           <p>
             El propósito de esta página es crear una red solidaria para facilitar el acceso a equipamiento ortopédico y fomentar la colaboración comunitaria.
           </p>
@@ -32,7 +32,7 @@ const Onboarding = () => {
       )}
       {step === 2 && (
         <div className="onboarding-step">
-          <h2>Condiciones de la plataforma</h2>
+          <h2 className="text-2xl font-bold">Condiciones de la plataforma</h2>
           <p>Al utilizar esta página, usted acepta los siguientes términos y condiciones:</p>
           <ul>
             <li>No se permite la venta de artículos robados o de procedencia dudosa.</li>
@@ -44,20 +44,20 @@ const Onboarding = () => {
       )}
       {step === 3 && (
         <div className="onboarding-step">
-          <h2>Gracias por Unirse</h2>
+          <h2 className="text-2xl font-bold">Gracias por Unirse</h2>
           <p>
             Estamos encantados de que se una a nuestra comunidad. ¡Esperamos que disfrute de su experiencia!
           </p>
         </div>
       )}
       <div className="onboarding-navigation">
-        <div className="progress-indicators">
-          <div className={`circle ${step === 1 ? 'active' : ''}`}></div>
-          <div className={`circle ${step === 2 ? 'active' : ''}`}></div>
-          <div className={`circle ${step === 3 ? 'active' : ''}`}></div>
+        <div className="progress-indicators flex justify-center mb-4">
+          <div className={`circle ${step === 1 ? 'active' : ''} w-4 h-4 mx-1 rounded-full bg-blue-500`}></div>
+          <div className={`circle ${step === 2 ? 'active' : ''} w-4 h-4 mx-1 rounded-full bg-blue-500`}></div>
+          <div className={`circle ${step === 3 ? 'active' : ''} w-4 h-4 mx-1 rounded-full bg-blue-500`}></div>
         </div>
         <button
-          className="progress-button"
+          className="progress-button bg-blue-600 text-white py-2 px-4 rounded"
           onClick={nextStep}
         >
           {getButtonText()}
