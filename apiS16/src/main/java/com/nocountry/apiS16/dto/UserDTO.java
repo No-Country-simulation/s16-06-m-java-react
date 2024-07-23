@@ -52,4 +52,7 @@ public class UserDTO implements Serializable {
     @NotBlank(message = "Increase a Province please!")
     private String province;
 
+    @NotBlank
+    private String photoUser;
+
 }
