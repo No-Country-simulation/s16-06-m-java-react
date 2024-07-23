@@ -37,7 +37,7 @@ const Login = ({ handleLogin }) => {
     <div className="login-container min-h-screen flex flex-col justify-center items-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 p-10 bg-white rounded-lg shadow-md">
         <div className="profile-header mb-4">
-          <div className="profile-pic">Logo</div>
+          <div className="profile-pic"><img src="/img/logo.webp" alt="logo" /></div>
         </div>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="rounded-md shadow-sm -space-y-px">
