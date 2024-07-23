@@ -22,6 +22,9 @@ const Onboarding = ({ onFinish }) => {
 
   return (
     <div className="onboarding-container">
+        <div className="profile-header mb-4">
+          <div className="profile-pic"><img src="/img/logo.webp" alt="logo" /></div>
+        </div>
       {step === 1 && (
         <div className="onboarding-step">
           <h2 className="text-2xl font-bold">Propósito de la plataforma</h2>
