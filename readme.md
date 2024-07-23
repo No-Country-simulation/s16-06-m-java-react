@@ -1,6 +1,7 @@
+# Proyecto: Banco de Ortesis
 
+## Pasos Firmes
 
-![Logo](./bancoOrtesis/s16/apis/src/main/resources/img/pasos_firmes.svg)
 ### Introducción
  
 En América latina, se observa una problemática generalizada.
