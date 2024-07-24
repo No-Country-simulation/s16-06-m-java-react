@@ -42,17 +42,22 @@ public class UserDTO implements Serializable {
     private String repeatedPassword;
 
     @Past
-    @NotNull(message = "Birth day is required")
     private LocalDate birthday;
 
-    @NotBlank(message = "Increase a phone number please!")
+
     @Size(min = 10, max = 11) //3571416413
     private String phoneNumber;
 
     @NotBlank(message = "Increase a Province please!")
     private String province;
 
-    @NotBlank
+
     private String photoUser;
+
+    @NotNull
+    private Long socialWorkNumber;
+
+    @NotNull
+    private Long disabilityCertificateNumber;
 
 }
