@@ -9,7 +9,6 @@ import com.nocountry.apiS16.repository.IProductRepository;
 import com.nocountry.apiS16.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 @RequiredArgsConstructor
@@ -46,6 +45,7 @@ public class ProductService {
         }else {
             throw new ResourceNotFoundException("User or category no present with that id");
         }
+
 
     }
 

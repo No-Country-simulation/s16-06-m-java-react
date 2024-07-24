@@ -38,19 +38,14 @@ public class UserDTO implements Serializable {
     @Size(min = 8)
     private String password;
 
-    @Size(min = 8)
-    private String repeatedPassword;
-
     @Past
     private LocalDate birthday;
-
 
     @Size(min = 10, max = 11) //3571416413
     private String phoneNumber;
 
     @NotBlank(message = "Increase a Province please!")
     private String province;
-
 
     private String photoUser;
 
@@ -59,5 +54,6 @@ public class UserDTO implements Serializable {
 
     @NotNull
     private Long disabilityCertificateNumber;
+
 
 }
