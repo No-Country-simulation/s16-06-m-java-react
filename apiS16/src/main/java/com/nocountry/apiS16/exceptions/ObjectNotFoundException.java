@@ -1,4 +1,4 @@
-package com.nocountry.apiS16.exception;
+package com.nocountry.apiS16.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException{
 
