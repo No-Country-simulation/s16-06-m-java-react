@@ -80,6 +80,7 @@ public class ProductService {
         existingProduct.setCreationDate(productDTO.getCreationDate());
         existingProduct.setAvailable(productDTO.isAvailable());
         existingProduct.setCategory(category);
+        existingProduct.setState(productDTO.getState());
 
         return iProductRepository.save(existingProduct);
     }

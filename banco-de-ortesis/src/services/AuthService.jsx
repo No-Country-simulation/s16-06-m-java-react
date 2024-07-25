@@ -1,8 +1,8 @@
 // src/services/UserService.js
-const API_URL = 'http://localhost:5000/api/users';
+const API_URL = 'http://localhost:8080/api/v1/users';
 
 export const registerUser = async (formData) => {
-  const response = await fetch(`${API_URL}/register`, {
+  const response = await fetch(`${API_URL}/add`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

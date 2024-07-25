@@ -27,11 +27,11 @@ const ArticlePage = () => {
 
   if(!product) return null;
 
-  const {name, description, creationDate, available, state, category, img} = product;
+  const {name, description, creationDate, available, state, category, imageURL} = product;
 
-  const items = [img, img, img];
+  const items = [imageURL, imageURL, imageURL];
   return (
-    <div className='flex flex-col gap-4'>
+    <div className='flex flex-col gap-4 mb-20'>
       <Carousel items={items} />
       <div className='flex flex-col gap-5 p-6 text-lg'>
         <div className='flex items-center text-xl'>
@@ -44,7 +44,7 @@ const ArticlePage = () => {
         </div>
         <ul>
           <li>{description}</li>
-          <li>{category}</li>
+          <li>{category.name}</li>
           <li>{state}</li>
           <li>Cantidad</li>
         </ul>
