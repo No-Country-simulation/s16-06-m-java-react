@@ -5,11 +5,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+
 
 @Getter
 @Setter
@@ -17,7 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @NoArgsConstructor
 @Builder
 @Entity
-public class Users implements UserDetails { //UserDetails representa al Usuario logeado en Spring Security
+public class Users { //UserDetails representa al Usuario logeado en Spring Security
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +31,9 @@ public class Users implements UserDetails { //UserDetails representa al Usuario 
     @Column(name = "phone_number")
     private String phoneNumber;
     private String province;
+    private String userPhoto;
+    private Long socialWorkNumber;
+    private Long disabilityCertificateNumber;
 
 
     @OneToMany(mappedBy = "users",cascade = CascadeType.PERSIST, targetEntity = Product.class)
@@ -43,41 +44,44 @@ public class Users implements UserDetails { //UserDetails representa al Usuario 
     @JsonManagedReference
     private List<Comments> commentsList;
 
+    @OneToMany(mappedBy = "users",cascade = CascadeType.PERSIST,targetEntity = Favorites.class)
+    @JsonManagedReference
+    private List<Favorites> favoritesList;
 
-    //Implementaciones de los metodos UserDetails
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+//    //Implementaciones de los metodos UserDetails
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return null;
+//    }
+//
+//
+//    @Override
+//    public String getUsername() {
+//        return email;
+//    }
+//
+//
+//    @Override
+//    public boolean isAccountNonExpired() {
+//        return true;
+//    }
+//
+//
+//    @Override
+//    public boolean isAccountNonLocked() {
+//        return true;
+//    }
+//
+//
+//    @Override
+//    public boolean isCredentialsNonExpired() {
+//        return true;
+//    }
+//
+//
+//    @Override
+//    public boolean isEnabled() {
+//        return true;
+//    }
 
 }
