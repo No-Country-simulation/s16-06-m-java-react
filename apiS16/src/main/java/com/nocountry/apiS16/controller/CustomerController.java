@@ -14,20 +14,19 @@ import com.nocountry.apiS16.dto.UserDTO;
 
 import jakarta.validation.Valid;
 
-//@RestController
-//@RequestMapping
-//public class CustomerController {
-//
-//    @Autowired
-//    private AuthenticationService authenticateService;
-//
-//    @PostMapping
-//    public ResponseEntity<RegisteredUserDTO> registerOne( @RequestBody @Valid UserDTO newUser){
-//
-//        RegisteredUserDTO registeredUser = authenticateService.registerOneCustomer(newUser);
-//
-//        return ResponseEntity.status(HttpStatus.CREATED).body(registeredUser);
-//
-//    }
+@RestController
+@RequestMapping("/api/v1/register")
+public class CustomerController {
 
-//}
+    @Autowired
+    private AuthenticationService authenticateService;
+
+    @PostMapping
+    public ResponseEntity<RegisteredUserDTO> registerOne( @RequestBody @Valid UserDTO newUser){
+
+        RegisteredUserDTO registeredUser = authenticateService.registerOneCustomer(newUser);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(registeredUser);
+
+    }
+}
