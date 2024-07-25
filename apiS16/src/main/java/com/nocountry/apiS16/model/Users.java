@@ -36,15 +36,15 @@ public class Users { //UserDetails representa al Usuario logeado en Spring Secur
     private Long disabilityCertificateNumber;
 
 
-    @OneToMany(mappedBy = "users",cascade = CascadeType.PERSIST, targetEntity = Product.class)
+    @OneToMany(mappedBy = "users",cascade = CascadeType.REMOVE, targetEntity = Product.class, orphanRemoval = true)
     @JsonManagedReference
     private List<Product> productList;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, targetEntity = Comments.class)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, targetEntity = Comments.class , orphanRemoval = true)
     @JsonManagedReference
     private List<Comments> commentsList;
 
-    @OneToMany(mappedBy = "users",cascade = CascadeType.PERSIST,targetEntity = Favorites.class)
+    @OneToMany(mappedBy = "users",cascade = CascadeType.REMOVE,targetEntity = Favorites.class , orphanRemoval = true)
     @JsonManagedReference
     private List<Favorites> favoritesList;
 

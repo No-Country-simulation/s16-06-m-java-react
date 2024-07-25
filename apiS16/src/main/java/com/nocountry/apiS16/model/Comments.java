@@ -20,12 +20,12 @@ public class Comments {
     private Long id_comments;
 
     @ManyToOne(targetEntity = Users.class)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
     private Users user;
 
     @ManyToOne(targetEntity = Product.class)
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", nullable = false)
     @JsonBackReference
     private Product product;
 

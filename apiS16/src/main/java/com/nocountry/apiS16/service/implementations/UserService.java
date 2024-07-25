@@ -2,6 +2,7 @@ package com.nocountry.apiS16.service.implementations;
 
 import com.nocountry.apiS16.dto.UserDTO;
 import com.nocountry.apiS16.model.Users;
+import com.nocountry.apiS16.repository.IProductRepository;
 import com.nocountry.apiS16.repository.IUserRepository;
 import com.nocountry.apiS16.service.interfaces.IUserService;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +16,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService implements IUserService {
 
-    @Autowired
+
     private final IUserRepository userRepository;
+
+
 
 //    @Autowired
 //    private PasswordEncoder passwordEncoder;
