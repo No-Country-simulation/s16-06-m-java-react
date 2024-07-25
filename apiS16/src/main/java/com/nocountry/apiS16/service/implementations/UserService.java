@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -63,6 +64,11 @@ public class UserService implements IUserService {
     public Users findUserByName(String name) {
         return this.userRepository.getUserByName(name)
                 .orElseThrow(()-> new RuntimeException("User with that name doesnt exist"));
+    }
+    
+    @Override
+    public Optional<Users> findUserByEmail(String email) {
+        return userRepository.getUserByEmail(email);
     }
 
     @Override

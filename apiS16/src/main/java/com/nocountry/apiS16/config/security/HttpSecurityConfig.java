@@ -17,22 +17,17 @@ public class HttpSecurityConfig{
     @Autowired
     private AuthenticationProvider daoAuthProvider;
 
-
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-       return  http
-            .csrf( csrfConfig -> csrfConfig.disable())
-            .sessionManagement( sessMagConfig -> sessMagConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        return http
+            .csrf(csrf -> csrf.disable())
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authenticationProvider(daoAuthProvider)
-            .authorizeHttpRequests( authReqConfig -> {
-                authReqConfig.requestMatchers(HttpMethod.POST ,"/customers").permitAll();
-                authReqConfig.requestMatchers(HttpMethod.POST ,"/auth/**").permitAll();
-
-                authReqConfig.anyRequest().authenticated();
-            } ).
-            build();
-
+            .authorizeHttpRequests(auth -> {
+                auth.anyRequest().permitAll();
+            })
+            .build();
     }
 
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -43,6 +44,17 @@ public class JwtService {
         byte[] key = SECRET_KEY.getBytes();
         return Keys.hmacShaKeyFor(key);
 
+    }
+
+    public String extractEmail(String jwt) {
+
+        return extractAllClaims(jwt).getSubject();
+
+    }
+
+    private Claims extractAllClaims(String jwt) { 
+        return Jwts.parserBuilder().setSigningKey( generateKey() ).build()
+                .parseClaimsJws(jwt).getBody();
     }
 
     

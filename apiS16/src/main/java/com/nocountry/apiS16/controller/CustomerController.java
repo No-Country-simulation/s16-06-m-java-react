@@ -15,7 +15,7 @@ import com.nocountry.apiS16.service.auth.AuthenticationService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api/v1/register")
 public class CustomerController {
 
     @Autowired
