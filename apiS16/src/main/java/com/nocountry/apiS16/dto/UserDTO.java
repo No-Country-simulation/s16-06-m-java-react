@@ -36,6 +36,7 @@ public class UserDTO implements Serializable {
     private String email;
 
     @Size(min = 8)
+    @NotBlank
     private String password;
 
     @Past
