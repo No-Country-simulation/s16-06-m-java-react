@@ -1,10 +1,12 @@
 package com.nocountry.apiS16.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Getter
@@ -34,4 +36,7 @@ public class Comments {
     @Column(name = "creation_date")
     private LocalDate creationDate;
 
+    @OneToMany(mappedBy = "comments", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Answers> answersList;
 }

@@ -50,6 +50,11 @@ public class Users implements UserDetails { //UserDetails representa al Usuario 
     @JsonManagedReference
     private List<Favorites> favoritesList;
 
+    @OneToMany(mappedBy = "users", cascade = CascadeType.REMOVE, targetEntity = Answers.class, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Answers> answersList;
+
+
     //Implementaciones de los metodos UserDetails
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
