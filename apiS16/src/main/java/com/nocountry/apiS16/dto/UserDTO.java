@@ -28,6 +28,7 @@ public class UserDTO implements Serializable {
     private String lastName;
 
     @Size(min = 8) //44 123 321
+    @NotBlank(message =  "Dni is required")
     private String dni;
 
     @Email
@@ -40,6 +41,7 @@ public class UserDTO implements Serializable {
     @Past
     private LocalDate birthday;
 
+
     @Size(min = 10, max = 11) //3571416413
     private String phoneNumber;
 
@@ -48,11 +50,12 @@ public class UserDTO implements Serializable {
 
     private String photoUser;
 
-
+    @NotNull
     private Long socialWorkNumber;
 
-
+    @NotNull
     private Long disabilityCertificateNumber;
 
-
+    @Size(min = 8)
+    private String repeatedPassword;
 }

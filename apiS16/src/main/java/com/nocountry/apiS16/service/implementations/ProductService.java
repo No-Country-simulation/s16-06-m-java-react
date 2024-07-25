@@ -9,6 +9,7 @@ import com.nocountry.apiS16.repository.IProductRepository;
 import com.nocountry.apiS16.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 @RequiredArgsConstructor
@@ -46,7 +47,6 @@ public class ProductService {
             throw new ResourceNotFoundException("User or category no present with that id");
         }
 
-
     }
 
     public List<Product> getAllProduct() {
@@ -79,7 +79,7 @@ public class ProductService {
         existingProduct.setDescription(productDTO.getDescription());
         existingProduct.setCreationDate(productDTO.getCreationDate());
         existingProduct.setAvailable(productDTO.isAvailable());
-        existingProduct.setCategory(category);
+        existingProduct.setImageURL(productDTO.getImageURL());
         existingProduct.setState(productDTO.getState());
 
         return iProductRepository.save(existingProduct);
