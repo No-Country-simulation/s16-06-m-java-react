@@ -41,7 +41,7 @@ public class AuthenticationService {
         userDTO.setName(user.getName());
         userDTO.setEmail(user.getEmail());
 
-        String jwt = jwtService.generateToken(user, generateExtraClaims(user));
+        String jwt = jwtService.generateToken((UserDetails) user, generateExtraClaims(user));
         userDTO.setJwt(jwt);
 
 
@@ -65,7 +65,7 @@ public class AuthenticationService {
         );
         authenticationManager.authenticate(authentication);
 
-        UserDetails user = userService.findUserByEmail(authenticationRequest.getEmail()).get();
+        UserDetails user = (UserDetails) userService.findUserByEmail(authenticationRequest.getEmail()).get();
 
         String jwt = jwtService.generateToken(user, generateExtraClaims((Users)user));
 

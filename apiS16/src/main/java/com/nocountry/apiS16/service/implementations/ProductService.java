@@ -79,7 +79,6 @@ public class ProductService {
         existingProduct.setDescription(productDTO.getDescription());
         existingProduct.setCreationDate(productDTO.getCreationDate());
         existingProduct.setAvailable(productDTO.isAvailable());
-        existingProduct.setCategory();
         existingProduct.setImageURL(productDTO.getImageURL());
         existingProduct.setState(productDTO.getState());
 

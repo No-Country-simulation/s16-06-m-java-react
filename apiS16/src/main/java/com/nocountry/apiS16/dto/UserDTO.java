@@ -56,4 +56,6 @@ public class UserDTO implements Serializable {
     @NotNull
     private Long disabilityCertificateNumber;
 
+    @Size(min = 8)
+    private String repeatedPassword;
 }
