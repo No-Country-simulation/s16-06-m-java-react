@@ -25,6 +25,9 @@ public class ProductDTO implements Serializable {
     private String imageURL;
     private Long categoryId;
     private State state;
-
+    private String userName;
+    private String userLastName;
+    private String userEmail;
+    private String userProvince;
 
 }

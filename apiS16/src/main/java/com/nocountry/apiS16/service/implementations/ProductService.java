@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 @Service
 public class ProductService {
@@ -49,24 +51,29 @@ public class ProductService {
 
     }
 
-    public List<Product> getAllProduct() {
-        return iProductRepository.findAll();
+    public List<ProductDTO> getAllProductDTOs() {
+        List<Product> products = iProductRepository.findAll();
+        return products.stream().map(this::convertToProductDTO).collect(Collectors.toList());
     }
 
-    public Product getProductById(Long id) throws ResourceNotFoundException {
+    public ProductDTO getProductById(Long id) throws ResourceNotFoundException {
         Product product = iProductRepository.findById(id).orElse(null);
         if (product == null) {
             throw new ResourceNotFoundException("Product not found with id: " + id);
         }
-        return product;
+        return convertToProductDTO(product);
     }
 
-    public Product getProductByName(String name) throws ResourceNotFoundException {
-        Product product = iProductRepository.findByName(name).orElse(null);
-        if (product == null) {
-            throw new ResourceNotFoundException("Product not found with id: " + name);
+    public ProductDTO getProductByName(String name) throws ResourceNotFoundException {
+     Optional<Product> optionalProduct= iProductRepository.findByName(name);
+
+        if (optionalProduct.isPresent()) {
+            Product product = optionalProduct.get();
+            return convertToProductDTO(product);
+        } else { throw new ResourceNotFoundException("Product not found with id: " + name);
+
         }
-        return product;
+
     }
 
     public Product updateProduct(Long idProduct, ProductDTO productDTO) throws  ResourceNotFoundException{
@@ -94,6 +101,27 @@ public class ProductService {
         }
 
     }
+    public ProductDTO convertToProductDTO(Product product) {
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setName(product.getName());
+        productDTO.setDescription(product.getDescription());
+        productDTO.setCreationDate(product.getCreationDate());
+        productDTO.setAvailable(product.isAvailable());
+        productDTO.setImageURL(product.getImageURL());
+        productDTO.setCategoryId(product.getCategory().getIdCategory());
+        productDTO.setState(product.getState());
 
+        Users user = product.getUsers();
+        if (user != null) {
+            productDTO.setIdUser(user.getId_user());
+            productDTO.setUserName(user.getName());
+            productDTO.setUserLastName(user.getLastName());
+            productDTO.setUserEmail(user.getEmail());
+            productDTO.setUserProvince(user.getProvince());
+        }
+
+
+        return productDTO;
+    }
 }
 
