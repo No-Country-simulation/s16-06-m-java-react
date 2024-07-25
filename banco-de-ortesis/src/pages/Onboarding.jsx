@@ -21,19 +21,23 @@ const Onboarding = ({ onFinish }) => {
   };
 
   return (
-    <div className="onboarding-container">
+    <div className="onboarding-container mb-20">
+      {step === 1 && (<>
         <div className="profile-header mb-4">
-          <div className="profile-pic"><img src="/img/logo.webp" alt="logo" /></div>
+          <div className=""><img src="/img/onboard_1.webp" alt="onboard1" /></div>
         </div>
-      {step === 1 && (
         <div className="onboarding-step">
           <h2 className="text-2xl font-bold">Propósito de la plataforma</h2>
           <p>
             El propósito de esta página es crear una red solidaria para facilitar el acceso a equipamiento ortopédico y fomentar la colaboración comunitaria.
           </p>
         </div>
+        </>
       )}
-      {step === 2 && (
+      {step === 2 && (<>
+        <div className="profile-header mb-4">
+          <div className=""><img src="/img/onboard_2.webp" alt="onboard2" /></div>
+        </div>
         <div className="onboarding-step">
           <h2 className="text-2xl font-bold">Condiciones de la plataforma</h2>
           <p>Al utilizar esta página, usted acepta los siguientes términos y condiciones:</p>
@@ -44,14 +48,19 @@ const Onboarding = ({ onFinish }) => {
             <li>La plataforma no se hace responsable por transacciones entre usuarios.</li>
           </ul>
         </div>
+      </>
       )}
-      {step === 3 && (
+      {step === 3 && (<>
+        <div className="profile-header mb-4">
+          <div className=""><img src="/img/onboard_3.webp" alt="onboard3" /></div>
+        </div>
         <div className="onboarding-step">
           <h2 className="text-2xl font-bold">Gracias por Unirse</h2>
           <p>
             Estamos encantados de que se una a nuestra comunidad. ¡Esperamos que disfrute de su experiencia!
           </p>
         </div>
+      </>
       )}
       <div className="onboarding-navigation">
         <div className="progress-indicators flex justify-center mb-4">

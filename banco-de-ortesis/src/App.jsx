@@ -1,5 +1,4 @@
 // src/App.jsx
-import React, { useContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -10,25 +9,11 @@ import Footer from './components/Footer';
 import ArticleForm from './components/ArticleForm';
 import MobileNav from './components/MobileNav';
 import HeaderNav from './components/HeaderNav';
-import { getAllArticles } from './services/ArticleService';
 import Onboarding from './pages/Onboarding';
 import UserArticles from './pages/UserArticles';
 
 function App() {
-  const [productList, setProductList] = useState([]);
 
-  const fetchProducts = async () => {
-    try {
-      const products = await getAllArticles(); // Llama a la función correctamente y espera su resolución
-      setProductList(products);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  
-  useEffect(() => {
-    fetchProducts();
-  }, []);
 
 
   return (
@@ -36,7 +21,7 @@ function App() {
       {/* <Header /> */}
       <HeaderNav />
       <Routes>
-        <Route path="/" element={<HomePage productList={productList} />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/onboarding" component={Onboarding} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />

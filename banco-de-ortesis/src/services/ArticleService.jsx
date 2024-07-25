@@ -1,5 +1,5 @@
 
-const API_URL = 'https://alura-geek-api-kohl.vercel.app/product';
+const API_URL = 'http://localhost:8080/api/v1/products';
 
 export const getArticleDetails = async (id) => {
   try {
@@ -18,7 +18,7 @@ export const getArticleDetails = async (id) => {
 
 export const getAllArticles = async () => {
   try {
-    const response = await fetch(API_URL);
+    const response = await fetch(`${API_URL}/get`);
     if (response.ok) {
       const data = await response.json(); // Agrega await aquí
       return data;
@@ -32,7 +32,7 @@ export const getAllArticles = async () => {
 
 export const createArticle = async(article) => {
   try {
-    const response = await fetch(API_URL, {
+    const response = await fetch(`${API_URL}/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -77,11 +77,11 @@ export const deleteArticle = async(id) => {
     const response = await fetch(`${API_URL}/${id}`,{
       method: 'DELETE'
     })
-    if(response.ok){
-      const data = await response.json();
-      console.log('Producto borrado correctamente');
-      return data;
-    }
+    // if(response.ok){
+    //   const data = await response.json();
+    //   console.log('Producto borrado correctamente');
+    //   return data;
+    // }
   } catch (error) {
     console.error('Ocurrio un errror al borrar el producto', error);
     throw error;
