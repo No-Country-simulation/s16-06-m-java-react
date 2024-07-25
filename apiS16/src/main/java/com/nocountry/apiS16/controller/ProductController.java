@@ -5,9 +5,9 @@ import com.nocountry.apiS16.exceptions.ResourceNotFoundException;
 import com.nocountry.apiS16.model.Product;
 import com.nocountry.apiS16.service.implementations.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,33 +18,39 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping("/add")
-    public Product createProduct(@RequestBody ProductDTO productDTO) throws ResourceNotFoundException {
-        return productService.createProduct(productDTO);
+    public ProductDTO createProduct(@RequestBody ProductDTO productDTO) throws ResourceNotFoundException {
+        Product createdProduct = productService.createProduct(productDTO);
+        return productService.convertToProductDTO(createdProduct);
     }
 
     @GetMapping("/get")
-    public List<Product> getAllProducts() {
-        return productService.getAllProduct();
+    public List<ProductDTO> getAllProducts() {
+        List<ProductDTO> productDTOs = productService.getAllProductDTOs();
+        if (productDTOs.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return productDTOs;
+
     }
 
     @GetMapping("/get/name/{name}")
-    public Product getProductByName(@PathVariable String name) throws ResourceNotFoundException {
+    public ProductDTO getProductByName(@PathVariable String name) throws ResourceNotFoundException {
         return productService.getProductByName(name);
     }
 
-
     @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) throws ResourceNotFoundException{
-        return productService.updateProduct(id, productDTO);
+    public ProductDTO updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) throws ResourceNotFoundException{
+        Product updatedProduct = productService.updateProduct(id, productDTO);
+        return productService.convertToProductDTO(updatedProduct);
     }
 
     @GetMapping("/{id}")
-    public Product getProductById(@PathVariable Long id) throws ResourceNotFoundException  {
-        Product product = productService.getProductById(id);
-        if (product == null) {
+    public ProductDTO getProductById(@PathVariable Long id) throws ResourceNotFoundException  {
+        ProductDTO productDTO = productService.getProductById(id);
+        if (productDTO == null) {
             throw new ResourceNotFoundException("Category not found with id: " + id);
         }
-        return product;
+        return productDTO;
     }
 
 
