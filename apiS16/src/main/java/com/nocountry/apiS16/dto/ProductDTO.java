@@ -1,6 +1,5 @@
 package com.nocountry.apiS16.dto;
 
-
 import com.nocountry.apiS16.model.State;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -17,7 +16,6 @@ import java.util.Date;
 public class ProductDTO implements Serializable {
 
 
-
     @NotBlank(message = "Cant be blank")
     private String name;
     private Long idUser;
@@ -27,8 +25,6 @@ public class ProductDTO implements Serializable {
     private String imageURL;
     private Long categoryId;
     private State state;
-
-
 
 
 }
