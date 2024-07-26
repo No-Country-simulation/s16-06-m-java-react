@@ -4,8 +4,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/AuthService';
 import Onboarding from './Onboarding';
+import { useAuth } from '../context/AuthProvider';
 
-const Login = ({ handleLogin }) => {
+const Login = () => {
+
+  const auth = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showOnboarding, setShowOnboarding] = useState(false);
@@ -17,11 +20,10 @@ const Login = ({ handleLogin }) => {
 
     try {
       const data = await loginUser(user);
-      localStorage.setItem('token', data.token);
-      handleLogin();
+      auth.saveSessionInfo(data);
       navigate('/profile');
     } catch (error) {
-      alert('Error al iniciar sesión');
+      alert('Error al iniciar sesión', error);
     }
   };
 

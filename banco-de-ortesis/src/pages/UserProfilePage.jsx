@@ -2,13 +2,16 @@
 import '../styles/Styles.css';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { logoutUser } from '../services/AuthService';
+import { useAuth } from '../context/AuthProvider';
 
 const UserProfilePage = () => {
+
+  const auth = useAuth();
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logoutUser();
+    auth.logOut();
     navigate('/login');
   };
 
