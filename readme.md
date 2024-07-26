@@ -1,9 +1,7 @@
 # Proyecto: Banco de Ortesis
 
-## Pasos Firmes
+![Logo](https://raw.githubusercontent.com/No-Country-simulation/s16-06-m-java-react/frontend/banco-de-ortesis/public/img/logo.webp?token=GHSAT0AAAAAACR6DOVU73YXW3NU2NWQKUWKZVDWIMQ)
 
-### Introducción
- 
 En América latina, se observa una problemática generalizada.
 
 En 2020, unas 85 millones de personas con discapacidad viven en América Latina y el Caribe, lo que representa el 14.7% de la población regional. Los datos indican que los hogares donde viven personas con discapacidad son más pobres y en 1 de cada 5 hogares en situación de pobreza extrema vive una persona con discapacidad. Se estima que en 1 de cada 3 hogares vive una persona con discapacidad. - fuente banco mundial
@@ -133,6 +131,18 @@ La página en general posee un instructivo de uso (con una breve introducción d
 - Postman
   ![Postman](https://cdn.iconscout.com/icon/free/png-64/free-postman-3628992-3030217.png?f=webp&w=64)
 - Plataforma para probar APIs y realizar solicitudes HTTP.
+- Swagger
+![Swagger](https://img.icons8.com/?size=100&id=rdKV2dee9wxd&format=png&color=000000)
+- Proporciona una interfaz visual para interactuar con la API y facilita la comprensión de sus endpoints y parámetros.
+- La documentación de la API está disponible y se puede explorar mediante Swagger en la siguiente dirección:
+- Swagger UI: 
+https://upbeat-commitment-production.up.railway.app/swagger-ui/index.html
+## Diseño UX/UI
+- En esta sección se describe el enfoque combinado de Diseño de Experiencia de Usuario (UX) y Diseño de la Interfaz de Usuario (UI).
+
+### Colaboración en Figma
+![Figma](https://img.icons8.com/?size=100&id=zfHRZ6i1Wg0U&format=png&color=000000)
+- Permite la colaboración en tiempo real, esto ha mejorado nuestra eficiencia y ha asegurado una mejor integración entre el diseño y el desarrollo.
 
 ## Control de versiones
 - Git

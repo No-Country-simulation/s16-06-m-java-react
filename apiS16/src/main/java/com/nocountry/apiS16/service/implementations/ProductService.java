@@ -103,6 +103,8 @@ public class ProductService {
     }
     public ProductDTO convertToProductDTO(Product product) {
         ProductDTO productDTO = new ProductDTO();
+
+        productDTO.setId(product.getIdProduct());
         productDTO.setName(product.getName());
         productDTO.setDescription(product.getDescription());
         productDTO.setCreationDate(product.getCreationDate());

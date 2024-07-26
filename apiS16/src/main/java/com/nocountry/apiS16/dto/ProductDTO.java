@@ -15,6 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class ProductDTO implements Serializable {
 
+    private Long id;
 
     @NotBlank(message = "Cant be blank")
     private String name;
