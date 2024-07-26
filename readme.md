@@ -134,7 +134,7 @@ La página en general posee un instructivo de uso (con una breve introducción d
 - Swagger
 ![Swagger](https://img.icons8.com/?size=100&id=rdKV2dee9wxd&format=png&color=000000)
 - Proporciona una interfaz visual para interactuar con la API y facilita la comprensión de sus endpoints y parámetros.
-- La documentación de la API está disponible y se puede explorar mediante Swagger en la siguiente dirección:git add
+- La documentación de la API está disponible y se puede explorar mediante Swagger en la siguiente dirección:
 - Swagger UI: 
 https://upbeat-commitment-production.up.railway.app/swagger-ui/index.html
 ## Diseño UX/UI
