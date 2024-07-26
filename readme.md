@@ -1,6 +1,7 @@
 # Proyecto: Banco de Ortesis
 
 ## Pasos Firmes
+![Logo](https://raw.githubusercontent.com/No-Country-simulation/s16-06-m-java-react/frontend/banco-de-ortesis/public/img/logo.webp?token=GHSAT0AAAAAACR6DOVVZBL6XZPQ3HWMUQJOZVDU34A)
 
 ### Introducción
  
