@@ -28,7 +28,6 @@ public class UserDTO implements Serializable {
     private String lastName;
 
     @Size(min = 8) //44 123 321
-    @NotBlank(message =  "Dni is required")
     private String dni;
 
     @Email
@@ -51,10 +50,8 @@ public class UserDTO implements Serializable {
 
     private String photoUser;
 
-    @NotNull
     private Long socialWorkNumber;
 
-    @NotNull
     private Long disabilityCertificateNumber;
 
     @Size(min = 8)
