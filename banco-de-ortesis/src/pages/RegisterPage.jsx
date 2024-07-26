@@ -7,11 +7,31 @@ import Onboarding from './Onboarding';
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
+    name: '',
     lastName: '',
     email: '',
-    password: ''
+    password: '',
+    province: '',
+    repeatedPassword:''
   });
+
+  /*
+{
+  "name": "Pablo",
+  "lastName": "Velasco",
+  "dni": "35184235",
+  "email": "pablo@gmail.com",
+  "password": "123456789",
+  "birthday": "1990-07-02",
+  "phoneNumber": "stringstri",
+  "province": "Mendoza",
+  "photoUser": "string",
+  "socialWorkNumber": 0,
+  "disabilityCertificateNumber": 0,
+  "repeatedPassword": "123456789"
+}
+  */
+
   const [showOnboarding, setShowOnboarding] = useState(false);
   const navigate = useNavigate();
 
@@ -25,13 +45,13 @@ const Register = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
       await registerUser(formData);
-      navigate('/profile');
+      navigate('/login');
     } catch (error) {
       alert('Error al registrarse');
     }
+    console.log('Datos usuario a Registrar', formData);
   };
 
   const handleFinishOnboarding = () => {
@@ -46,7 +66,7 @@ const Register = () => {
     <div className="register-container min-h-screen flex flex-col justify-center items-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 p-10 bg-white rounded-lg shadow-md">
         <div className="profile-header mb-4">
-          <div className="profile-pic"><img src="/img/logo.webp" alt="logo" /></div>
+          <div className=""><img src="/img/logo.webp" alt="logo" /></div>
         </div>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="rounded-md shadow-sm -space-y-px">
@@ -55,12 +75,12 @@ const Register = () => {
               <input
                 type="text"
                 id="firstName"
-                name="firstName"
+                name="name"
                 autoComplete="given-name"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                 placeholder="Nombre"
-                value={formData.firstName}
+                value={formData.name}
                 onChange={handleInputChange}
               />
             </div>
@@ -72,7 +92,7 @@ const Register = () => {
                 name="lastName"
                 autoComplete="family-name"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-none focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                 placeholder="Apellido"
                 value={formData.lastName}
                 onChange={handleInputChange}
@@ -86,7 +106,7 @@ const Register = () => {
                 name="email"
                 autoComplete="email"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-none focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                 placeholder="Correo Electrónico"
                 value={formData.email}
                 onChange={handleInputChange}
@@ -105,6 +125,38 @@ const Register = () => {
                 value={formData.password}
                 onChange={handleInputChange}
               />
+            </div>
+            <div>
+              <label htmlFor="repeatedPassword" className="sr-only">Repetir Contraseña</label>
+              <input
+                type="password"
+                id="repeatedPassword"
+                name="repeatedPassword"
+                autoComplete="new-password"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                placeholder="Repetir contraseña"
+                value={formData.repeatedPassword}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="province" className='sr-only'>Ubicación</label>
+              <select
+                name="province"
+                id="province"
+                value={formData.province}
+                onChange={handleInputChange}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              >
+                <option value="" defaultValue>Elige tu provincia </option>
+                <option value="Buenos Aires" default>Buenos Aires</option>
+                <option value="Cordoba">Córdoba</option>
+                <option value="Mendoza" >Mendoza</option>
+                <option value="Salta">Salta</option>
+                <option value="San Juan">San Juan</option>
+                <option value="Santa Fe">Santa Fe</option>
+              </select>
             </div>
           </div>
 

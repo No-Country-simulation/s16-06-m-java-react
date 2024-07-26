@@ -23,6 +23,7 @@ export default {
         greenAccent: '#679436',
         cyanMain: '#1F7A8C',
         whiteBg: '#F5F5F5',
+        
       },
     },
   },

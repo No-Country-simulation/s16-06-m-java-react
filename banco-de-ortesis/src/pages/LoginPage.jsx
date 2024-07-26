@@ -4,8 +4,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/AuthService';
 import Onboarding from './Onboarding';
+import { useAuth } from '../context/AuthProvider';
 
-const Login = ({ handleLogin }) => {
+const Login = () => {
+
+  const auth = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showOnboarding, setShowOnboarding] = useState(false);
@@ -17,11 +20,10 @@ const Login = ({ handleLogin }) => {
 
     try {
       const data = await loginUser(user);
-      localStorage.setItem('token', data.token);
-      handleLogin();
+      auth.saveSessionInfo(data);
       navigate('/profile');
     } catch (error) {
-      alert('Error al iniciar sesión');
+      alert('Error al iniciar sesión', error);
     }
   };
 
@@ -34,10 +36,10 @@ const Login = ({ handleLogin }) => {
   }
 
   return (
-    <div className="login-container min-h-screen flex flex-col justify-center items-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="login-container min-h-screen flex flex-col justify-center items-center bg-white-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 p-10 bg-white rounded-lg shadow-md">
         <div className="profile-header mb-4">
-          <div className="profile-pic"><img src="/img/logo.webp" alt="logo" /></div>
+          <div className=""><img src="/img/logo.webp" alt="logo" /></div>
         </div>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="rounded-md shadow-sm -space-y-px">

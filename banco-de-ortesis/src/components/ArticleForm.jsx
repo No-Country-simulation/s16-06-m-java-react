@@ -2,12 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import { createArticle, updateArticle } from '../services/ArticleService';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { getCategories } from './../services/CategoryService';
 
 const ArticleForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
   const currentProduct = location.state?.product || null;
+  const [categories, setCategories] = useState([]);
 
   const formatDate = (date) => {
     const d = new Date(date);
@@ -21,21 +23,54 @@ const ArticleForm = () => {
     return [year, month, day].join('-');
   };
 
+  useEffect(()=>{
+    const fetchCategories = async()=>{
+      try {
+        const categories = await getCategories(); // Llama a la función correctamente y espera su resolución
+        setCategories(categories);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchCategories();
+  },[]);
+
   const [product, setProduct] = useState({
     name: '',
-    category: '',
-    material: '',
-    state: '',
+    idUser: '1',
     description: '',
     creationDate: formatDate(Date.now()),
     available: true,
-    img: ''
+    imageURL: '',
+    categoryId: '',
+    state: ''
   });
 
   useEffect(() => {
     if (currentProduct) {
-      delete currentProduct.id;
-      setProduct(currentProduct);
+      // Desestructuración del objeto y asignación al estado
+      const {
+        name,
+        description,
+        creationDate,
+        available,
+        imageURL,
+        category: { idCategory: categoryId }, // Renombrando idCategory a categoryId
+        state
+      } = currentProduct;
+
+      // Actualizando el estado con los valores desestructurados
+      setProduct(prevState => ({
+        ...prevState,
+        name,
+        idUser: prevState.idUser, // Manteniendo idUser sin cambios
+        description,
+        creationDate: formatDate(creationDate), // Formateo de la fecha
+        available,
+        imageURL,
+        categoryId,
+        state
+      }));
     }
   }, [currentProduct]);
 
@@ -47,19 +82,19 @@ const ArticleForm = () => {
     }));
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setProduct((prevProduct) => ({
-        ...prevProduct,
-        img: reader.result
-      }));
-    };
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  };
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files[0];
+  //   const reader = new FileReader();
+  //   reader.onloadend = () => {
+  //     setProduct((prevProduct) => ({
+  //       ...prevProduct,
+  //       img: reader.result
+  //     }));
+  //   };
+  //   if (file) {
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -71,6 +106,7 @@ const ArticleForm = () => {
     } catch (error) {
       console.error(error);
     }
+    console.log('intentando actualizar producto con id ' + id);
     console.log(product);
   };
 
@@ -113,25 +149,29 @@ const ArticleForm = () => {
           <label htmlFor="category" className="block text-gray-700 text-sm font-bold mb-2">Categoría:</label>
           <select
             id="category"
-            name="category"
-            value={product.category}
+            name="categoryId"
+            value={product.categoryId}
             onChange={handleChange}
             required
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           >
-            <option value="" disabled>Seleccione una categoría</option>
-            <option value="Miembro Superior">🖐️ Miembro Superior</option>
-            <option value="Miembro Inferior">🦵 Miembro Inferior</option>
-            <option value="Axiales">🦴 Axiales</option>
-            <option value="Sillas de ruedas">🦽 Sillas de ruedas</option>
-            <option value="Bastones">🦯 Bastones</option>
-            <option value="Andadores">🚶‍♂️ Andadores</option>
-            <option value="Cama ortopédica">🛏️ Cama ortopédica</option>
-            <option value="Colchon antiescaras">🛏️ Colchon antiescaras</option>
-            <option value="Muletas">🩼 Muletas</option>
+            <option value="" disabled default>Seleccione una categoría</option>
+            {categories.length > 0 ? 
+            (categories.map(category=><option key={category.idCategory} value={category.idCategory}>{category.name}</option>)) 
+            : <></>}
+            {/* 
+            <option value="1">🖐️ Miembro Superior</option> 
+            <option value="1">🦵 Miembro Inferior</option>
+            <option value="1">🦴 Axiales</option>
+            <option value="1">🦽 Sillas de ruedas</option>
+            <option value="1">🦯 Bastones</option>
+            <option value="1">🚶‍♂️ Andadores</option>
+            <option value="1">🛏️ Cama ortopédica</option>
+            <option value="1">🛏️ Colchon antiescaras</option>
+            <option value="1">🩼 Muletas</option> */}
           </select>
         </div>
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label htmlFor="material" className="block text-gray-700 text-sm font-bold mb-2">Material:</label>
           <select
             id="material"
@@ -146,7 +186,7 @@ const ArticleForm = () => {
             <option value="Plástico">🧴 Plástico</option>
             <option value="Otro">🔧 Otro</option>
           </select>
-        </div>
+        </div> */}
         <div className="mb-4">
           <label htmlFor="state" className="block text-gray-700 text-sm font-bold mb-2">Estado:</label>
           <select
@@ -158,9 +198,9 @@ const ArticleForm = () => {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           >
             <option value="" disabled>Seleccione un estado</option>
-            <option value="Bueno">👍 Bueno</option>
-            <option value="Regular">👌 Regular</option>
-            <option value="Malo">👎 Malo</option>
+            <option value="BUENO">👍 Bueno</option>
+            <option value="REGULAR">👌 Regular</option>
+            <option value="MALO">👎 Malo</option>
           </select>
         </div>
         <div className="mb-4">
@@ -175,13 +215,14 @@ const ArticleForm = () => {
           ></textarea>
         </div>
         <div className="mb-4">
-          <label htmlFor="img" className="block text-gray-700 text-sm font-bold mb-2">Agregar Imagen:</label>
+          <label htmlFor="img" className="block text-gray-700 text-sm font-bold mb-2">Agregar Dirección de Imagen:</label>
           <input
-            type="file"
+            type="text"
             id="img"
-            name="img"
+            name="imageURL"
             accept="image/*"
-            onChange={handleImageChange}
+            value={product.imageURL}
+            onChange={handleChange}
             required
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
@@ -201,9 +242,9 @@ const ArticleForm = () => {
             Publicar
           </button>
         </div>
-        {product.img && (
+        {product.imageURL && (
           <div className="mt-4">
-            <img src={product.img} alt="Preview" className="w-full h-auto rounded" />
+            <img src={product.imageURL} alt="Preview" className="w-full h-auto rounded" />
           </div>
         )}
       </form>
