@@ -45,13 +45,16 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ProductDTO getProductById(@PathVariable Long id) throws ResourceNotFoundException  {
-        ProductDTO productDTO = productService.getProductById(id);
-        if (productDTO == null) {
-            throw new ResourceNotFoundException("Category not found with id: " + id);
-        }
-        return productDTO;
+    public ProductDTO getProductById(@PathVariable Long id) throws ResourceNotFoundException {
+        return productService.getProductById(id); // Retorna directamente el ProductDTO
     }
+//    public ProductDTO getProductById(@PathVariable Long id) throws ResourceNotFoundException {
+//        ProductDTO productDTO = productService.getProductById(id);
+//        if (productDTO == null) {
+//            throw new ResourceNotFoundException("Product not found with id: " + id);
+//        }
+//        return productDTO;
+//    }
 
 
     @DeleteMapping("/{id}")
