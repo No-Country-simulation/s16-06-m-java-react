@@ -11,23 +11,25 @@ const Register = () => {
     lastName: '',
     email: '',
     password: '',
-    province: ''
+    province: '',
+    repeatedPassword:''
   });
 
   /*
-  {
-    "name": "string",
-    "lastName": "string",
-    "dni": "stringst",
-    "email": "string",
-    "password": "stringst",
-    "birthday": "2024-07-25",
-    "phoneNumber": "stringstri",
-    "province": "string",
-    "photoUser": "string",
-    "socialWorkNumber": 0,
-    "disabilityCertificateNumber": 0
-  }
+{
+  "name": "Pablo",
+  "lastName": "Velasco",
+  "dni": "35184235",
+  "email": "pablo@gmail.com",
+  "password": "123456789",
+  "birthday": "1990-07-02",
+  "phoneNumber": "stringstri",
+  "province": "Mendoza",
+  "photoUser": "string",
+  "socialWorkNumber": 0,
+  "disabilityCertificateNumber": 0,
+  "repeatedPassword": "123456789"
+}
   */
 
   const [showOnboarding, setShowOnboarding] = useState(false);
@@ -125,6 +127,20 @@ const Register = () => {
               />
             </div>
             <div>
+              <label htmlFor="repeatedPassword" className="sr-only">Repetir Contraseña</label>
+              <input
+                type="password"
+                id="repeatedPassword"
+                name="repeatedPassword"
+                autoComplete="new-password"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                placeholder="Repetir contraseña"
+                value={formData.repeatedPassword}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div>
               <label htmlFor="province" className='sr-only'>Ubicación</label>
               <select
                 name="province"
@@ -132,7 +148,7 @@ const Register = () => {
                 value={formData.province}
                 onChange={handleInputChange}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                >
+              >
                 <option value="" defaultValue>Elige tu provincia </option>
                 <option value="Buenos Aires" default>Buenos Aires</option>
                 <option value="Cordoba">Córdoba</option>
