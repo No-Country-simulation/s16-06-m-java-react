@@ -15,7 +15,7 @@ export default function MobileNav() {
         <SlHome className='w-6 h-6' />
         Home
       </Link>
-      <Link to={'/'} className='flex text-whiteBg flex-col items-center justify-center'>
+      <Link to={'/favorites'} className='flex text-whiteBg flex-col items-center justify-center'>
         <IoMdHeartEmpty className='w-6 h-6' />
         Favoritos
       </Link>
