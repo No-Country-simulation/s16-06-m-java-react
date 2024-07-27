@@ -2,9 +2,13 @@ package com.nocountry.apiS16.controller;
 
 import com.nocountry.apiS16.dto.UserDTO;
 import com.nocountry.apiS16.model.Users;
+import com.nocountry.apiS16.service.auth.AuthenticationService;
 import com.nocountry.apiS16.service.interfaces.IUserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
+import org.springdoc.api.ErrorMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +20,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/users")
 public class UsersController {
+
+    @Autowired
+    private AuthenticationService authenticationService;
 
     private final IUserService userService;
 
@@ -34,6 +41,7 @@ public class UsersController {
             return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
+
 
     @GetMapping("get/{id_user}")
     public ResponseEntity<Users> findUser(@PathVariable Long id_user){
