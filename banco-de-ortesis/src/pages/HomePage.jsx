@@ -27,7 +27,7 @@ const HomePage = () => {
     <div className='flex flex-col w-full items-center p-4 mb-20'>
       <h1 className="text-lg self-start font-bold">Más buscados</h1>
       <div className='flex w-full flex-col gap-3'>
-        {productList.map(product => (<Link to={`/article/${product.idProduct}`} key={product.idProduct}> <ProductCard product={product} /> </Link> ))}
+        {productList.map(product => ( <ProductCard key={product.id} product={product} /> ))}
       </div>
     </div>
   );
