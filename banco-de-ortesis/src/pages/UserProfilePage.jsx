@@ -18,7 +18,7 @@ const UserProfilePage = () => {
   return (
     <div className="profile-container">
       <div className="profile-header">
-        <div className="profile-pic">Foto perfil</div>
+        <div className="profile-pic"><img src="/img/logo.webp" alt="logo" /></div>
         <div className="profile-name">Nombre usuario</div>
       </div>
       <div className="profile-options">

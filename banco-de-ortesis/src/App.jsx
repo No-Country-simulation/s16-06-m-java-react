@@ -7,6 +7,7 @@ import ArticlePage from './pages/ArticlePage';
 import UserProfilePage from './pages/UserProfilePage';
 import Footer from './components/Footer';
 import ArticleForm from './components/ArticleForm';
+import DonationForm from './components/DonateForm';
 import MobileNav from './components/MobileNav';
 import HeaderNav from './components/HeaderNav';
 import Onboarding from './pages/Onboarding';
@@ -30,6 +31,7 @@ function App() {
           <Route path="/article/:id" element={<ArticlePage />} />
           <Route path="/profile" element={<UserProfilePage />} />
           <Route path="/upload" element={<ArticleForm />} />
+         {/* <Route path="/donate" element={<DonationForm />} /> */} 
           <Route path='/update/:id' element={<ArticleForm />} />
           <Route path='/userArticles' element={<UserArticles />} />
         </Routes>
