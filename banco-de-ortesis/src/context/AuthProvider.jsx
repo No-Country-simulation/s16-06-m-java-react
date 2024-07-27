@@ -1,64 +1,72 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { fetchUser } from "../services/AuthService";
 
-//context data
+// Contexto para autenticación
 const AuthContext = createContext({
-    isAuthenticated: '',
+    user: null,
+    isAuthenticated: false,
     getToken: () => {},
-    saveUser: (response) => {}
+    saveSessionInfo: (data) => {},
+    logOut: () => {},
 });
 
-
-export function AuthProvider({children}){
-    //basic hooks for context info
-    const [user, setUser] = useState({});
-    const[token, setToken] = useState('');
+export function AuthProvider({ children }) {
+    const [user, setUser] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    useEffect(()=>{
-        //call to auth status
-    });
-
-    function getToken(){
-        const token = sessionStorage.getItem('token');
-        if(token){
-            const {token} = JSON.parse(token);
-            return this.token;
+    useEffect(() => {
+        const token = getToken();
+        if (token && user === null) {
+            saveUserData(token);
         }
-        return null;
+    }, [user]);
+
+    useEffect(() => {
+        console.log('User state updated:', user);
+        console.log('Authenticated state updated:', isAuthenticated);
+    }, [user, isAuthenticated]);
+
+
+    function getToken() {
+        return sessionStorage.getItem('token') || null;
     }
 
-    function saveUser(){
-
+    async function saveUserData(token) {
+        console.log('Sending request with token:', token);
+        try {
+            const userData = await fetchUser(token);
+            console.log('Response from fetchUser:', userData);
+            
+            if (userData) {
+                setUser(userData);
+                setIsAuthenticated(true);
+            }
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+        }
     }
 
-    //reset user session to null changes auth to false
-    function logOut(){
-        setToken('');
-        sessionStorage.removeItem('token')
+    function logOut() {
+        sessionStorage.removeItem('token');
         setIsAuthenticated(false);
+        setUser(null); // Usa null en lugar de {}
         console.log('Logout exiting');
     }
 
-    //recovers token and setup user session enviroment
-    function saveSessionInfo(data){
-        const {jwt} = data;
-        if(jwt){
+    function saveSessionInfo(data) {
+        const { jwt } = data;
+        if (jwt) {
             sessionStorage.setItem('token', jwt);
-            setToken(token);
-            console.log('Token succesfully saved!');
-            setIsAuthenticated(true);
+            saveUserData(jwt);
+            console.log('Token successfully saved!');
         }
     }
 
-    async function checkAuth(){
-        return isAuthenticated;
-    }
-
-    return(
-        <AuthContext.Provider value={{saveSessionInfo, logOut}}>
+    return (
+        <AuthContext.Provider value={{ user, isAuthenticated, saveSessionInfo, logOut, getToken }}>
             {children}
         </AuthContext.Provider>
-    )
+    );
 }
 
 export const useAuth = () => useContext(AuthContext);

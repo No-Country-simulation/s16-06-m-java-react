@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { FaRegTrashAlt } from "react-icons/fa";
 import { deleteArticle } from '../services/ArticleService';
@@ -9,10 +9,15 @@ import { MdFindInPage } from "react-icons/md";
 
 export default function UpdateArticleCard({ product }) {
     const navigate = useNavigate();
+    const [date, setDate] = useState('');
 
     if (!product) return null;
 
     const { name, creationDate, category, imageURL, id } = product;
+
+    // useEffect(()=>{
+    //     if(creationDate) setDate(creationDate.split(' ')[0]);
+    // },[]);
 
     const deleteProduct = async (e) => {
         e.preventDefault();
@@ -35,7 +40,7 @@ export default function UpdateArticleCard({ product }) {
             </div>
             <div className='flex-grow flex flex-col text-blueSecond items-center justify-center text-start gap-2 p-1 text-wrap'>
                 <h3 className='self-start text-lg font-semibold leading-4'>{name}</h3>
-                <p className='text-sm w-full leading-4'>Fecha publicación: {creationDate}</p>
+                {/* <p className='text-sm w-full leading-4'>Fecha publicación: <br /> {date}</p> */}
                 <div className='flex w-full pr-1 justify-between items-center text-sm text-blueSecond'>
                     {/* <MdFindInPage className='text-blueSecond' /> */}
                     <Link><div className='flex items-center text-blueSecond'> <MdOutlineGroup className='w-5 h-5' /><span className='text-xs'>0 solicitudes</span></div></Link>

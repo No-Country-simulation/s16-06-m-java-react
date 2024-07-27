@@ -12,6 +12,7 @@ import HeaderNav from './components/HeaderNav';
 import Onboarding from './pages/Onboarding';
 import UserArticles from './pages/UserArticles';
 import { AuthProvider } from './context/AuthProvider';
+import Favorites from './pages/Favorites';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/upload" element={<ArticleForm />} />
           <Route path='/update/:id' element={<ArticleForm />} />
           <Route path='/userArticles' element={<UserArticles />} />
+          <Route path='/favorites' element={<Favorites />} />
         </Routes>
         <MobileNav />
         {/* <Notification message="Esto es una notificación!" /> */}

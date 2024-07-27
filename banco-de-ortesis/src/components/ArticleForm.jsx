@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { createArticle, updateArticle } from '../services/ArticleService';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getCategories } from './../services/CategoryService';
+import { useAuth } from '../context/AuthProvider';
 
 const ArticleForm = () => {
   const navigate = useNavigate();
@@ -10,7 +11,8 @@ const ArticleForm = () => {
   const location = useLocation();
   const currentProduct = location.state?.product || null;
   const [categories, setCategories] = useState([]);
-
+  const auth = useAuth();
+  const {id_user} = auth.user;
   const formatDate = (date) => {
     const d = new Date(date);
     let month = '' + (d.getMonth() + 1);
@@ -37,7 +39,7 @@ const ArticleForm = () => {
 
   const [product, setProduct] = useState({
     name: '',
-    idUser: '1',
+    idUser: id_user,
     description: '',
     creationDate: formatDate(Date.now()),
     available: true,
