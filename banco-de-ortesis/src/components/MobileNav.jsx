@@ -10,7 +10,6 @@ import { useAuth } from '../context/AuthProvider';
 
 export default function MobileNav() {
   const auth = useAuth();
-
   return (
     <div className='fixed bottom-0 flex w-full h-16 text-base  bg-cyanMain justify-evenly items-center md:sticky'>
       {auth.isAuthenticated ?
@@ -44,7 +43,6 @@ export default function MobileNav() {
         <Link to={'/login'} className='text-xl p-2.5 bg-whiteBg text-cyanMain  border border-solid rounded-xl
           font-semibold hover:bg-cyanMain hover:text-whiteBg'>Iniciar Sesión</Link>
         </>}
-
     </div>
   )
 }

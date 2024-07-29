@@ -1,7 +1,9 @@
 package com.nocountry.apiS16.service.implementations;
 
+import com.nocountry.apiS16.dto.RegisteredUserDTO;
 import com.nocountry.apiS16.dto.UserDTO;
 import com.nocountry.apiS16.exceptions.InvalidPasswordException;
+import com.nocountry.apiS16.exceptions.ObjectNotFoundException;
 import com.nocountry.apiS16.model.Users;
 import com.nocountry.apiS16.repository.IProductRepository;
 import com.nocountry.apiS16.repository.IUserRepository;
@@ -72,10 +74,19 @@ public class UserService implements IUserService {
         return this.userRepository.getUserByName(name)
                 .orElseThrow(()-> new RuntimeException("User with that name doesnt exist"));
     }
-    
+
+
     @Override
-    public Optional<Users> findUserByEmail(String email) {
-        return userRepository.getUserByEmail(email);
+    public Optional<Users> findUserByEmail(String email) throws ObjectNotFoundException {
+
+         Optional<Users> users = userRepository.getUserByEmail(email);
+
+        if(users.isPresent()){
+            return users;
+        }else{
+            throw new ObjectNotFoundException("User with that email doesnt found");
+        }
+
     }
 
     @Override
@@ -115,4 +126,8 @@ public class UserService implements IUserService {
             return false;
         }
     }
+
+
+
+
 }
