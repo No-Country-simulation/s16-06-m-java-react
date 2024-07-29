@@ -19,6 +19,10 @@ export default function UpdateArticleCard({ product }) {
     //     if(creationDate) setDate(creationDate.split(' ')[0]);
     // },[]);
 
+    // useEffect(()=>{
+    //     if(creationDate) setDate(creationDate.split(' ')[0]);
+    // },[]);
+
     const deleteProduct = async (e) => {
         e.preventDefault();
         console.log('Se borrara el id: ' + idProduct);

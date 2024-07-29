@@ -6,7 +6,7 @@ import { useAuth } from '../context/AuthProvider';
 export default function UserArticles() {
     
     const auth = useAuth();
-
+  
     const [productList, setProductList] = useState([]);
 
     useEffect(() => {
@@ -33,7 +33,7 @@ export default function UserArticles() {
             <>
                 <h1 className="text-lg self-start font-bold">Tus articulos</h1>
                 <div className='flex w-full flex-col gap-3'>
-                    {productList.map(product => (<UpdateArticleCard key={product.idProduct} product={product} />))}
+                    {productList.map(product => (<UpdateArticleCard key={product.id} product={product} />))}
                 </div>
             </>
             )
