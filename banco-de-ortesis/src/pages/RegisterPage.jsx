@@ -59,7 +59,7 @@ const Register = () => {
   };
 
   const handleFinishOnboarding = () => {
-    navigate('/');
+    navigate('/home');
   };
 
   if (showOnboarding) {

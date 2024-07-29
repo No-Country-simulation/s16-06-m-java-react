@@ -6,7 +6,7 @@ import { useAuth } from '../context/AuthProvider';
 export default function UserArticles() {
     
     const auth = useAuth();
-  
+
     const [productList, setProductList] = useState([]);
 
     useEffect(() => {
