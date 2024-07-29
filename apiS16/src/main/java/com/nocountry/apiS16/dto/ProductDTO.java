@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 @Getter
 @Setter
@@ -21,7 +22,7 @@ public class ProductDTO implements Serializable {
     private String name;
     private Long idUser;
     private String description;
-    private Date creationDate;
+    private LocalDate creationDate;
     private boolean available;
     private String imageURL;
     private Long categoryId;
