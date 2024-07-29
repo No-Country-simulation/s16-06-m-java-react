@@ -57,7 +57,7 @@ const ArticleForm = () => {
         creationDate,
         available,
         imageURL,
-        category: { idCategory: categoryId }, // Renombrando idCategory a categoryId
+        categoryId,
         state
       } = currentProduct;
 

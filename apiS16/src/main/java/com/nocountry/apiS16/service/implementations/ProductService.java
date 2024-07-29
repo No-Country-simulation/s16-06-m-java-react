@@ -130,7 +130,7 @@ public class ProductService {
         return productDTO;
     }
 
-    public List<ProductDTO> getProductsByUserId(Long id_user) {
+    public List<ProductGetDTO> getProductsByUserId(Long id_user) {
         List<Product> products = iProductRepository.findProductsByUserId(id_user);
         return products.stream().map(this::convertToProductDTO).collect(Collectors.toList());
     }

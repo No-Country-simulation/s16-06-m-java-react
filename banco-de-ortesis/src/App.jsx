@@ -16,6 +16,7 @@ import Favorites from './pages/Favorites';
 import ProtectedNode from './components/ProtectedNode/ProtectedNode';
 import ErrorPage from './pages/ErrorPage';
 import DonationRequestForm from './components/DonateForm';
+import PopUpAlert from './components/Modals/PopUpAlert';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function AppContent() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/article/:id" element={<ArticlePage />} />
+        <Route path={'/alert'}  element={<PopUpAlert />}/>
         <Route path="*" element={<ErrorPage />} />
         {/* Protected Routes */}
         <Route element={<ProtectedNode />}>
