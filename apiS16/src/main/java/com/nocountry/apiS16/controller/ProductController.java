@@ -43,8 +43,8 @@ public class ProductController {
     }
 
     @GetMapping("/user/{id_user}")
-    public ResponseEntity<List<ProductDTO>> getProductsByUserId(@PathVariable Long id_user) {
-        List<ProductDTO> products = productService.getProductsByUserId(id_user);
+    public ResponseEntity<List<ProductGetDTO>> getProductsByUserId(@PathVariable Long id_user) {
+        List<ProductGetDTO> products = productService.getProductsByUserId(id_user);
         if (products.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
