@@ -60,11 +60,13 @@ export default function ProductCard({ product, favoriteId }) {
         <p className='text-sm w-full leading-4'>{description}</p>
         <div className='flex w-full justify-between items-center text-sm pr-2'>
           <span className='flex items-center gap-1'>{userName} 5 <MdOutlineStar className='inline w-5 h-5' /></span>
+          {auth.isAuthenticated && <>
           {!favorite ?
             <IoMdHeartEmpty className='w-5 h-5 cursor-pointer' onClick={switchFavorite} />
             :
             <IoMdHeart className='w-5 h-5 text-red-400 cursor-pointer' onClick={switchFavorite} />
           }
+          </>}
         </div>
       </div>
     </div>

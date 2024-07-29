@@ -5,11 +5,13 @@ import { MdOutlineLocationOn } from "react-icons/md";
 import Button1 from '../components/Buttons/Button1';
 import Button2 from '../components/Buttons/Button2';
 import Carousel from '../components/Carousel';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getArticleDetails } from '../services/ArticleService';
 import UserTag from '../components/UserTag';
+import { useAuth } from '../context/AuthProvider';
 
 const ArticlePage = () => {
+  const auth = useAuth();
   const { id } = useParams();
   const [product, setProduct] = useState(null)
 
@@ -50,8 +52,10 @@ const ArticlePage = () => {
           <li>Estado: <span className='font-normal text-base'>{state}</span></li>
           <li>Disponibilidad: <span className='font-normal text-base'>{available ? 'Disponible' : 'No Disponible'}</span></li>
         </ul>
-
-        <Button2 name='Solicitar' />
+        {auth.isAuthenticated ? <Button2 name='Solicitar' /> : 
+        
+        <Link to='/login' className='text-base rounded-lg text-center p-2.5 bg-greenAccent text-white  font-normal drop-shadow-md'>Inicia sesión para ver más detalles</Link>}
+        
       </div>
     </div>
   );

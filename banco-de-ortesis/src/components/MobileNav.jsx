@@ -11,7 +11,7 @@ export default function MobileNav() {
   return (
     <div className='fixed bottom-0 flex w-full text-base  bg-cyanMain justify-evenly items-center'>
 
-      <Link to={'/'} className='flex text-whiteBg flex-col items-center justify-center'>
+      <Link to={'/home'} className='flex text-whiteBg flex-col items-center justify-center'>
         <SlHome className='w-6 h-6' />
         Home
       </Link>

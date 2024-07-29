@@ -104,7 +104,7 @@ const ArticleForm = () => {
       const response = currentProduct != null ? await updateArticle(id, product) : await createArticle(product);
       console.log(response);
       if (response) alert('Artículo registrado exitosamente');
-      navigate('/');
+      navigate('/home');
     } catch (error) {
       console.error(error);
     }
@@ -117,7 +117,7 @@ const ArticleForm = () => {
   };
 
   const handleBackClick = () => {
-    navigate('/');
+    navigate('/home');
   };
 
   return (
