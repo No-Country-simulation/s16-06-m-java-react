@@ -13,6 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [showOnboarding, setShowOnboarding] = useState(false);
   const navigate = useNavigate();
+  if(auth.isAuthenticated) navigate('/home');
 
   const handleSubmit = async (e) => {
     e.preventDefault();

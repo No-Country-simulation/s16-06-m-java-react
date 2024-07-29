@@ -6,10 +6,8 @@ import { useAuth } from '../context/AuthProvider';
 export default function UserArticles() {
     
     const auth = useAuth();
-    if(!auth.isAuthenticated) return null;
-    
-    const [productList, setProductList] = useState([]);
 
+    const [productList, setProductList] = useState([]);
 
     useEffect(() => {
         // const getUserProducts = async () => {
@@ -17,10 +15,14 @@ export default function UserArticles() {
         //     setProductList(products);
         // }
         // getUserProducts();
-        const userProducts = auth.user.productList;
-        setProductList(userProducts);
+        if(auth.isAuthenticated){
+            const userProducts = auth.user.productList;
+            setProductList(userProducts);
+        }
     }, []);
 
+    if(!auth.isAuthenticated) return null;
+    
     if (!productList) return null;
 
 
@@ -31,7 +33,7 @@ export default function UserArticles() {
             <>
                 <h1 className="text-lg self-start font-bold">Tus articulos</h1>
                 <div className='flex w-full flex-col gap-3'>
-                    {productList.map(product => (<UpdateArticleCard key={product.id} product={product} />))}
+                    {productList.map(product => (<UpdateArticleCard key={product.idProduct} product={product} />))}
                 </div>
             </>
             )
