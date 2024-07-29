@@ -14,7 +14,7 @@ const ErrorPage = () => {
   };
 
   const handleGoHome = () => {
-    navigate('/'); // Navega a la página de inicio
+    navigate('/home'); // Navega a la página de inicio
   };
 
   return (

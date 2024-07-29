@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8080/api/v1/categories';
+const API_URL = 'http://pasos_firmes:8080/api/v1/categories';
 
 export const getCategories = async () => {
     try {

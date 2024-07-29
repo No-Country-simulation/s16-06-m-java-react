@@ -1,13 +1,13 @@
 // src/pages/UserProfilePage.jsx
 import '../styles/Styles.css';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthProvider';
 
 const UserProfilePage = () => {
 
   const auth = useAuth();
-
+  const {name, lastName} = auth.user;
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -16,18 +16,19 @@ const UserProfilePage = () => {
   };
 
   return (
-    <div className="profile-container">
+    <div className="mt-16 profile-container">
       <div className="profile-header">
         <div className="profile-pic"><img src="/img/logo.webp" alt="logo" /></div>
-        <div className="profile-name">Nombre usuario</div>
+        <div className="profile-name">{name} {lastName}</div>
       </div>
       <div className="profile-options">
-        <div>Mis Productos</div>
-        <div>Valoraciones</div>
-        <div>Mensajes</div>
+        <Link to={'/userArticles'}>Mis Productos</Link>
+        {/* <div>Valoraciones</div> */}
+        {/* <div>Mensajes</div> */}
         <div>Configuración</div>
         <div>Privacidad</div>
         <div>Ayuda</div>
+        <Link to={'/onboarding'}>Acerca de</Link>
       </div>
       <button className="logout-button" onClick={handleLogout}>Cerrar sesión</button>
     </div>
@@ -35,3 +36,4 @@ const UserProfilePage = () => {
 };
 
 export default UserProfilePage;
+

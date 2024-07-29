@@ -1,5 +1,5 @@
 
-const API_URL = 'http://localhost:8080/api/v1/products';
+const API_URL = 'http://pasos_firmes:8080/api/v1/products';
 
 export const getArticleDetails = async (id) => {
   try {

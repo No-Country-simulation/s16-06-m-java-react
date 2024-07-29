@@ -1,39 +1,28 @@
-// src/pages/Register.jsx
 import '../styles/Styles.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../services/AuthService';
 import Onboarding from './Onboarding';
+import { useAuth } from '../context/AuthProvider';
 
 const Register = () => {
+  const auth = useAuth();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: '',
     lastName: '',
     email: '',
     password: '',
     province: '',
-    repeatedPassword:''
+    repeatedPassword: ''
   });
 
-  /*
-{
-  "name": "Pablo",
-  "lastName": "Velasco",
-  "dni": "35184235",
-  "email": "pablo@gmail.com",
-  "password": "123456789",
-  "birthday": "1990-07-02",
-  "phoneNumber": "stringstri",
-  "province": "Mendoza",
-  "photoUser": "string",
-  "socialWorkNumber": 0,
-  "disabilityCertificateNumber": 0,
-  "repeatedPassword": "123456789"
-}
-  */
-
   const [showOnboarding, setShowOnboarding] = useState(false);
-  const navigate = useNavigate();
+
+  if (auth.isAuthenticated) {
+    navigate('/home');
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -55,7 +44,7 @@ const Register = () => {
   };
 
   const handleFinishOnboarding = () => {
-    navigate('/');
+    navigate('/home');
   };
 
   if (showOnboarding) {
@@ -66,7 +55,9 @@ const Register = () => {
     <div className="register-container min-h-screen flex flex-col justify-center items-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 p-10 bg-white rounded-lg shadow-md">
         <div className="profile-header mb-4">
-        <div className="profile-pic"><img src="/img/logo.webp" alt="logo" /></div>
+          <div className="profile-pic">
+            <img src="/img/logo.webp" alt="logo" />
+          </div>
         </div>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="rounded-md shadow-sm -space-y-px">
@@ -141,7 +132,8 @@ const Register = () => {
               />
             </div>
             <div>
-              <label htmlFor="province" className='sr-only'>Ubicación</label>
+              <br></br>
+              <label htmlFor="province" className="sr-only">Ubicación</label>
               <select
                 name="province"
                 id="province"
@@ -149,17 +141,16 @@ const Register = () => {
                 onChange={handleInputChange}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               >
-                <option value="" defaultValue>Elige tu provincia </option>
-                <option value="Buenos Aires" default>Buenos Aires</option>
+                <option value="" defaultValue>Elige tu provincia</option>
+                <option value="Buenos Aires">Buenos Aires</option>
                 <option value="Cordoba">Córdoba</option>
-                <option value="Mendoza" >Mendoza</option>
+                <option value="Mendoza">Mendoza</option>
                 <option value="Salta">Salta</option>
                 <option value="San Juan">San Juan</option>
                 <option value="Santa Fe">Santa Fe</option>
               </select>
             </div>
           </div>
-
           <div>
             <button
               type="submit"
