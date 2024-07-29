@@ -4,8 +4,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../services/AuthService';
 import Onboarding from './Onboarding';
+import { useAuth } from '../context/AuthProvider';
 
 const Register = () => {
+  const auth = useAuth();
   const [formData, setFormData] = useState({
     name: '',
     lastName: '',
@@ -34,6 +36,8 @@ const Register = () => {
 
   const [showOnboarding, setShowOnboarding] = useState(false);
   const navigate = useNavigate();
+
+  if(auth.isAuthenticated) navigate('/home');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
