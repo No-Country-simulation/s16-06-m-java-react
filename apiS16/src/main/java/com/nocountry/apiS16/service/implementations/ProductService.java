@@ -10,6 +10,7 @@ import com.nocountry.apiS16.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -122,6 +123,11 @@ public class ProductService {
 
 
         return productDTO;
+    }
+
+    public List<ProductDTO> getProductsByUserId(Long id_user) {
+        List<Product> products = iProductRepository.findProductsByUserId(id_user);
+        return products.stream().map(this::convertToProductDTO).collect(Collectors.toList());
     }
 }
 

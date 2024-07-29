@@ -5,10 +5,13 @@ import com.nocountry.apiS16.exceptions.ResourceNotFoundException;
 import com.nocountry.apiS16.model.Product;
 import com.nocountry.apiS16.service.implementations.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -38,6 +41,15 @@ public class ProductController {
         return productService.getProductByName(name);
     }
 
+    @GetMapping("/user/{id_user}")
+    public ResponseEntity<List<ProductDTO>> getProductsByUserId(@PathVariable Long id_user) {
+        List<ProductDTO> products = productService.getProductsByUserId(id_user);
+        if (products.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        }
+    }
     @PutMapping("/{id}")
     public ProductDTO updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) throws ResourceNotFoundException{
         Product updatedProduct = productService.updateProduct(id, productDTO);
