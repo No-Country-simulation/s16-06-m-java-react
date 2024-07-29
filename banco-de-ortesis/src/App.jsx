@@ -13,10 +13,9 @@ import HeaderNav from './components/HeaderNav';
 import Onboarding from './pages/Onboarding';
 import UserArticles from './pages/UserArticles';
 import { AuthProvider } from './context/AuthProvider';
+import ErrorPage from './pages/ErrorPage';
 
 function App() {
-
-
 
   return (
     <AuthProvider>
@@ -31,9 +30,10 @@ function App() {
           <Route path="/article/:id" element={<ArticlePage />} />
           <Route path="/profile" element={<UserProfilePage />} />
           <Route path="/upload" element={<ArticleForm />} />
-         {/* <Route path="/donate" element={<DonationForm />} /> */} 
+         <Route path="/donate" element={<DonationForm />} /> 
           <Route path='/update/:id' element={<ArticleForm />} />
           <Route path='/userArticles' element={<UserArticles />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
         <MobileNav />
         {/* <Notification message="Esto es una notificación!" /> */}

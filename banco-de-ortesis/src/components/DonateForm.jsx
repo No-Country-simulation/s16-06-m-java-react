@@ -1,14 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getCategories } from './../services/CategoryService';
+import { createArticle } from './../services/ArticleService';
 
 const DonationRequestForm = () => {
   const navigate = useNavigate();
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [categories, setCategories] = useState([]);
   const [request, setRequest] = useState({
     name: '',
     description: '',
     categoryId: ''
   });
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const categories = await getCategories();
+        setCategories(categories);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchCategories();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,9 +38,15 @@ const DonationRequestForm = () => {
     setShowConfirmation(true);
   };
 
-  const handleConfirm = () => {
-    alert('Solicitud registrada exitosamente');
-    navigate('/');
+  const handleConfirm = async () => {
+    try {
+      const response = await createArticle(request);
+      console.log(response);
+      if (response) alert('Solicitud registrada exitosamente');
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleCancel = () => {
@@ -74,15 +95,9 @@ const DonationRequestForm = () => {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           >
             <option value="" disabled default>Seleccione una categoría</option>
-            <option value="1">🖐️ Miembro Superior</option>
-            <option value="2">🦵 Miembro Inferior</option>
-            <option value="3">🦴 Axiales</option>
-            <option value="4">🦽 Sillas de ruedas</option>
-            <option value="5">🦯 Bastones</option>
-            <option value="6">🚶‍♂️ Andadores</option>
-            <option value="7">🛏️ Cama ortopédica</option>
-            <option value="8">🛏️ Colchon antiescaras</option>
-            <option value="9">🩼 Muletas</option>
+            {categories.length > 0 ? 
+            (categories.map(category => <option key={category.idCategory} value={category.idCategory}>{category.name}</option>)) 
+            : <></>}
           </select>
         </div>
         <div className="mb-4">
@@ -99,35 +114,35 @@ const DonationRequestForm = () => {
         <div className="flex items-center justify-between">
           <button
             type="button"
+            className="bg-[#848484] hover:bg-[#6c6c6c] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            onClick={() => setShowConfirmation(true)}
+          >
+            Solicitar
+          </button>
+          <button
+            type="button"
             className="bg-white border-2 border-[#679436] text-[#679436] hover:bg-[#679436] hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             onClick={handleCancel}
           >
             Cancelar
-          </button>
-          <button
-            type="submit"
-            className="bg-[#848484] hover:bg-[#6c6c6c] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            Solicitar
           </button>
         </div>
       </form>
       {showConfirmation && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded shadow-md text-center">
-          <h2 className="text-center text-2xl font-bold flex-grow">¿Solicitar este producto?</h2>
-            <p className="mb-4">Recuerda que hasta que concretes la transacción no podrás solicitar otro producto.</p>
+            <p className="mb-4">¿Estás seguro de que quieres solicitar este producto?</p>
             <button
-              className="bg-white border-2 border-[#679436] text-[#679436] hover:bg-[#679436] hover:text-white font-bold py-2 px-4 rounded mr-6"
+              className="bg-[#848484] hover:bg-[#6c6c6c] text-white font-bold py-2 px-4 rounded mr-2"
+              onClick={handleConfirm}
+            >
+              Confirmar
+            </button>
+            <button
+              className="bg-white border-2 border-[#679436] text-[#679436] hover:bg-[#679436] hover:text-white font-bold py-2 px-4 rounded"
               onClick={() => setShowConfirmation(false)}
             >
               Cancelar
-            </button>
-            <button
-              className="bg-[#848484]  hover:bg-[#6c6c6c] text-white font-bold py-2 px-4 rounded mr-2"
-              onClick={handleConfirm}
-            >
-              Solicitar
             </button>
           </div>
         </div>
