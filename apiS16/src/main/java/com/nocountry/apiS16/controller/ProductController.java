@@ -2,34 +2,38 @@ package com.nocountry.apiS16.controller;
 
 import com.nocountry.apiS16.dto.ProductDTO;
 import com.nocountry.apiS16.dto.ProductGetDTO;
+import com.nocountry.apiS16.dto.ProductRequestDTO;
 import com.nocountry.apiS16.exceptions.ResourceNotFoundException;
 import com.nocountry.apiS16.model.Product;
 import com.nocountry.apiS16.service.implementations.ProductService;
-import lombok.RequiredArgsConstructor;
+
+import jakarta.websocket.server.PathParam;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/v1/products")
 public class ProductController {
 
-    private final ProductService productService;
+    @Autowired
+    private ProductService productService;
 
     @PostMapping("/add")
     public ProductGetDTO createProduct(@RequestBody ProductDTO productDTO) throws ResourceNotFoundException {
         Product createdProduct = productService.createProduct(productDTO);
-        return productService.convertToProductDTO(createdProduct);
+        return productService.convertToProductGetDTO(createdProduct);
     }
 
     @GetMapping("/get")
-    public List<ProductGetDTO> getAllProducts() {
-        List<ProductGetDTO> productDTOs = productService.getAllProductDTOs();
+    public List<ProductDTO> getAllProducts() {
+        List<ProductDTO> productDTOs = productService.getAllProductDTOs();
         if (productDTOs.isEmpty()) {
             return new ArrayList<>();
         }
@@ -54,7 +58,7 @@ public class ProductController {
     @PutMapping("/{id}")
     public ProductGetDTO updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) throws ResourceNotFoundException{
         Product updatedProduct = productService.updateProduct(id, productDTO);
-        return productService.convertToProductDTO(updatedProduct);
+        return productService.convertToProductGetDTO(updatedProduct);
     }
 
     @GetMapping("/{id}")
@@ -75,4 +79,30 @@ public class ProductController {
         productService.deleteProductById(id);
     }
 
+    @PostMapping("/request")
+    public ResponseEntity<String> requestProduct(@RequestBody ProductRequestDTO productRequest)  throws ResourceNotFoundException {
+        productService.requestProduct(productRequest.getProductId(), productRequest.getRequesterId());
+        return ResponseEntity.ok("Producto solicitado con exito");
+    }   
+
+    @PutMapping("/disable/{idProduct}")
+    public ResponseEntity<String> disabledProduct(@PathVariable Long idProduct) throws ResourceNotFoundException {
+        ProductDTO newProduct = new ProductDTO();
+        ProductGetDTO product = productService.getProductById(idProduct);
+        newProduct.setName(product.getName());
+        newProduct.setIdUser(product.getIdUser());
+        newProduct.setDescription(product.getDescription());
+        newProduct.setCreationDate(LocalDate.parse(product.getCreationDate()));
+        newProduct.setAvailable(false);
+        newProduct.setImageURL(product.getImageURL());
+        newProduct.setCategoryId(product.getCategoryId());
+        newProduct.setState(product.getState());
+        newProduct.setUserName(product.getUserName());
+        newProduct.setUserLastName(product.getUserLastName());
+        newProduct.setUserEmail(product.getUserEmail());
+        newProduct.setUserProvince(product.getUserProvince());
+        productService.updateProduct(idProduct, newProduct);
+
+        return ResponseEntity.ok("Producto desabilitado con exito");
+    }
 }
