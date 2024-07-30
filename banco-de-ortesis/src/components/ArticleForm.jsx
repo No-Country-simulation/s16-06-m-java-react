@@ -4,6 +4,8 @@ import { createArticle, updateArticle } from '../services/ArticleService';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getCategories } from './../services/CategoryService';
 import { useAuth } from '../context/AuthProvider';
+import PopUpAlert from './Modals/PopUpAlert';
+import useAlert from '../hooks/useAlert';
 
 const ArticleForm = () => {
   const navigate = useNavigate();
@@ -11,8 +13,9 @@ const ArticleForm = () => {
   const location = useLocation();
   const currentProduct = location.state?.product || null;
   const [categories, setCategories] = useState([]);
+  const { isAlertVisible, alertMessage, showAlert, closeAlert } = useAlert();
   const auth = useAuth();
-  const {id_user} = auth.user;
+  const { id_user } = auth.user;
   const formatDate = (date) => {
     const d = new Date(date);
     let month = '' + (d.getMonth() + 1);
@@ -25,8 +28,8 @@ const ArticleForm = () => {
     return [year, month, day].join('-');
   };
 
-  useEffect(()=>{
-    const fetchCategories = async()=>{
+  useEffect(() => {
+    const fetchCategories = async () => {
       try {
         const categories = await getCategories(); // Llama a la función correctamente y espera su resolución
         setCategories(categories);
@@ -35,7 +38,7 @@ const ArticleForm = () => {
       }
     }
     fetchCategories();
-  },[]);
+  }, []);
 
   const [product, setProduct] = useState({
     name: '',
@@ -103,12 +106,14 @@ const ArticleForm = () => {
     try {
       const response = currentProduct != null ? await updateArticle(id, product) : await createArticle(product);
       console.log(response);
-      if (response) alert('Artículo registrado exitosamente');
-      navigate('/home');
+      showAlert('Exito!', 'Producto registrado exitosamente! seras redirigido al inicio');
+
+      setTimeout(() => {
+        navigate('/home');
+      }, 3000);
     } catch (error) {
       console.error(error);
     }
-    console.log('intentando actualizar producto con id ' + id);
     console.log(product);
   };
 
@@ -120,7 +125,8 @@ const ArticleForm = () => {
     navigate('/home');
   };
 
-  return (
+  return (<>
+
     <div className="max-w-2xl mx-auto py-8">
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <div className="flex items-center justify-center mb-6">
@@ -158,9 +164,9 @@ const ArticleForm = () => {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           >
             <option value="" disabled default>Seleccione una categoría</option>
-            {categories.length > 0 ? 
-            (categories.map(category=><option key={category.idCategory} value={category.idCategory}>{category.name}</option>)) 
-            : <></>}
+            {categories.length > 0 ?
+              (categories.map(category => <option key={category.idCategory} value={category.idCategory}>{category.name}</option>))
+              : <></>}
             {/* 
             <option value="1">🖐️ Miembro Superior</option> 
             <option value="1">🦵 Miembro Inferior</option>
@@ -251,6 +257,13 @@ const ArticleForm = () => {
         )}
       </form>
     </div>
+    <PopUpAlert
+      title={alertMessage.title}
+      description={alertMessage.description}
+      isVisible={isAlertVisible}
+      onClose={closeAlert}
+    />
+  </>
   );
 };
 
