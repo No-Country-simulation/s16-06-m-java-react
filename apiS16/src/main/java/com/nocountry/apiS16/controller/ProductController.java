@@ -28,12 +28,12 @@ public class ProductController {
     @PostMapping("/add")
     public ProductGetDTO createProduct(@RequestBody ProductDTO productDTO) throws ResourceNotFoundException {
         Product createdProduct = productService.createProduct(productDTO);
-        return productService.convertToProductDTO(createdProduct);
+        return productService.convertToProductGetDTO(createdProduct);
     }
 
     @GetMapping("/get")
-    public List<ProductGetDTO> getAllProducts() {
-        List<ProductGetDTO> productDTOs = productService.getAllProductDTOs();
+    public List<ProductDTO> getAllProducts() {
+        List<ProductDTO> productDTOs = productService.getAllProductDTOs();
         if (productDTOs.isEmpty()) {
             return new ArrayList<>();
         }
@@ -58,7 +58,7 @@ public class ProductController {
     @PutMapping("/{id}")
     public ProductGetDTO updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) throws ResourceNotFoundException{
         Product updatedProduct = productService.updateProduct(id, productDTO);
-        return productService.convertToProductDTO(updatedProduct);
+        return productService.convertToProductGetDTO(updatedProduct);
     }
 
     @GetMapping("/{id}")
