@@ -1,15 +1,15 @@
 import { API_URL } from "../context/apiurl";
 
-const BASE_URL = `${API_URL}/products`;
+const BASE_URL = `${API_URL}/products`
 
 export const getArticleDetails = async (id) => {
   try {
     const response = await fetch(`${BASE_URL}/${id}`);
     if (response.ok) {
-      const data = await response.json();
+      const data = await response.json(); // Agrega await aquí
       return data;
-    } else {
-      throw new Error('No se encontró el producto deseado');
+    } else { response.status === '404' } {
+      throw new Error('No se encontro el producto deseado');
     }
   } catch (error) {
     console.error('Ocurrió un error al obtener el producto indicado', error);
@@ -21,7 +21,7 @@ export const getAllArticles = async () => {
   try {
     const response = await fetch(`${BASE_URL}/get`);
     if (response.ok) {
-      const data = await response.json();
+      const data = await response.json(); // Agrega await aquí
       return data;
     }
     throw new Error('No se pudo obtener la lista de productos');
@@ -41,13 +41,13 @@ export const createArticle = async(article) => {
       body: JSON.stringify(article)
     });
 
-    if (response.ok) {
+    if (response) {
       const data = await response.json();
       console.log('Exito al subir');
       return data;
     }
   } catch (error) {
-    console.error('Ocurrió un error al registrar el producto', error);
+    console.error('Ocurrio un errror al registrar el producto', error);
     throw error;
   }
 };
@@ -64,42 +64,40 @@ export const updateArticle = async(id, updatedArticle) => {
 
     if (response.ok) {
       const data = await response.json();
-      console.log('Modificado con éxito!');
+      console.log('Modificado con exito!');
       return data;
     }
   } catch (error) {
-    console.error('Ocurrió un error al actualizar el producto', error);
+    console.error('Ocurrio un error al actualizar el producto', error);
     throw error;
   }
 };
 
 export const deleteArticle = async(id) => {
   try {
-    const response = await fetch(`${BASE_URL}/${id}`, {
+    const response = await fetch(`${BASE_URL}/${id}`,{
       method: 'DELETE'
-    });
-    if (response.ok) {
-      console.log('Producto borrado correctamente');
-    } else {
-      throw new Error('No se pudo borrar el producto');
-    }
+    })
+    // if(response.ok){
+    //   const data = await response.json();
+    //   console.log('Producto borrado correctamente');
+    //   return data;
+    // }
   } catch (error) {
-    console.error('Ocurrió un error al borrar el producto', error);
+    console.error('Ocurrio un errror al borrar el producto', error);
     throw error;
   }
 };
 
-export const getUserArticles = async(id) => {
+
+export const getUserArticles = async(id) =>{
   try {
     const response = await fetch(`${BASE_URL}/user/${id}`);
-    if (response.ok) {
-      const data = await response.json();
+    if(response.ok){
+      const data  = await response.json();
       return data;
-    } else {
-      throw new Error('No se pudieron obtener los artículos del usuario');
     }
   } catch (error) {
-    console.error('Ocurrió un error al obtener artículos del usuario', error);
-    throw error;
+    console.error('Ocurrio un error al obtener articulos del usuario');
   }
-};
+}

@@ -3,9 +3,6 @@ import { API_URL } from "../context/apiurl";
 const BASE_URL = `${API_URL}/favorites`
 
 export const addFavorite = async(article)=>{
-
-
-
     try {
         const response = await fetch(`${BASE_URL}/add`, {
           method: 'POST',
@@ -37,4 +34,16 @@ export const deleteFavorite = async(id)=>{
     } catch (error) {
         console.log('Hubo un problema al sacar el articulo de favoritos');
     }
+}
+
+export const getFavorites = async(id) =>{
+  try {
+    const response = await fetch(`${BASE_URL}/get/${id}`);
+    if(response.ok){
+      const data  = await response.json();
+      return data;
+    }
+  } catch (error) {
+    console.error('Ocurrio un error al mostrar favoritos');
+  }
 }
