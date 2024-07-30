@@ -7,11 +7,14 @@ import com.nocountry.apiS16.exceptions.ResourceNotFoundException;
 import com.nocountry.apiS16.model.Product;
 import com.nocountry.apiS16.service.implementations.ProductService;
 
+import jakarta.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,6 +83,26 @@ public class ProductController {
     public ResponseEntity<String> requestProduct(@RequestBody ProductRequestDTO productRequest)  throws ResourceNotFoundException {
         productService.requestProduct(productRequest.getProductId(), productRequest.getRequesterId());
         return ResponseEntity.ok("Producto solicitado con exito");
+    }   
 
-}
+    @PutMapping("/disable/{idProduct}")
+    public ResponseEntity<String> disabledProduct(@PathVariable Long idProduct) throws ResourceNotFoundException {
+        ProductDTO newProduct = new ProductDTO();
+        ProductGetDTO product = productService.getProductById(idProduct);
+        newProduct.setName(product.getName());
+        newProduct.setIdUser(product.getIdUser());
+        newProduct.setDescription(product.getDescription());
+        newProduct.setCreationDate(LocalDate.parse(product.getCreationDate()));
+        newProduct.setAvailable(false);
+        newProduct.setImageURL(product.getImageURL());
+        newProduct.setCategoryId(product.getCategoryId());
+        newProduct.setState(product.getState());
+        newProduct.setUserName(product.getUserName());
+        newProduct.setUserLastName(product.getUserLastName());
+        newProduct.setUserEmail(product.getUserEmail());
+        newProduct.setUserProvince(product.getUserProvince());
+        productService.updateProduct(idProduct, newProduct);
+
+        return ResponseEntity.ok("Producto desabilitado con exito");
+    }
 }
