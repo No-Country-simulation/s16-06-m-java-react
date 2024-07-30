@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { getAllArticles, getUserArticles } from '../services/ArticleService';
 import UpdateArticleCard from '../components/UpdateArticleCard';
 import { useAuth } from '../context/AuthProvider';
+import useAlert from '../hooks/useAlert';
+import PopUpAlert from '../components/Modals/PopUpAlert';
 
 export default function UserArticles() {
     
