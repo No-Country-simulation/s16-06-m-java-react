@@ -1,8 +1,10 @@
-const API_URL = 'http://pasos_firmes:8080/api/v1/categories';
+import { API_URL } from "../context/apiurl";
+
+const BASE_URL = `${API_URL}/categories`
 
 export const getCategories = async () => {
     try {
-      const response = await fetch(`${API_URL}`);
+      const response = await fetch(`${BASE_URL}`);
       if (response.ok) {
         const data = await response.json(); // Agrega await aquí
         return data;

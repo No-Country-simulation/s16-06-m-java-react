@@ -26,6 +26,7 @@ export function AuthProvider({ children }) {
         console.log('Authenticated state updated:', isAuthenticated);
     }, [user, isAuthenticated]);
 
+
     function getToken() {
         return sessionStorage.getItem('token') || null;
     }
