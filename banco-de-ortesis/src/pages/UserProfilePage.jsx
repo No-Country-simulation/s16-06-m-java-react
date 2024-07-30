@@ -16,19 +16,23 @@ const UserProfilePage = () => {
   };
 
   return (
-    <div className="mt-16 profile-container">
+    <div className="mb-5 profile-container">
       <div className="profile-header">
         <div className="profile-pic"><img src="/img/logo.webp" alt="logo" /></div>
         <div className="profile-name">{name} {lastName}</div>
       </div>
       <div className="profile-options">
+        <div>
         <Link to={'/userArticles'}>Mis Productos</Link>
+        </div>
         {/* <div>Valoraciones</div> */}
         {/* <div>Mensajes</div> */}
         <div>Configuración</div>
         <div>Privacidad</div>
         <div>Ayuda</div>
+        <div>
         <Link to={'/onboarding'}>Acerca de</Link>
+        </div>
       </div>
       <button className="logout-button" onClick={handleLogout}>Cerrar sesión</button>
     </div>

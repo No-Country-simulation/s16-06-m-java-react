@@ -16,6 +16,9 @@ import Favorites from './pages/Favorites';
 import ProtectedNode from './components/ProtectedNode/ProtectedNode';
 import ErrorPage from './pages/ErrorPage';
 import DonationRequestForm from './components/DonateForm';
+import PopUpAlert from './components/Modals/PopUpAlert';
+import Modal1 from './components/Modals/Modal1';
+import Confirmed from './pages/Confirmed';
 
 function App() {
   return (
@@ -30,7 +33,7 @@ function App() {
 function AppContent() {
   const location = useLocation();
   //add routes wich wont render Header or Nav components.
-  const showHeaderNav = !['/login', '/register', '/profile', '/onboarding'].includes(location.pathname);
+  const showHeaderNav = !['/login', '/register', '/profile', '/onboarding', '/notFound'].includes(location.pathname);
 
   return (
     <>
@@ -43,7 +46,8 @@ function AppContent() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/article/:id" element={<ArticlePage />} />
-        <Route path="*" element={<ErrorPage />} />
+        <Route path="*" element={<Navigate to="notFound" />} />
+        <Route path={"/notFound"} element={<ErrorPage />} />
         {/* Protected Routes */}
         <Route element={<ProtectedNode />}>
           <Route path='/update/:id' element={<ArticleForm />} />
@@ -51,7 +55,8 @@ function AppContent() {
           <Route path='/favorites' element={<Favorites />} />
           <Route path="/profile" element={<UserProfilePage />} />
           <Route path='/userArticles' element={<UserArticles />} />
-          <Route path="/donate" element={<DonationRequestForm />} /> 
+          <Route path="/donate" element={<DonationRequestForm />} />
+          <Route path={'/confirmed'} element={<Confirmed />} />
         </Route>
       </Routes>
       <MobileNav />

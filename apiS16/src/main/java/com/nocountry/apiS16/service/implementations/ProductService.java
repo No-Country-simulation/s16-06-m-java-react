@@ -163,6 +163,7 @@ public class ProductService {
         return productDTO;
     }
 
+
     public void requestProduct(Long productId, Long requesterId) throws ResourceNotFoundException {
         Product product = iProductRepository.findById(productId).orElse(null);
         if(product == null) {
@@ -181,6 +182,7 @@ public class ProductService {
     }
 
     public List<ProductDTO> getProductsByUserId(Long id_user) {
+
         List<Product> products = iProductRepository.findProductsByUserId(id_user);
         return products.stream().map(this::convertToProductDTO).collect(Collectors.toList());
     }

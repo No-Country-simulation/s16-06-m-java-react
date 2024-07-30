@@ -1,8 +1,10 @@
-// src/services/UserService.js
-const API_URL = 'http://localhost:8080/api/v1/users';
+import { API_URL } from "../context/apiurl";
 
+// src/services/UserService.js
+const BASE_URL = `${API_URL}/users`
+const AUTH_URL = `${API_URL}/auth`
 export const registerUser = async (formData) => {
-  const response = await fetch(`${API_URL}/add`, {
+  const response = await fetch(`${BASE_URL}/add`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -19,8 +21,7 @@ export const registerUser = async (formData) => {
 };
 
 export const loginUser = async (credentials) => {
-  const AUTH_URL = 'http://localhost:8080/api/v1/auth/authenticate';
-  const response = await fetch(`${AUTH_URL}`, {
+  const response = await fetch(`${AUTH_URL}/authenticate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -40,9 +41,8 @@ export const loginUser = async (credentials) => {
 
 //Review endpoint auth
 export const fetchUser = async (credentials) => {
-  const AUTH_URL = 'http://localhost:8080/api/v1/auth/getUser'
   try {
-    const response = await fetch(`${AUTH_URL}?jwt=${encodeURIComponent(credentials)}`);
+    const response = await fetch(`${AUTH_URL}/getUser?jwt=${encodeURIComponent(credentials)}`);
     if (!response.ok) {
       throw new Error(`Error fetching user data status: ${response.status}`);
     }
