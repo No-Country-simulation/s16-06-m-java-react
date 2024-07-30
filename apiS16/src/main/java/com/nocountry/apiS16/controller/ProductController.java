@@ -2,24 +2,25 @@ package com.nocountry.apiS16.controller;
 
 import com.nocountry.apiS16.dto.ProductDTO;
 import com.nocountry.apiS16.dto.ProductGetDTO;
+import com.nocountry.apiS16.dto.ProductRequestDTO;
 import com.nocountry.apiS16.exceptions.ResourceNotFoundException;
 import com.nocountry.apiS16.model.Product;
 import com.nocountry.apiS16.service.implementations.ProductService;
-import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/v1/products")
 public class ProductController {
 
-    private final ProductService productService;
+    @Autowired
+    private ProductService productService;
 
     @PostMapping("/add")
     public ProductGetDTO createProduct(@RequestBody ProductDTO productDTO) throws ResourceNotFoundException {
@@ -43,8 +44,8 @@ public class ProductController {
     }
 
     @GetMapping("/user/{id_user}")
-    public ResponseEntity<List<ProductDTO>> getProductsByUserId(@PathVariable Long id_user) {
-        List<ProductDTO> products = productService.getProductsByUserId(id_user);
+    public ResponseEntity<List<ProductGetDTO>> getProductsByUserId(@PathVariable Long id_user) {
+        List<ProductGetDTO> products = productService.getProductsByUserId(id_user);
         if (products.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
@@ -75,4 +76,10 @@ public class ProductController {
         productService.deleteProductById(id);
     }
 
+    @PostMapping("/request")
+    public ResponseEntity<String> requestProduct(@RequestBody ProductRequestDTO productRequest)  throws ResourceNotFoundException {
+        productService.requestProduct(productRequest.getProductId(), productRequest.getRequesterId());
+        return ResponseEntity.ok("Producto solicitado con exito");
+
+}
 }

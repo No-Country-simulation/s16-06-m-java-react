@@ -1,4 +1,5 @@
 package com.nocountry.apiS16.service.implementations;
+import com.nocountry.apiS16.dto.NotificationDTO;
 import com.nocountry.apiS16.dto.ProductDTO;
 import com.nocountry.apiS16.dto.ProductGetDTO;
 import com.nocountry.apiS16.exceptions.ResourceNotFoundException;
@@ -8,10 +9,13 @@ import com.nocountry.apiS16.model.Users;
 import com.nocountry.apiS16.repository.ICategoryRepository;
 import com.nocountry.apiS16.repository.IProductRepository;
 import com.nocountry.apiS16.repository.IUserRepository;
+
+
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,6 +30,8 @@ public class ProductService {
 
     private final IUserRepository userRepository;
 
+    @Autowired
+    private NotificationService notificationService;
 
     public Product createProduct(ProductDTO productDTO) throws ResourceNotFoundException {
 
@@ -130,7 +136,24 @@ public class ProductService {
         return productDTO;
     }
 
-    public List<ProductDTO> getProductsByUserId(Long id_user) {
+    public void requestProduct(Long productId, Long requesterId) throws ResourceNotFoundException {
+        Product product = iProductRepository.findById(productId).orElse(null);
+        if(product == null) {
+            throw new ResourceNotFoundException("Product not found with id: " + productId);
+        }
+        Long sellerId = product.getUsers().getId_user();
+
+        NotificationDTO notificationDTO = new NotificationDTO();
+
+        notificationDTO.setId_requester(requesterId);
+        notificationDTO.setId_seller(sellerId);
+        notificationDTO.setMessage("Tu producto ha sido solicitado por otro usuario.");
+
+
+        notificationService.createNotification(notificationDTO);
+    }
+
+    public List<ProductGetDTO> getProductsByUserId(Long id_user) {
         List<Product> products = iProductRepository.findProductsByUserId(id_user);
         return products.stream().map(this::convertToProductDTO).collect(Collectors.toList());
     }
