@@ -180,7 +180,7 @@ public class ProductService {
         notificationService.createNotification(notificationDTO);
     }
 
-    public List<ProductGetDTO> getProductsByUserId(Long id_user) {
+    public List<ProductDTO> getProductsByUserId(Long id_user) {
         List<Product> products = iProductRepository.findProductsByUserId(id_user);
         return products.stream().map(this::convertToProductDTO).collect(Collectors.toList());
     }
