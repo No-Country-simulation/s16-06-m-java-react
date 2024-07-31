@@ -121,6 +121,7 @@ public class ProductService {
         productDTO.setImageURL(product.getImageURL());
         productDTO.setCategoryId(product.getCategory().getIdCategory());
         productDTO.setState(product.getState());
+        productDTO.setRequestList(product.getRequestList());
 
         Users user = product.getUsers();
         if (user != null) {

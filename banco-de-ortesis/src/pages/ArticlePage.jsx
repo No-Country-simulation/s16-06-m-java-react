@@ -11,6 +11,7 @@ import UserTag from '../components/UserTag';
 import { useAuth } from '../context/AuthProvider';
 import useModal from './../hooks/useModal';
 import Modal1 from '../components/Modals/Modal1';
+import { newRequest } from '../services/RequestService';
 
 const ArticlePage = () => {
   const auth = useAuth();
@@ -39,13 +40,7 @@ const ArticlePage = () => {
 
   const confirmRequest = async () => {
     if (auth.isAuthenticated) {
-      let request ={
-        productId: id,
-        requesterId: auth.user.id_user
-      }
-      console.log(request);
-      const response = await requestArticle(request);
-      console.log(response);
+      const response = await newRequest(id, auth.user.id_user);
       if (response) {
         navigate('/confirmed');
       }
