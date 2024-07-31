@@ -4,17 +4,18 @@ const BASE_URL = `${API_URL}/comments`;
 
 export const getComments = async (productId) => {
   try {
-    const response = await fetch(`${BASE_URL}/product/${productId}`);
+    const response = await fetch(`${BASE_URL}/product/${productId}/comments`);
     if (response.ok) {
       const data = await response.json();
       return data;
     }
-    throw new Error('No se pudo obtener los comentarios');
+    throw new Error('No se pudieron obtener los comentarios');
   } catch (error) {
     console.error('Ocurrió un error al obtener los comentarios', error);
     throw error;
   }
 };
+
 
 export const addComment = async (comment) => {
   try {
