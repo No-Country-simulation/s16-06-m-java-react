@@ -1,51 +1,54 @@
 // src/pages/HomePage.jsx
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
-import React, { useEffect, useState } from 'react';
-import { getAllArticles } from '../services/ArticleService';
 import { useAuth } from '../context/AuthProvider';
+import ProductsContext from '../context/ProductsProvider';
 
 const HomePage = () => {
   const auth = useAuth();
-  const [productList, setProductList] = useState([]);
+  // const { showList, loading } = useProducts();
+  const { productList, showList, filterProducts, loading } = useContext(ProductsContext);
   const [favorites, setFavorites] = useState([]);
 
+  if(!showList) return null;
+
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const products = await getAllArticles(); // Llama a la función correctamente y espera su resolución
-        setProductList(products);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     if (auth.isAuthenticated) {
       setFavorites(auth.user.favoritesList);
     }
-    fetchProducts();
-  }, []);
+  }, [auth]);
 
-  if (!productList) return null;
+  useEffect(() => {
+    console.log('Current ShowList in HomePage:', showList);
+  }, [showList]);
 
-  console.log('Recibiendo productos', productList);
+  if (loading) return <p>Loading...</p>;
+
   return (
     <div className='flex flex-col w-full items-center p-4 mb-20'>
-      <h1 className="text-lg self-start font-bold">Más buscados</h1>
-      <div className='flex w-full flex-col gap-3'>
-        {productList.map(product => {
-          const favorite = favorites.find(fav => fav.product.idProduct === product.id);
-          const favoriteId = favorite ? favorite.id_favorites : null;
+      {showList.length > 0 ?
+        <>
+          <h1 className="text-lg self-start font-bold">Más buscados</h1>
+          <div className='flex w-full flex-col gap-3'>
+            {showList.map(product => {
+              const favorite = favorites.find(fav => fav.product.idProduct === product.id);
+              const favoriteId = favorite ? favorite.id_favorites : null;
 
-          return (
-            <ProductCard
-              key={product.id}
-              product={product}
-              favoriteId={favoriteId} // Pasa el id_favorites como prop
-            />
-          );
-        })}
-      </div>
+              return (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  favoriteId={favoriteId}
+                />
+              );
+            })}
+          </div>
+        </>
+        :
+        <h1 className='mt-32 text-xl self-center font-bold text-blueSecond'>No se encontraron Elementos para mostrar</h1>
+      }
     </div>
+
   );
 };
 

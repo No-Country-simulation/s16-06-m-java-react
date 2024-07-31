@@ -21,13 +21,16 @@ import Modal1 from './components/Modals/Modal1';
 import Confirmed from './pages/Confirmed';
 import Requests from './pages/Requests';
 import ConfirmRequest from './pages/ConfirmRequest';
+import { ProductsProvider } from './context/ProductsProvider';
 
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <AppContent />
-      </Router>
+      <ProductsProvider>
+        <Router>
+          <AppContent />
+        </Router>
+      </ProductsProvider >
     </AuthProvider>
   );
 }
