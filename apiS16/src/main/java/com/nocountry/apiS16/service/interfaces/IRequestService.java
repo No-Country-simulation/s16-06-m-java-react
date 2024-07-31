@@ -7,6 +7,9 @@ import java.util.List;
 
 public interface IRequestService {
 
-    public Request saveRequest(Long productId, Long userId);
+    Request saveRequest(Long productId, Long userId);
     List<Request> findByUserId(Long user_id);
+    Request findByid(Long request_id);
+    Boolean deleteRequest(Long id_user);
+    void confirmRequest(Long id_request);
 }

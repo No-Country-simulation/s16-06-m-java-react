@@ -2,9 +2,11 @@ package com.nocountry.apiS16.service.implementations;
 import com.nocountry.apiS16.dto.NotificationDTO;
 import com.nocountry.apiS16.dto.ProductDTO;
 import com.nocountry.apiS16.dto.ProductGetDTO;
+import com.nocountry.apiS16.dto.RequestDTO;
 import com.nocountry.apiS16.exceptions.ResourceNotFoundException;
 import com.nocountry.apiS16.model.Category;
 import com.nocountry.apiS16.model.Product;
+import com.nocountry.apiS16.model.Request;
 import com.nocountry.apiS16.model.Users;
 import com.nocountry.apiS16.repository.ICategoryRepository;
 import com.nocountry.apiS16.repository.IProductRepository;
@@ -15,7 +17,9 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -37,10 +41,15 @@ public class ProductService {
 
         Optional<Users> users = this.userRepository.findById(productDTO.getIdUser());
 
+
         Optional<Category> category = iCategoryRepository.findById(productDTO.getCategoryId());
 
 
         if(users.isPresent() && category.isPresent()) {
+
+            Users user = users.get();
+
+            String completeName = user.getName() + " " + user.getLastName();
 
             Product product = Product.builder()
                     .name(productDTO.getName())
@@ -51,6 +60,7 @@ public class ProductService {
                     .category(category.get())
                     .users(users.get())
                     .state(productDTO.getState())
+                    .completeName(completeName)
                     .build();
             return this.iProductRepository.save(product);
         }else {
@@ -59,30 +69,15 @@ public class ProductService {
 
     }
 
-    public List<ProductDTO> getAllProductDTOs() {
-        List<Product> products = iProductRepository.findAll();
-        return products.stream().map(this::convertToProductDTO).collect(Collectors.toList());
+    public List<Product> getProducts(){
+        return this.iProductRepository.findAll();
     }
 
-    public ProductGetDTO getProductById(Long id) throws ResourceNotFoundException {
-        Product product = iProductRepository.findById(id).orElse(null);
-        if (product == null) {
-            throw new ResourceNotFoundException("Product not found with id: " + id);
-        }
-        return convertToProductGetDTO(product);
+    public Product getProductById(Long id_product){
+        return this.iProductRepository.findById(id_product).orElseThrow(()-> new RuntimeException("Product dont found"));
     }
 
-    public ProductGetDTO getProductByName(String name) throws ResourceNotFoundException {
-     Optional<Product> optionalProduct= iProductRepository.findByName(name);
 
-        if (optionalProduct.isPresent()) {
-            Product product = optionalProduct.get();
-            return convertToProductGetDTO(product);
-        } else { throw new ResourceNotFoundException("Product not found with id: " + name);
-
-        }
-
-    }
 
     public Product updateProduct(Long idProduct, ProductDTO productDTO) throws ResourceNotFoundException{
         Product existingProduct = iProductRepository.findById(idProduct)
@@ -109,60 +104,7 @@ public class ProductService {
         }
 
     }
-    public ProductDTO convertToProductDTO(Product product) {
-        
-        ProductDTO productDTO = new ProductDTO();
 
-        productDTO.setId(product.getIdProduct());
-        productDTO.setName(product.getName());
-        productDTO.setDescription(product.getDescription());
-        productDTO.setCreationDate(product.getCreationDate());
-        productDTO.setAvailable(product.isAvailable());
-        productDTO.setImageURL(product.getImageURL());
-        productDTO.setCategoryId(product.getCategory().getIdCategory());
-        productDTO.setState(product.getState());
-        productDTO.setRequestList(product.getRequestList());
-
-        Users user = product.getUsers();
-        if (user != null) {
-            productDTO.setIdUser(user.getId_user());
-            productDTO.setUserName(user.getName());
-            productDTO.setUserLastName(user.getLastName());
-            productDTO.setUserEmail(user.getEmail());
-            productDTO.setUserProvince(user.getProvince());
-        }
-        
-
-
-        return productDTO;
-    }
-    
-    public ProductGetDTO convertToProductGetDTO(Product product) {
-        
-        ProductGetDTO productDTO = new ProductGetDTO();
-
-        productDTO.setId(product.getIdProduct());
-        productDTO.setName(product.getName());
-        productDTO.setDescription(product.getDescription());
-        productDTO.setCreationDate(product.getCreationDate().toString());
-        productDTO.setAvailable(product.isAvailable());
-        productDTO.setImageURL(product.getImageURL());
-        productDTO.setCategoryId(product.getCategory().getIdCategory());
-        productDTO.setState(product.getState());
-
-        Users user = product.getUsers();
-        if (user != null) {
-            productDTO.setIdUser(user.getId_user());
-            productDTO.setUserName(user.getName());
-            productDTO.setUserLastName(user.getLastName());
-            productDTO.setUserEmail(user.getEmail());
-            productDTO.setUserProvince(user.getProvince());
-        }
-        
-
-
-        return productDTO;
-    }
 
 
     public void requestProduct(Long productId, Long requesterId) throws ResourceNotFoundException {
@@ -182,10 +124,12 @@ public class ProductService {
         notificationService.createNotification(notificationDTO);
     }
 
-    public List<ProductDTO> getProductsByUserId(Long id_user) {
+    List<Product> getProductByIdUser(Long id_user){
+        return this.iProductRepository.findProductsByUserId(id_user);
+    }
 
-        List<Product> products = iProductRepository.findProductsByUserId(id_user);
-        return products.stream().map(this::convertToProductDTO).collect(Collectors.toList());
+    public Product getProductByName(String name){
+        return this.iProductRepository.findByName(name).orElseThrow(()-> new RuntimeException("PRODUCT DONT FOUND"));
     }
 
 //    List<Product> findAvaibleProduct(){

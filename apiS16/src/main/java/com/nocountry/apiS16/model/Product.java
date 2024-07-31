@@ -27,6 +27,7 @@ public class Product {
     private LocalDate creationDate;
     private boolean available;
     private String imageURL;
+    private String completeName;
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)

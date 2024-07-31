@@ -29,6 +29,12 @@ public class RequestController {
         }
     }
 
+    @PostMapping("/confirm-delivery/{requestId}")
+    public ResponseEntity<String> confirmDelivery(@PathVariable Long requestId) {
+        requestService.confirmRequest(requestId);
+        return ResponseEntity.ok("Delivery confirmed and product deleted successfully.");
+    }
+
 
     @GetMapping("/user/{id_user}")
     public ResponseEntity<List<Request>> requestUsers(@PathVariable Long id_user){
@@ -38,6 +44,31 @@ public class RequestController {
             return new ResponseEntity<>(requestList, HttpStatus.OK);
         }else {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+
+
+    @GetMapping("/get/{request_id}")
+    public ResponseEntity<Request> findRequest(@PathVariable Long request_id){
+        Request request = this.requestService.findByid(request_id);
+
+        if(request != null){
+            return new ResponseEntity<>(request, HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+
+    @DeleteMapping("/delete/{id_request}")
+    public ResponseEntity<String> deleteRequest(@PathVariable Long id_request){
+        Boolean request = this.requestService.deleteRequest(id_request);
+
+        if(request){
+            return new ResponseEntity<>("Request deleted!", HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

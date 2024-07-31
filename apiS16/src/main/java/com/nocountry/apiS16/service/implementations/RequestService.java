@@ -63,4 +63,44 @@ public class RequestService implements IRequestService {
     public List<Request> findByUserId(Long id_user) {
         return this.requestRepository.findByUserId(id_user);
     }
+
+    @Override
+    public Request findByid(Long request_id) throws ObjectNotFoundException{
+
+        Request requestOptional = this.requestRepository.findById(request_id).orElse(null);
+
+        if (requestOptional != null){
+            return requestOptional;
+        }else{
+            throw new ObjectNotFoundException("I dont found the request");
+        }
+
+
+    }
+
+    @Override
+    public Boolean deleteRequest(Long request_id) {
+        Request request = this.findByid(request_id);
+
+        if(request != null){
+            this.requestRepository.delete(request);
+            return true;
+        }else {
+            throw new ObjectNotFoundException("Request with the id: " + request_id + " doesnt exist");
+        }
+
+    }
+
+    @Override
+    public void confirmRequest(Long id_request) {
+
+        Request requestComplete = this.findByid(id_request);
+
+        requestComplete.setRequestCompleted(true);
+        this.requestRepository.save(requestComplete);
+
+        Product product = requestComplete.getProduct();
+        this.productRepository.delete(product);
+
+    }
 }
