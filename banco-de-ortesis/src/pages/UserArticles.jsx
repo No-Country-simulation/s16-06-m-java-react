@@ -28,7 +28,7 @@ export default function UserArticles() {
     if(!auth.isAuthenticated) return null;
     
     if (!productList) return null;
-
+    
 
     console.log('Productos usuario id: ', auth.user.id_user, productList);
     return (<section className='flex flex-col w-full items-center p-4 mb-40'>

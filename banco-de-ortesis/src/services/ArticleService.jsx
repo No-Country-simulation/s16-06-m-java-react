@@ -78,11 +78,6 @@ export const deleteArticle = async(id) => {
     const response = await fetch(`${BASE_URL}/${id}`,{
       method: 'DELETE'
     })
-    // if(response.ok){
-    //   const data = await response.json();
-    //   console.log('Producto borrado correctamente');
-    //   return data;
-    // }
   } catch (error) {
     console.error('Ocurrio un errror al borrar el producto', error);
     throw error;
@@ -99,5 +94,22 @@ export const getUserArticles = async(id) =>{
     }
   } catch (error) {
     console.error('Ocurrio un error al obtener articulos del usuario');
+  }
+}
+
+export const requestArticle = async(request) => {
+  try {
+    const response = await fetch(`${BASE_URL}/request`,{
+      method:'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(request)
+    })
+    if(response.ok){
+      return 'Pedido con exito';
+    }
+  } catch (error) {
+    console.error('Ocurrio un error al pedir el producto', error);
   }
 }

@@ -19,6 +19,8 @@ import DonationRequestForm from './components/DonateForm';
 import PopUpAlert from './components/Modals/PopUpAlert';
 import Modal1 from './components/Modals/Modal1';
 import Confirmed from './pages/Confirmed';
+import Requests from './pages/Requests';
+import ConfirmRequest from './pages/ConfirmRequest';
 
 function App() {
   return (
@@ -48,6 +50,8 @@ function AppContent() {
         <Route path="/article/:id" element={<ArticlePage />} />
         <Route path="*" element={<Navigate to="notFound" />} />
         <Route path={"/notFound"} element={<ErrorPage />} />
+        <Route path={'/confirmRequest'} element={<ConfirmRequest />} />
+        <Route path='/confirmed' element={<Confirmed />} />
         {/* Protected Routes */}
         <Route element={<ProtectedNode />}>
           <Route path='/update/:id' element={<ArticleForm />} />
@@ -56,7 +60,7 @@ function AppContent() {
           <Route path="/profile" element={<UserProfilePage />} />
           <Route path='/userArticles' element={<UserArticles />} />
           <Route path="/donate" element={<DonationRequestForm />} />
-          <Route path={'/confirmed'} element={<Confirmed />} />
+          <Route path='/request' element={<Requests />} />
         </Route>
       </Routes>
       <MobileNav />

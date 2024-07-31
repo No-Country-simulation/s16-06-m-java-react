@@ -6,11 +6,12 @@ import Button1 from '../components/Buttons/Button1';
 import Button2 from '../components/Buttons/Button2';
 import Carousel from '../components/Carousel';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { getArticleDetails } from '../services/ArticleService';
+import { getArticleDetails, requestArticle } from '../services/ArticleService';
 import UserTag from '../components/UserTag';
 import { useAuth } from '../context/AuthProvider';
 import useModal from './../hooks/useModal';
 import Modal1 from '../components/Modals/Modal1';
+import { newRequest } from '../services/RequestService';
 
 const ArticlePage = () => {
   const auth = useAuth();
@@ -37,13 +38,23 @@ const ArticlePage = () => {
     showAlert('¿Solicitar este producto?', 'Recuerda que hasta que concretes la transacción no podrás solicitar otro producto.')
   };
 
-  const confirmRequest = () =>{
-    navigate('/confirmed');
+  const confirmRequest = async () => {
+    if (auth.isAuthenticated) {
+      const response = await newRequest(id, auth.user.id_user);
+      if (response) {
+        navigate('/confirmed');
+      }
+    }
+  }
+
+
+  const checkOwner = (idOwner, idAuth) => {
+    return idOwner == idAuth;
   }
 
   if (!product) return null;
 
-  const { name, description, creationDate, available, state, categoryId, imageURL, userName, userLastName, userProvince } = product;
+  const { name, description, creationDate, available, state, categoryId, imageURL, userName, userLastName, userProvince, idUser } = product;
 
   const items = [imageURL, imageURL, imageURL];
   return (
@@ -65,19 +76,22 @@ const ArticlePage = () => {
             <li>Estado: <span className='font-normal text-base'>{state}</span></li>
             <li>Disponibilidad: <span className='font-normal text-base'>{available ? 'Disponible' : 'No Disponible'}</span></li>
           </ul>
-          {auth.isAuthenticated ? <Button2 onClick={requestProduct} name='Solicitar' /> :
-
-            <Link to='/login' className='text-base rounded-lg text-center p-2.5 bg-greenAccent text-white  font-normal drop-shadow-md'>Inicia sesión para ver más detalles</Link>}
+          {auth.isAuthenticated && !checkOwner(idUser, auth.user.id_user) ? <Button2 onClick={requestProduct} name='Solicitar' /> :
+            <></>
+          }
+          {!auth.isAuthenticated ?
+            <Link to='/login' className='text-base rounded-lg text-center p-2.5 bg-greenAccent text-white  font-normal drop-shadow-md'>Inicia sesión para ver más detalles</Link>
+            : <></>}
 
         </div>
       </div>
-      <Modal1 
-      title={modalMessage.title}
-      description={modalMessage.description}
-      isVisible={isVisible}
-      onClose={closeAlert}
-      textBtn={'Solicitar'}
-      onAction={confirmRequest}
+      <Modal1
+        title={modalMessage.title}
+        description={modalMessage.description}
+        isVisible={isVisible}
+        onClose={closeAlert}
+        textBtn={'Solicitar'}
+        onAction={confirmRequest}
       />
     </>
   );

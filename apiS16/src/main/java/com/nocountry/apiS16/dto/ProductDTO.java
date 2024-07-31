@@ -1,5 +1,6 @@
 package com.nocountry.apiS16.dto;
 
+import com.nocountry.apiS16.model.Request;
 import com.nocountry.apiS16.model.State;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -9,6 +10,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 @Getter
 @Setter
 @Data
@@ -30,5 +32,6 @@ public class ProductDTO implements Serializable {
     private String userLastName;
     private String userEmail;
     private String userProvince;
+    private List<Request> requestList;
 
 }
