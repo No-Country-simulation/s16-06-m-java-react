@@ -15,7 +15,7 @@ export default function UpdateArticleCard({ product }) {
 
     if (!product) return null;
 
-    const { name, creationDate, category, imageURL, id } = product;
+    const { name, creationDate, category, imageURL, id, requestList } = product;
     const { isAlertVisible, alertMessage, showAlert, closeAlert } = useAlert();
 
     // useEffect(()=>{
@@ -46,10 +46,10 @@ export default function UpdateArticleCard({ product }) {
                 </div>
                 <div className='flex-grow flex flex-col text-blueSecond items-center justify-center text-start gap-2 p-1 text-wrap'>
                     <h3 className='self-start text-lg font-semibold leading-4'>{name}</h3>
-                    <p className='text-sm w-full leading-4'>Fecha publicación: <br /> {creationDate}</p>
+                    <p className='text-sm w-full leading-4'>Fecha publicación: <br /> {`${creationDate[0]}/${creationDate[1]}/${creationDate[2]}`}</p>
                     <div className='flex w-full pr-1 justify-between items-center text-sm text-blueSecond'>
                         {/* <MdFindInPage className='text-blueSecond' /> */}
-                        <Link><div className='flex items-center text-blueSecond'> <MdOutlineGroup className='w-5 h-5' /><span className='text-xs'>0 solicitudes</span></div></Link>
+                        <Link to={'/request'} state={{requestList}}><div className='flex items-center text-blueSecond'> <MdOutlineGroup className='w-5 h-5' /><span className='text-xs'>{requestList.length} solicitudes</span></div></Link>
                         <Link to={`/update/${id}`} state={{ product }}><TbEdit className='text-blueSecond w-5 h-5' /></Link>
                         <FaRegTrashAlt onClick={deleteProduct} className='text-blueSecond w-4 h-4 cursor-pointer' />
                     </div>
