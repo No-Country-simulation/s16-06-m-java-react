@@ -261,9 +261,9 @@ button:focus-visible {
 }
 
 .profile-pic {
-  width: 150px;
+  width: 400px;
   height: 150px;
-  background-color: #D9D9D9;
+  background-color: #ffffff;
   color: #ffffff;
   border-radius: 50%;
   display: flex;

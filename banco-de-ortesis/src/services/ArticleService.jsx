@@ -1,9 +1,10 @@
+import { API_URL } from "../context/apiurl";
 
-const API_URL = 'http://localhost:8080/api/v1/products';
+const BASE_URL = `${API_URL}/products`
 
 export const getArticleDetails = async (id) => {
   try {
-    const response = await fetch(`${API_URL}/${id}`);
+    const response = await fetch(`${BASE_URL}/${id}`);
     if (response.ok) {
       const data = await response.json(); // Agrega await aquí
       return data;
@@ -18,7 +19,7 @@ export const getArticleDetails = async (id) => {
 
 export const getAllArticles = async () => {
   try {
-    const response = await fetch(`${API_URL}/get`);
+    const response = await fetch(`${BASE_URL}/get`);
     if (response.ok) {
       const data = await response.json(); // Agrega await aquí
       return data;
@@ -32,7 +33,7 @@ export const getAllArticles = async () => {
 
 export const createArticle = async(article) => {
   try {
-    const response = await fetch(`${API_URL}/add`, {
+    const response = await fetch(`${BASE_URL}/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -53,7 +54,7 @@ export const createArticle = async(article) => {
 
 export const updateArticle = async(id, updatedArticle) => {
   try {
-    const response = await fetch(`${API_URL}/${id}`, {
+    const response = await fetch(`${BASE_URL}/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -74,7 +75,7 @@ export const updateArticle = async(id, updatedArticle) => {
 
 export const deleteArticle = async(id) => {
   try {
-    const response = await fetch(`${API_URL}/${id}`,{
+    const response = await fetch(`${BASE_URL}/${id}`,{
       method: 'DELETE'
     })
     // if(response.ok){
@@ -87,3 +88,16 @@ export const deleteArticle = async(id) => {
     throw error;
   }
 };
+
+
+export const getUserArticles = async(id) =>{
+  try {
+    const response = await fetch(`${BASE_URL}/user/${id}`);
+    if(response.ok){
+      const data  = await response.json();
+      return data;
+    }
+  } catch (error) {
+    console.error('Ocurrio un error al obtener articulos del usuario');
+  }
+}

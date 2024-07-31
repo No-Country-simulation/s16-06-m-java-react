@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../services/AuthService';
 import Onboarding from './Onboarding';
 import { useAuth } from '../context/AuthProvider';
+import useAlert from '../hooks/useAlert';
+import PopUpAlert from '../components/Modals/PopUpAlert';
 
 const Register = () => {
   const auth = useAuth();
@@ -17,26 +19,10 @@ const Register = () => {
     repeatedPassword:''
   });
 
-  /*
-{
-  "name": "Pablo",
-  "lastName": "Velasco",
-  "dni": "35184235",
-  "email": "pablo@gmail.com",
-  "password": "123456789",
-  "birthday": "1990-07-02",
-  "phoneNumber": "stringstri",
-  "province": "Mendoza",
-  "photoUser": "string",
-  "socialWorkNumber": 0,
-  "disabilityCertificateNumber": 0,
-  "repeatedPassword": "123456789"
-}
-  */
 
   const [showOnboarding, setShowOnboarding] = useState(false);
   const navigate = useNavigate();
-
+  const { isAlertVisible, alertMessage, showAlert, closeAlert } = useAlert();
   if(auth.isAuthenticated) navigate('/home');
 
   const handleInputChange = (e) => {
@@ -51,15 +37,19 @@ const Register = () => {
     event.preventDefault();
     try {
       await registerUser(formData);
-      navigate('/login');
+      showAlert('Registro exitoso!', 'Por favor, inicia sesión');
+      
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
     } catch (error) {
-      alert('Error al registrarse');
+      showAlert('Error al registrarse', 'Rellena bien los campos e intentalo nuevamente')
     }
     console.log('Datos usuario a Registrar', formData);
   };
 
   const handleFinishOnboarding = () => {
-    navigate('/');
+    navigate('/home');
   };
 
   if (showOnboarding) {
@@ -185,6 +175,12 @@ const Register = () => {
           </div>
         </form>
       </div>
+      <PopUpAlert
+        title={alertMessage.title}
+        description={alertMessage.description}
+        isVisible={isAlertVisible}
+        onClose={closeAlert}
+      />
     </div>
   );
 };

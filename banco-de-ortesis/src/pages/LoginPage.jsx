@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/AuthService';
 import Onboarding from './Onboarding';
 import { useAuth } from '../context/AuthProvider';
+import PopUpAlert from '../components/Modals/PopUpAlert';
+import useAlert from '../hooks/useAlert';
 
 const Login = () => {
 
@@ -12,8 +14,11 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showOnboarding, setShowOnboarding] = useState(false);
+  //alert
+  const { isAlertVisible, alertMessage, showAlert, closeAlert } = useAlert();
+
   const navigate = useNavigate();
-  if(auth.isAuthenticated) navigate('/home');
+  if (auth.isAuthenticated) navigate('/home');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,12 +29,12 @@ const Login = () => {
       auth.saveSessionInfo(data);
       navigate('/profile');
     } catch (error) {
-      alert('Error al iniciar sesión', error);
+      showAlert('Error al iniciar sesión', 'Por favor intenta de nuevo más tarde')
     }
   };
 
   const handleFinishOnboarding = () => {
-    navigate('/');
+    navigate('/home');
   };
 
   if (showOnboarding) {
@@ -104,6 +109,12 @@ const Login = () => {
           </div>
         </form>
       </div>
+      <PopUpAlert
+        title={alertMessage.title}
+        description={alertMessage.description}
+        isVisible={isAlertVisible}
+        onClose={closeAlert}
+      />
     </div>
   );
 };
