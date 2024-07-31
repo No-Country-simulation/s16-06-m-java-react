@@ -186,5 +186,9 @@ public class ProductService {
         List<Product> products = iProductRepository.findProductsByUserId(id_user);
         return products.stream().map(this::convertToProductDTO).collect(Collectors.toList());
     }
+
+//    List<Product> findAvaibleProduct(){
+//        return this.iProductRepository.findAvaibleProduct();
+//    }
 }
 
