@@ -2,6 +2,7 @@ package com.nocountry.apiS16.service.implementations;
 import com.nocountry.apiS16.dto.NotificationDTO;
 import com.nocountry.apiS16.dto.ProductDTO;
 import com.nocountry.apiS16.dto.ProductGetDTO;
+import com.nocountry.apiS16.dto.RequestDTO;
 import com.nocountry.apiS16.exceptions.ResourceNotFoundException;
 import com.nocountry.apiS16.model.Category;
 import com.nocountry.apiS16.model.Product;
@@ -16,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -40,7 +42,7 @@ public class ProductService {
         Optional<Category> category = iCategoryRepository.findById(productDTO.getCategoryId());
 
 
-        if(users.isPresent() && category.isPresent()) {
+        if (users.isPresent() && category.isPresent()) {
 
             Product product = Product.builder()
                     .name(productDTO.getName())
@@ -53,7 +55,7 @@ public class ProductService {
                     .state(productDTO.getState())
                     .build();
             return this.iProductRepository.save(product);
-        }else {
+        } else {
             throw new ResourceNotFoundException("User or category no present with that id");
         }
 
@@ -61,7 +63,7 @@ public class ProductService {
 
     public List<ProductDTO> getAllProductDTOs() {
         List<Product> products = iProductRepository.findAll();
-        return products.stream().map(this::convertToProductDTO).collect(Collectors.toList());
+        return products.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
     public ProductGetDTO getProductById(Long id) throws ResourceNotFoundException {
@@ -73,18 +75,19 @@ public class ProductService {
     }
 
     public ProductGetDTO getProductByName(String name) throws ResourceNotFoundException {
-     Optional<Product> optionalProduct= iProductRepository.findByName(name);
+        Optional<Product> optionalProduct = iProductRepository.findByName(name);
 
         if (optionalProduct.isPresent()) {
             Product product = optionalProduct.get();
             return convertToProductGetDTO(product);
-        } else { throw new ResourceNotFoundException("Product not found with id: " + name);
+        } else {
+            throw new ResourceNotFoundException("Product not found with id: " + name);
 
         }
 
     }
 
-    public Product updateProduct(Long idProduct, ProductDTO productDTO) throws ResourceNotFoundException{
+    public Product updateProduct(Long idProduct, ProductDTO productDTO) throws ResourceNotFoundException {
         Product existingProduct = iProductRepository.findById(idProduct)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + idProduct));
 
@@ -109,36 +112,35 @@ public class ProductService {
         }
 
     }
-    public ProductDTO convertToProductDTO(Product product) {
-        
-        ProductDTO productDTO = new ProductDTO();
 
-        productDTO.setId(product.getIdProduct());
-        productDTO.setName(product.getName());
-        productDTO.setDescription(product.getDescription());
-        productDTO.setCreationDate(product.getCreationDate());
-        productDTO.setAvailable(product.isAvailable());
-        productDTO.setImageURL(product.getImageURL());
-        productDTO.setCategoryId(product.getCategory().getIdCategory());
-        productDTO.setState(product.getState());
-        productDTO.setRequestList(product.getRequestList());
+//    public ProductDTO convertToProductDTO(Product product) {
+//
+//        ProductDTO productDTO = new ProductDTO();
+//        productDTO.setIdProduct(product.getIdProduct());
+//        productDTO.setName(product.getName());
+//        productDTO.setDescription(product.getDescription());
+//        productDTO.setCreationDate(product.getCreationDate());
+//        productDTO.setAvailable(product.isAvailable());
+//        productDTO.setImageURL(product.getImageURL());
+//        productDTO.setCategoryId(product.getCategory().getIdCategory());
+//        productDTO.setState(product.getState());
+//
+//
+//        Users user = product.getUsers();
+//        if (user != null) {
+//            productDTO.setIdUser(user.getId_user());
+//            productDTO.setUserName(user.getName());
+//            productDTO.setUserLastName(user.getLastName());
+//            productDTO.setUserEmail(user.getEmail());
+//            productDTO.setUserProvince(user.getProvince());
+//        }
+//
+//
+//        return productDTO;
+//    }
 
-        Users user = product.getUsers();
-        if (user != null) {
-            productDTO.setIdUser(user.getId_user());
-            productDTO.setUserName(user.getName());
-            productDTO.setUserLastName(user.getLastName());
-            productDTO.setUserEmail(user.getEmail());
-            productDTO.setUserProvince(user.getProvince());
-        }
-        
-
-
-        return productDTO;
-    }
-    
     public ProductGetDTO convertToProductGetDTO(Product product) {
-        
+
         ProductGetDTO productDTO = new ProductGetDTO();
 
         productDTO.setId(product.getIdProduct());
@@ -158,7 +160,6 @@ public class ProductService {
             productDTO.setUserEmail(user.getEmail());
             productDTO.setUserProvince(user.getProvince());
         }
-        
 
 
         return productDTO;
@@ -167,7 +168,7 @@ public class ProductService {
 
     public void requestProduct(Long productId, Long requesterId) throws ResourceNotFoundException {
         Product product = iProductRepository.findById(productId).orElse(null);
-        if(product == null) {
+        if (product == null) {
             throw new ResourceNotFoundException("Product not found with id: " + productId);
         }
         Long sellerId = product.getUsers().getId_user();
@@ -182,14 +183,53 @@ public class ProductService {
         notificationService.createNotification(notificationDTO);
     }
 
-    public List<ProductDTO> getProductsByUserId(Long id_user) {
-
-        List<Product> products = iProductRepository.findProductsByUserId(id_user);
-        return products.stream().map(this::convertToProductDTO).collect(Collectors.toList());
+    public List<ProductDTO> getProductsByUserId(Long idUser) {
+        List<Product> products = iProductRepository.findProductsByUserId(idUser);
+        return products.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
+    private ProductDTO convertToDTO(Product product) {
+        List<RequestDTO> requestDTOs = new ArrayList<>();
+        if (product.getRequestList() != null) {
+            requestDTOs = product.getRequestList().stream()
+                    .map(request -> new RequestDTO(
+                            request.getIdRequest(),
+                            request.getRequestDay(),
+                            request.isRequestCompleted(),
+                            request.getName()
+                    ))
+                    .collect(Collectors.toList());
+        }
+
+        Long categoryId = product.getCategory() != null ? product.getCategory().getIdCategory() : null;
+        Long userId = product.getUsers() != null ? product.getUsers().getId_user() : null;
+        String userName = product.getUsers() != null ? product.getUsers().getName() : null;
+        String userLastName = product.getUsers() != null ? product.getUsers().getLastName() : null;
+        String userEmail = product.getUsers() != null ? product.getUsers().getEmail() : null;
+        String userProvince = product.getUsers() != null ? product.getUsers().getProvince() : null;
+
+        return new ProductDTO(
+                product.getIdProduct(),
+                userId,
+                product.getName(),
+                product.getDescription(),
+                product.getCreationDate(),
+                product.isAvailable(),
+                product.getImageURL(),
+                categoryId,
+                product.getState(),
+                userName,
+                userLastName,
+                userEmail,
+                userProvince,
+                requestDTOs
+        );
+    }
+}
 //    List<Product> findAvaibleProduct(){
 //        return this.iProductRepository.findAvaibleProduct();
 //    }
-}
+
 

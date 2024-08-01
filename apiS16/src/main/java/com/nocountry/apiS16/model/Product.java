@@ -42,7 +42,7 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private State state;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE, targetEntity = Request.class, orphanRemoval = true)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE, targetEntity = Request.class, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Request> requestList;
 
 }

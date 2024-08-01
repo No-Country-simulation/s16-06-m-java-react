@@ -9,4 +9,7 @@ public interface IRequestService {
 
     public Request saveRequest(Long productId, Long userId);
     List<Request> findByUserId(Long user_id);
+    public Request findByid(Long request_id);
+    public Boolean deleteRequest(Long request_id);
+    public void confirmRequest(Long id_request);
 }
