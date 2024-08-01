@@ -28,7 +28,7 @@ const UserProfilePage = () => {
         {/* <div>Valoraciones</div> */}
         {/* <div>Mensajes</div> */}
         <div>
-          <Link to={`/editUserData/${id_user}`}>Editar Datos</Link>
+          {/* <Link to={`/editUserData/${id_user}`}>Editar Datos</Link> */}
         </div>
         <div>Privacidad</div>
         <div>Ayuda</div>
