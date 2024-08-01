@@ -37,7 +37,7 @@ export default function UserArticles() {
             <>
                 <h1 className="text-lg self-start font-bold">Tus articulos</h1>
                 <div className='flex w-full flex-col gap-3'>
-                    {productList.map(product => (<UpdateArticleCard key={product.id} product={product} />))}
+                    {productList.map(product => (<UpdateArticleCard key={product.idProduct} product={product} />))}
                 </div>
             </>
             )

@@ -31,12 +31,12 @@ const HomePage = () => {
           <h1 className="text-lg self-start font-bold">Más buscados</h1>
           <div className='flex w-full flex-col gap-3'>
             {showList.map(product => {
-              const favorite = favorites.find(fav => fav.product.idProduct === product.id);
+              const favorite = favorites.find(fav => fav.product.idProduct === product.idProduct);
               const favoriteId = favorite ? favorite.id_favorites : null;
 
               return (
                 <ProductCard
-                  key={product.id}
+                  key={product.idProduct}
                   product={product}
                   favoriteId={favoriteId}
                 />

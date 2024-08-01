@@ -18,7 +18,7 @@ export default function ProductCard({ product, favoriteId }) {
     if (auth.isAuthenticated) {
       setFavArticle({
         id_user: auth.user.id_user,
-        idProduct: product.id
+        idProduct: product.idProduct
       })
     }
     if (favoriteId) {
@@ -42,7 +42,7 @@ export default function ProductCard({ product, favoriteId }) {
       } catch (error) {
         console.error(error);
       }
-      console.log('Borro de lista', product.id, favorite);
+      console.log('Borro de lista', product.idProduct, favorite);
     }
     setFavorite(!favorite);
   }
@@ -51,7 +51,7 @@ export default function ProductCard({ product, favoriteId }) {
   return (
     <div className='flex items-center w-full gap-1 bg-transparent border-solid border border-greenAccent rounded-xl h-32 overflow-hidden'>
       <div className='h-full w-36 flex-nowrap flex-shrink-0 rounded-xl'>
-        <Link to={`/article/${product.id}`} >
+        <Link to={`/article/${product.idProduct}`} >
           <img className='h-full w-full rounded-xl border border-solid border-greenAccent' src={imageURL != '' ? imageURL : '/img/product.png'} alt={category} />
         </Link>
       </div>

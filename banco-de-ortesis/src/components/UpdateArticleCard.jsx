@@ -15,7 +15,7 @@ export default function UpdateArticleCard({ product }) {
 
     if (!product) return null;
 
-    const { name, creationDate, category, imageURL, id, requestList } = product;
+    const { name, creationDate, category, imageURL, idProduct, requestList } = product;
     const { isAlertVisible, alertMessage, showAlert, closeAlert } = useAlert();
 
     // useEffect(()=>{
@@ -24,9 +24,9 @@ export default function UpdateArticleCard({ product }) {
 
     const deleteProduct = async (e) => {
         e.preventDefault();
-        console.log('Se borrara el id: ' + id);
+        console.log('Se borrara el id: ' + idProduct);
         try {
-            await deleteArticle(id);
+            await deleteArticle(idProduct);
             showAlert('Borrado Exitoso!','Tu producto fue borrado! seras redirigido al inicio');
             setTimeout(() => {
                 navigate('/home');
@@ -40,7 +40,7 @@ export default function UpdateArticleCard({ product }) {
         <>
             <div className='flex items-center w-full gap-1 bg-transparent border-solid border border-greenAccent rounded-xl h-32'>
                 <div className='h-full w-36 flex-nowrap flex-shrink-0 rounded-xl border border-solid border-greenAccent'>
-                    <Link to={`/article/${id}`}>
+                    <Link to={`/article/${idProduct}`}>
                         <img className='h-full w-full rounded-xl' src={imageURL != '' ? imageURL : '/img/product.png'} alt={category} />
                     </Link>
                 </div>
@@ -50,7 +50,7 @@ export default function UpdateArticleCard({ product }) {
                     <div className='flex w-full pr-1 justify-between items-center text-sm text-blueSecond'>
                         {/* <MdFindInPage className='text-blueSecond' /> */}
                         <Link to={'/request'} state={{requestList}}><div className='flex items-center text-blueSecond'> <MdOutlineGroup className='w-5 h-5' /><span className='text-xs'>{requestList.length} solicitudes</span></div></Link>
-                        <Link to={`/update/${id}`} state={{ product }}><TbEdit className='text-blueSecond w-5 h-5' /></Link>
+                        <Link to={`/update/${idProduct}`} state={{ product }}><TbEdit className='text-blueSecond w-5 h-5' /></Link>
                         <FaRegTrashAlt onClick={deleteProduct} className='text-blueSecond w-4 h-4 cursor-pointer' />
                     </div>
                 </div>
