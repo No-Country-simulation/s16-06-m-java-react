@@ -27,3 +27,31 @@ export const getRequest = async(id) =>{
         console.error('Ocurrio un error al obtener la solicitud');
     }
 }
+
+export const confirmUserRequest = async(requestId)=>{
+    try {
+        const response = await fetch(`${BASE_URL}/confirm-delivery/${requestId}`,{
+            method:'POST',
+        });
+        if(response.ok){
+            console.log('Producto dado de alta con éxito!');
+            return response;
+        }
+    } catch (error) {
+        console.error('Ocurrio un error al confirmar tu entrega');
+    }
+}
+
+export const rejectUserRequest = async(requestId)=>{
+    try {
+        const response = await fetch(`${BASE_URL}/delete/${requestId}`,{
+            method:'DELETE',
+        });
+        if(response.ok){
+            console.log('Solicitud rechazada con éxito!');
+            return response;
+        }
+    } catch (error) {
+        console.error('Ocurrio un error al rechazar');
+    }
+}

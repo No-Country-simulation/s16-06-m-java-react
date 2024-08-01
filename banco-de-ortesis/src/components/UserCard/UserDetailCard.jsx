@@ -5,9 +5,10 @@ import { MdOutlineMailOutline } from "react-icons/md";
 import { MdOutlineLocalPhone } from "react-icons/md";
 
 
-export default function UserDetailCard({user}) {
-    if(!user) return null;
-    const {name, lastName, email, phoneNumber, province, socialWorkNumber, disabilityCertificateNumber} = user;
+export default function UserDetailCard({request}) {
+    if(!request) return null;
+    console.log('detalles', request);
+    const {name, lastName, email, phoneNumber, province, socialWorkNumber, disabilityCertificateNumber} = request;
   return (
     <div className='flex w-full flex-col gap-5 border-t-2 py-5 '>
     <div className='flex w-full gap-6'>

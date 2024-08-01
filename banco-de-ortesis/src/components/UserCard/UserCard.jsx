@@ -5,14 +5,17 @@ import UserTag from '../UserTag'
 import Modal1 from '../Modals/Modal1';
 import useModal from '../../hooks/useModal';
 import { useNavigate } from 'react-router-dom';
+import { rejectUserRequest } from '../../services/RequestService';
+import PopUpAlert from '../Modals/PopUpAlert';
+import useAlert from '../../hooks/useAlert';
 
 export default function UserCard({ request }) {
     if (!request) return null;
     const navigate = useNavigate();
-    const { name, lastName, province, socialWorkNumber, disabilityCertificateNumber } = request.users;
+    const { name, lastName, province, socialWorkNumber, disabilityCertificateNumber } = request;
     const [action, setAction] = useState(null);
     console.log(request);
-
+    const alerts = useAlert();
     const modal = useModal();
 
     const rejectRequest = () => {
@@ -21,18 +24,24 @@ export default function UserCard({ request }) {
     }
 
     const acceptRequest = () => {
-        setAction(() => accept); 
+        setAction(() => accept);
         modal.showAlert('¡Ya casi termina!', `Ponte en contacto con ${name} para coordinar la entrega.`);
     }
 
-    const reject = () => {
-        console.log('Rechazando solicitud');
-        // Lógica para rechazar la solicitud
+    const reject = async () => {
+        try {
+            const response = await rejectUserRequest(request.idRequest);
+            if (response) alerts.showAlert('La solicitud fue rechazada', 'Serás reirigido al menu principal')
+        } catch (error) {
+            console.error();
+        }
     }
+
+    const redirect = () => navigate('/home')
 
     const accept = () => {
         console.log('Aceptando solicitud');
-        navigate('/confirmRequest', {state:{request}})
+        navigate('/confirmRequest', { state: { request } })
         // Lógica para aceptar la solicitud
     }
 
@@ -71,6 +80,12 @@ export default function UserCard({ request }) {
                 onClose={modal.closeAlert}
                 textBtn={'confirmar'}
                 onAction={action}
+            />
+            <PopUpAlert
+                title={alerts.alertMessage.title}
+                description={alerts.alertMessage.description}
+                isVisible={alerts.isAlertVisible}
+                onClose={redirect}
             />
         </>
     )

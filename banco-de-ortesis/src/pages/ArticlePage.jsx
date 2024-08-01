@@ -35,15 +35,17 @@ const ArticlePage = () => {
   }, [id]);
 
   const requestProduct = () => {
-    showAlert('¿Solicitar este producto?', 'Recuerda que hasta que concretes la transacción no podrás solicitar otro producto.')
+    showAlert('¿Solicitar este producto?', 'Recuerda que hasta que concretes la transacción se recomienda no solicitar otro producto.')
   };
 
   const confirmRequest = async () => {
-    if (auth.isAuthenticated) {
-      const response = await newRequest(id, auth.user.id_user);
-      if (response) {
+    try {
+      if (auth.isAuthenticated) {
+         await newRequest(id, auth.user.id_user);
         navigate('/confirmed');
-      }
+      }  
+    } catch (error) {
+      console.error(error);
     }
   }
 

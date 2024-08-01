@@ -6,7 +6,7 @@ export default function HeaderNav() {
   return (
     <div className='flex w-full items-center justify-evenly p-3'>
         <SearchBar />
-        <Notification />
+        {/* <Notification /> */}
     </div>
   )
 }
