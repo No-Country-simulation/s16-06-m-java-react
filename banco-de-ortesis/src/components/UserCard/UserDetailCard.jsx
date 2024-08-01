@@ -5,33 +5,33 @@ import { MdOutlineMailOutline } from "react-icons/md";
 import { MdOutlineLocalPhone } from "react-icons/md";
 
 
-export default function UserDetailCard() {
-    const socialWorkNumber = null;
-    const disabilityCertificateNumber = null;
+export default function UserDetailCard({user}) {
+    if(!user) return null;
+    const {name, lastName, email, phoneNumber, province, socialWorkNumber, disabilityCertificateNumber} = user;
   return (
     <div className='flex w-full flex-col gap-5 border-t-2 py-5 '>
     <div className='flex w-full gap-6'>
         <UserTag userName={'Pepe'} userLastName={'Juan'} />
         <div className='flex flex-col h-full gap-2'>
-            <span className='text-lg font-semibold'>Pepe Juan</span>
-            <div className='flex text-base'>
+            <span className='text-lg font-semibold'>{name} {lastName}</span>
+            <div className='flex items-center gap-1 text-base'>
                 <MdOutlineLocationOn className='w-5 h-5' />
-                <span>españa</span>
+                <span>{province}</span>
             </div>
-            <div className='flex text-base'>
+            <div className='flex items-center gap-1 text-base'>
                 <MdOutlineMailOutline />
-                <span>pepejuan@gmail.com</span>
+                <span>{email}</span>
             </div>
-            <div className='flex text-base'>
+            <div className='flex items-center gap-1 text-base'>
                 <MdOutlineLocalPhone />
-                <span>35155577991</span>
+                <span>{phoneNumber}</span>
             </div>
-            {!socialWorkNumber ?
+            {socialWorkNumber ?
                 <span className='text-sm'>Cuenta con Obra social</span>
                 :
                 <></>
             }
-            {!disabilityCertificateNumber ?
+            {disabilityCertificateNumber ?
                 <span className='text-sm'>Cuenta con Certificado Unico de Discapacidad</span>
                 :
                 <></>

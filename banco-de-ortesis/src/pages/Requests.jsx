@@ -13,13 +13,13 @@ export default function Requests() {
             <h1 className="text-2xl self-start font-bold">Solicitudes</h1>
 
             <h2 className='text-xl self-start'>Usuarios Interesados</h2>
-            {requestList.length > 0 ? (requestList.map(request => 
+            {requestList.length > 0 ? (requestList.map(request =>
                 <UserCard key={request.idRequest} request={request} />
 
-            )) : 
-            <>
-            <h3 className='text-2xl font-bold'>No hay solicitudes para este producto</h3>
-            </>
+            )) :
+                <>
+                    <h3 className='text-2xl font-bold'>No hay solicitudes para este producto</h3>
+                </>
             }
 
 

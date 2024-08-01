@@ -4,9 +4,11 @@ import { MdOutlineCheckCircle, MdOutlineLocationOn } from 'react-icons/md'
 import UserTag from '../UserTag'
 import Modal1 from '../Modals/Modal1';
 import useModal from '../../hooks/useModal';
+import { useNavigate } from 'react-router-dom';
 
 export default function UserCard({ request }) {
     if (!request) return null;
+    const navigate = useNavigate();
     const { name, lastName, province, socialWorkNumber, disabilityCertificateNumber } = request.users;
     const [action, setAction] = useState(null);
     console.log(request);
@@ -20,7 +22,7 @@ export default function UserCard({ request }) {
 
     const acceptRequest = () => {
         setAction(() => accept); 
-        modal.showAlert('¡Ya casi termina!', 'Ponte en contacto con Mónica para coordinar la entrega.');
+        modal.showAlert('¡Ya casi termina!', `Ponte en contacto con ${name} para coordinar la entrega.`);
     }
 
     const reject = () => {
@@ -30,6 +32,7 @@ export default function UserCard({ request }) {
 
     const accept = () => {
         console.log('Aceptando solicitud');
+        navigate('/confirmRequest', {state:{request}})
         // Lógica para aceptar la solicitud
     }
 

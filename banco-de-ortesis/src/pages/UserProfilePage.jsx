@@ -7,7 +7,7 @@ import { useAuth } from '../context/AuthProvider';
 const UserProfilePage = () => {
 
   const auth = useAuth();
-  const {name, lastName} = auth.user;
+  const {name, lastName, id_user} = auth.user;
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -27,7 +27,9 @@ const UserProfilePage = () => {
         </div>
         {/* <div>Valoraciones</div> */}
         {/* <div>Mensajes</div> */}
-        <div>Configuración</div>
+        <div>
+          <Link to={`/editUserData/${id_user}`}>Editar Datos</Link>
+        </div>
         <div>Privacidad</div>
         <div>Ayuda</div>
         <div>

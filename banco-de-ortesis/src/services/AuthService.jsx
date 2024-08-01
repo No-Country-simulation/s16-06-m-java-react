@@ -54,3 +54,25 @@ export const fetchUser = async (credentials) => {
   }
 
 }
+
+export const editUser = async (id, formData) => {
+  try {
+    const response = await fetch(`${BASE_URL}/update/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to update user: ${errorText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error updating user:', error);
+    throw error; // Rethrow the error after logging it, if further handling is needed
+  }
+};

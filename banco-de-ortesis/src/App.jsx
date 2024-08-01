@@ -22,6 +22,7 @@ import Confirmed from './pages/Confirmed';
 import Requests from './pages/Requests';
 import ConfirmRequest from './pages/ConfirmRequest';
 import { ProductsProvider } from './context/ProductsProvider';
+import EditUserData from './pages/EditUserData';
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function AppContent() {
         <Route path='/confirmed' element={<Confirmed />} />
         {/* Protected Routes */}
         <Route element={<ProtectedNode />}>
+          <Route path='/editUserData/:id' element={<EditUserData />} />
           <Route path='/update/:id' element={<ArticleForm />} />
           <Route path="/upload" element={<ArticleForm />} />
           <Route path='/favorites' element={<Favorites />} />
