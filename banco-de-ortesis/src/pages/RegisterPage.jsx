@@ -38,7 +38,6 @@ const Register = () => {
     try {
       await registerUser(formData);
       showAlert('Registro exitoso!', 'Por favor, inicia sesión');
-
       setTimeout(() => {
         navigate('/login');
       }, 2000);

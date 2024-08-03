@@ -1,6 +1,8 @@
 # Proyecto: Banco de Ortesis
 ![Logo](/Pasos%20firmes%202.webp)
+
 ## Introducción
+
 En América latina, se observa una problemática generalizada.
 
 En 2020, unas 85 millones de personas con discapacidad viven en América Latina y el Caribe, lo que representa el 14.7% de la población regional. Los datos indican que los hogares donde viven personas con discapacidad son más pobres y en 1 de cada 5 hogares en situación de pobreza extrema vive una persona con discapacidad. Se estima que en 1 de cada 3 hogares vive una persona con discapacidad. - fuente banco mundial
@@ -96,6 +98,7 @@ La página en general posee un instructivo de uso (con una breve introducción d
 2. Publica artículos ortopédicos que ya no uses.
 3. Busca y contacta a otros usuarios que ofrezcan los artículos que necesitas.
 
+
 ## Despliegue
 
 La aplicación está desplegada en Vercel. Puedes acceder a la versión en vivo a través del siguiente enlace:
@@ -103,6 +106,7 @@ La aplicación está desplegada en Vercel. Puedes acceder a la versión en vivo 
 [**Acceder a la aplicación**](https://pasos-deploy-front.vercel.app/login)
 
 No dudes en explorar la aplicación y probar sus funcionalidades. ¡Esperamos que te guste!
+
 ### Tecnologías a Utilizar
 
 ## Backend
@@ -192,6 +196,7 @@ El proyecto Banco de Ortesis, a través de la red solidaria "Pasos Firmes", busc
 
 Invitamos a todos a unirse a esta iniciativa, ya sea contribuyendo con dispositivos ortopédicos en desuso, participando activamente en la plataforma, o difundiendo el proyecto para llegar a más personas que puedan beneficiarse de esta red solidaria. Juntos, podemos hacer una diferencia significativa en la vida de muchas personas.
 
+
 ### Colaboradores
 | Nombre                   | Rol      | LinkedIn                                               |
 |--------------------------|----------|--------------------------------------------------------|
@@ -204,4 +209,3 @@ Invitamos a todos a unirse a esta iniciativa, ya sea contribuyendo con dispositi
 | **Lucia Florencia Gangi**| UX/UI    | [LinkedIn](https://www.linkedin.com/in/luciagangi/) |
 
 Gracias a [Banco Mundial](https://www.worldbank.org/) y [Censo INDEC](https://www.indec.gob.ar/) por los datos estadísticos.
-
