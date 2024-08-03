@@ -1,5 +1,5 @@
 # Proyecto: Banco de Ortesis
-![Logo](https://raw.githubusercontent.com/No-Country-simulation/s16-06-m-java-react/desarrolloPablo/Pasos%20firmes%202.webp?token=GHSAT0AAAAAACR6DOVV4FPNPOCGEYRRHDSSZVM6CZQ)
+![Logo](/Pasos%20firmes%202.webp)
 ## Introducción
 En América latina, se observa una problemática generalizada.
 
