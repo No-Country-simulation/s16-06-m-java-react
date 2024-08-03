@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { FaRegTrashAlt } from "react-icons/fa";
 import { deleteArticle } from '../services/ArticleService';
@@ -7,11 +7,13 @@ import { MdOutlineGroup } from "react-icons/md";
 import { MdFindInPage } from "react-icons/md";
 import PopUpAlert from './Modals/PopUpAlert';
 import useAlert from '../hooks/useAlert';
+import ProductsContext from '../context/ProductsProvider';
 
 
 export default function UpdateArticleCard({ product }) {
     const navigate = useNavigate();
     const [date, setDate] = useState('');
+    const context = useContext(ProductsContext);
 
     if (!product) return null;
 
@@ -28,6 +30,7 @@ export default function UpdateArticleCard({ product }) {
         try {
             await deleteArticle(idProduct);
             showAlert('Borrado Exitoso!','Tu producto fue borrado! seras redirigido al inicio');
+            context.fetchProducts();
             setTimeout(() => {
                 navigate('/home');
               }, 2000);

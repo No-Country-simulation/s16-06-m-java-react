@@ -1,6 +1,7 @@
 # Proyecto: Banco de Ortesis
+![Logo](/Pasos%20firmes%202.webp)
 
-![Logo](https://raw.githubusercontent.com/No-Country-simulation/s16-06-m-java-react/frontend/banco-de-ortesis/public/img/logo.webp?token=GHSAT0AAAAAACR6DOVU73YXW3NU2NWQKUWKZVDWIMQ)
+## Introducción
 
 En América latina, se observa una problemática generalizada.
 
@@ -97,6 +98,15 @@ La página en general posee un instructivo de uso (con una breve introducción d
 2. Publica artículos ortopédicos que ya no uses.
 3. Busca y contacta a otros usuarios que ofrezcan los artículos que necesitas.
 
+
+## Despliegue
+
+La aplicación está desplegada en Vercel. Puedes acceder a la versión en vivo a través del siguiente enlace:
+
+[**Acceder a la aplicación**](https://pasos-deploy-front.vercel.app/login)
+
+No dudes en explorar la aplicación y probar sus funcionalidades. ¡Esperamos que te guste!
+
 ### Tecnologías a Utilizar
 
 ## Backend
@@ -185,14 +195,17 @@ Para contribuir al proyecto, sigue estos pasos:
 El proyecto Banco de Ortesis, a través de la red solidaria "Pasos Firmes", busca transformar la vida de miles de personas con movilidad reducida en Argentina, al facilitar el acceso a equipamientos ortopédicos reutilizables, promovemos la inclusión y mejoramos la calidad de vida de quienes más lo necesitan. Con la colaboración de la comunidad y el uso de tecnologías modernas, aspiramos a crear un impacto positivo y duradero en la sociedad.
 
 Invitamos a todos a unirse a esta iniciativa, ya sea contribuyendo con dispositivos ortopédicos en desuso, participando activamente en la plataforma, o difundiendo el proyecto para llegar a más personas que puedan beneficiarse de esta red solidaria. Juntos, podemos hacer una diferencia significativa en la vida de muchas personas.
-### Colaboradores
 
-- **Pablo Velasco** - Frontend - [LinkedIn](https://www.linkedin.com/in/pablo-r-velasco/)
-- **Ramiro Gonzalez** -  Frontend[Linkedin](https://www.linkedin.com/in/ramiro-gonzalez-98b28722a/)
-- **Gonzalo Bolognese** - Backend - [LinkedIn](https://www.linkedin.com/in/gonzalo-bolognese/)
-- **Maria Eugenia Giraldo** - Backend - [LinkedIn](https://www.linkedin.com/in/maria-eugenia-giraldo)
-- **Joaquin Brassinne** - Backend - [LinkedIn](https://www.linkedin.com/in/joaquin-brassinne-736a2b27b)
-- **Micaela Dallavia** - UX/UI - [LinkedIn](https://www.linkedin.com/in/micaela-dallavia-designer-ux-ui)
-- **Lucia Florencia Gangi** - UX/UI - [LinkedIn](https://www.linkedin.com/in/luciagangi/)
+
+### Colaboradores
+| Nombre                   | Rol      | LinkedIn                                               |
+|--------------------------|----------|--------------------------------------------------------|
+| **Pablo Velasco**        | Frontend | [LinkedIn](https://www.linkedin.com/in/pablo-r-velasco/)  |
+| **Ramiro Gonzalez**      | Frontend | [LinkedIn](https://www.linkedin.com/in/ramiro-gonzalez-98b28722a/) |
+| **Gonzalo Bolognese**    | Backend  | [LinkedIn](https://www.linkedin.com/in/gonzalo-bolognese/) |
+| **Maria Eugenia Giraldo**| Backend  | [LinkedIn](https://www.linkedin.com/in/maria-eugenia-giraldo) |
+| **Joaquin Brassinne**    | Backend  | [LinkedIn](https://www.linkedin.com/in/joaquin-brassinne-736a2b27b) |
+| **Micaela Dallavia**     | UX/UI    | [LinkedIn](https://www.linkedin.com/in/micaela-dallavia-designer-ux-ui) |
+| **Lucia Florencia Gangi**| UX/UI    | [LinkedIn](https://www.linkedin.com/in/luciagangi/) |
 
 Gracias a [Banco Mundial](https://www.worldbank.org/) y [Censo INDEC](https://www.indec.gob.ar/) por los datos estadísticos.

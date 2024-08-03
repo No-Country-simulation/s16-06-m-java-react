@@ -9,20 +9,22 @@ export const ProductsProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const products = await getAllArticles();
-        setProductList(products);
-        setShowList(products);
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
-      }
-    };
 
     fetchProducts();
   }, []);
+
+
+  const fetchProducts = async () => {
+    try {
+      const products = await getAllArticles();
+      setProductList(products);
+      setShowList(products);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  };
 
   const filterProducts = (query) => {
     if (query) {
@@ -36,7 +38,8 @@ export const ProductsProvider = ({ children }) => {
   };
 
   return (
-    <ProductsContext.Provider value={{ productList, showList, filterProducts, loading }}>
+
+    <ProductsContext.Provider value={{ productList, showList, filterProducts, loading, fetchProducts }}>
       {children}
     </ProductsContext.Provider>
   );

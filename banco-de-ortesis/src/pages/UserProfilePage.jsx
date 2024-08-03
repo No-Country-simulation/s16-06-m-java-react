@@ -23,17 +23,17 @@ const UserProfilePage = () => {
       </div>
       <div className="profile-options">
         <div>
-        <Link to={'/userArticles'}>Mis Productos</Link>
+        <Link className='text-blueSecond hover:text-cyanMain hover:font-bold transition-all duration-300' to={'/userArticles'}>Mis Productos</Link>
         </div>
         {/* <div>Valoraciones</div> */}
         {/* <div>Mensajes</div> */}
         <div>
-          {/* <Link to={`/editUserData/${id_user}`}>Editar Datos</Link> */}
+          <Link className='text-blueSecond hover:text-cyanMain hover:font-bold transition-all duration-300' to={`/editUserData/${id_user}`}>Editar Datos</Link>
         </div>
         <div>Privacidad</div>
         <div>Ayuda</div>
         <div>
-        <Link to={'/onboarding'}>Acerca de</Link>
+        <Link className='text-blueSecond hover:text-cyanMain hover:font-bold transition-all duration-300' to={'/onboarding'}>Acerca de</Link>
         </div>
       </div>
       <button className="logout-button" onClick={handleLogout}>Cerrar sesión</button>

@@ -16,14 +16,14 @@ const Register = () => {
     email: '',
     password: '',
     province: '',
-    repeatedPassword:''
+    repeatedPassword: ''
   });
 
 
   const [showOnboarding, setShowOnboarding] = useState(false);
   const navigate = useNavigate();
   const { isAlertVisible, alertMessage, showAlert, closeAlert } = useAlert();
-  if(auth.isAuthenticated) navigate('/home');
+  if (auth.isAuthenticated) navigate('/home');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -38,7 +38,6 @@ const Register = () => {
     try {
       await registerUser(formData);
       showAlert('Registro exitoso!', 'Por favor, inicia sesión');
-      
       setTimeout(() => {
         navigate('/login');
       }, 2000);
@@ -113,6 +112,7 @@ const Register = () => {
                 id="password"
                 name="password"
                 autoComplete="new-password"
+                minLength="8"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                 placeholder="Contraseña"
@@ -127,6 +127,7 @@ const Register = () => {
                 id="repeatedPassword"
                 name="repeatedPassword"
                 autoComplete="new-password"
+                minLength="8"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                 placeholder="Repetir contraseña"
@@ -145,11 +146,28 @@ const Register = () => {
               >
                 <option value="" defaultValue>Elige tu provincia </option>
                 <option value="Buenos Aires" default>Buenos Aires</option>
-                <option value="Cordoba">Córdoba</option>
-                <option value="Mendoza" >Mendoza</option>
+                <option value="Catamarca">Catamarca</option>
+                <option value="Chaco">Chaco</option>
+                <option value="Chubut">Chubut</option>
+                <option value="Córdoba">Córdoba</option>
+                <option value="Corrientes">Corrientes</option>
+                <option value="Entre Ríos">Entre Ríos</option>
+                <option value="Formosa">Formosa</option>
+                <option value="Jujuy">Jujuy</option>
+                <option value="La Pampa">La Pampa</option>
+                <option value="La Rioja">La Rioja</option>
+                <option value="Mendoza">Mendoza</option>
+                <option value="Misiones">Misiones</option>
+                <option value="Neuquén">Neuquén</option>
+                <option value="Río Negro">Río Negro</option>
                 <option value="Salta">Salta</option>
                 <option value="San Juan">San Juan</option>
+                <option value="San Luis">San Luis</option>
+                <option value="Santa Cruz">Santa Cruz</option>
                 <option value="Santa Fe">Santa Fe</option>
+                <option value="Santiago del Estero">Santiago del Estero</option>
+                <option value="Tierra del Fuego">Tierra del Fuego</option>
+                <option value="Tucumán">Tucumán</option>
               </select>
             </div>
           </div>
