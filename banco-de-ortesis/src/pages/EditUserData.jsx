@@ -23,8 +23,8 @@ const EditUserData = () => {
         phoneNumber: '',
         province: 'string',
         photoUser: '',
-        socialWorkNumber: 0,
-        disabilityCertificateNumber: 0,
+        socialWorkNumber: '',
+        disabilityCertificateNumber: '',
         repeatedPassword: ''
     });
 
@@ -43,7 +43,7 @@ const EditUserData = () => {
                 photoUser: photoUser || '',
                 socialWorkNumber: socialWorkNumber || 0,
                 disabilityCertificateNumber: disabilityCertificateNumber || 0,
-                repeatedPassword: repeatedPassword || ''
+                repeatedPassword: password || ''
             });
         }
     }, [auth]);
@@ -62,25 +62,26 @@ const EditUserData = () => {
         // Asegúrate de que todos los valores sean del tipo esperado y no sean undefined
         const sanitizedFormData = {
             ...formData,
-            socialWorkNumber: formData.socialWorkNumber ? Number(formData.socialWorkNumber) : 0,
-            disabilityCertificateNumber: formData.disabilityCertificateNumber ? Number(formData.disabilityCertificateNumber) : 0,
-            birthday: formData.birthday || '', // asegúrate de que birthday no sea undefined
             name: formData.name || '',
             lastName: formData.lastName || '',
             dni: formData.dni || '',
             email: formData.email || '',
             password: formData.password || '',
+            birthday: formData.birthday || '', // asegúrate de que birthday no sea undefined
             phoneNumber: formData.phoneNumber || '',
             province: formData.province || 'string',
             photoUser: formData.photoUser || '',
+            socialWorkNumber: formData.socialWorkNumber ? Number(formData.socialWorkNumber) : 0,
+            disabilityCertificateNumber: formData.disabilityCertificateNumber ? Number(formData.disabilityCertificateNumber) : 0,
             repeatedPassword: formData.repeatedPassword || '',
         };
 
         try {
-            await editUser(sanitizedFormData);
+            console.log('user data to be updated', sanitizedFormData);
+            await editUser(auth.user.id_user, sanitizedFormData);
             showAlert('Datos modificados con éxito!', 'Por favor, inicia sesión nuevamente');
-            auth.logOut();
             setTimeout(() => {
+                auth.logOut();
                 navigate('/login');
             }, 2000);
         } catch (error) {
@@ -125,6 +126,21 @@ const EditUserData = () => {
                             />
                         </div>
                         <div>
+                            <label htmlFor="dni" className="sr-only">Numero de Documento</label>
+                            <input
+                                type="number"
+                                id="dni"
+                                name="dni"
+                                autoComplete="cc-number"
+                                minLength="8"
+                                required
+                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                                placeholder="Numero de documento"
+                                value={formData.dni != 0 ? formData.dni : ''}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                        <div>
                             <label htmlFor="birthday" className="sr-only">Fecha de Nacimiento</label>
                             <input
                                 type="date"
@@ -144,6 +160,8 @@ const EditUserData = () => {
                                 id="phoneNumber"
                                 name="phoneNumber"
                                 autoComplete="tel"
+                                minLength="10"
+                                maxLength="11"
                                 required
                                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                                 placeholder="Número de Teléfono"
@@ -160,12 +178,12 @@ const EditUserData = () => {
                                 required
                                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                                 placeholder="Número de Obra Social"
-                                value={formData.socialWorkNumber}
+                                value={formData.socialWorkNumber != 0 ? formData.socialWorkNumber : ''}
                                 onChange={handleInputChange}
                             />
                         </div>
                         <div>
-                            <label htmlFor="disabilityCertificateNumber" className="sr-only">Número de Certificado de Discapacidad</label>
+                            <label htmlFor="disabilityCertificateNumber" className="sr-only">Número de Certif. de Discapacidad</label>
                             <input
                                 type="number"
                                 id="disabilityCertificateNumber"
@@ -173,7 +191,7 @@ const EditUserData = () => {
                                 required
                                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                                 placeholder="Número de Certificado de Discapacidad"
-                                value={formData.disabilityCertificateNumber}
+                                value={formData.disabilityCertificateNumber != 0 ? formData.disabilityCertificateNumber : ''}
                                 onChange={handleInputChange}
                             />
                         </div>
@@ -186,13 +204,30 @@ const EditUserData = () => {
                                 onChange={handleInputChange}
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             >
-                                <option value="" defaultValue>Elige tu provincia</option>
-                                <option value="Buenos Aires">Buenos Aires</option>
-                                <option value="Cordoba">Córdoba</option>
+                                <option value="" defaultValue>Elige tu provincia </option>
+                                <option value="Buenos Aires" default>Buenos Aires</option>
+                                <option value="Catamarca">Catamarca</option>
+                                <option value="Chaco">Chaco</option>
+                                <option value="Chubut">Chubut</option>
+                                <option value="Córdoba">Córdoba</option>
+                                <option value="Corrientes">Corrientes</option>
+                                <option value="Entre Ríos">Entre Ríos</option>
+                                <option value="Formosa">Formosa</option>
+                                <option value="Jujuy">Jujuy</option>
+                                <option value="La Pampa">La Pampa</option>
+                                <option value="La Rioja">La Rioja</option>
                                 <option value="Mendoza">Mendoza</option>
+                                <option value="Misiones">Misiones</option>
+                                <option value="Neuquén">Neuquén</option>
+                                <option value="Río Negro">Río Negro</option>
                                 <option value="Salta">Salta</option>
                                 <option value="San Juan">San Juan</option>
+                                <option value="San Luis">San Luis</option>
+                                <option value="Santa Cruz">Santa Cruz</option>
                                 <option value="Santa Fe">Santa Fe</option>
+                                <option value="Santiago del Estero">Santiago del Estero</option>
+                                <option value="Tierra del Fuego">Tierra del Fuego</option>
+                                <option value="Tucumán">Tucumán</option>
                             </select>
                         </div>
                     </div>

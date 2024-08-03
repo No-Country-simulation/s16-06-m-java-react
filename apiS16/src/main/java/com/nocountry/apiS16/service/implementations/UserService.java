@@ -111,6 +111,9 @@ public class UserService implements IUserService {
         usersEdited.setEmail(userDTO.getEmail());
         usersEdited.setBirthday(userDTO.getBirthday());
         usersEdited.setPhoneNumber(userDTO.getPhoneNumber());
+        usersEdited.setSocialWorkNumber(userDTO.getSocialWorkNumber());
+        usersEdited.setDisabilityCertificateNumber(userDTO.getDisabilityCertificateNumber());
+        usersEdited.setProvince(userDTO.getProvince());
 
 
         return this.userRepository.save(usersEdited);

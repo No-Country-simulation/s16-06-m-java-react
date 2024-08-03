@@ -1,11 +1,12 @@
 // src/components/ArticleForm.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { createArticle, updateArticle } from '../services/ArticleService';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getCategories } from './../services/CategoryService';
 import { useAuth } from '../context/AuthProvider';
 import PopUpAlert from './Modals/PopUpAlert';
 import useAlert from '../hooks/useAlert';
+import ProductsContext from '../context/ProductsProvider';
 
 const ArticleForm = () => {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ const ArticleForm = () => {
   const currentProduct = location.state?.product || null;
   const [categories, setCategories] = useState([]);
   const { isAlertVisible, alertMessage, showAlert, closeAlert } = useAlert();
+  const context = useContext(ProductsContext);
   const auth = useAuth();
   const { id_user } = auth.user;
   const formatDate = (date) => {
@@ -107,7 +109,7 @@ const ArticleForm = () => {
       const response = currentProduct != null ? await updateArticle(id, product) : await createArticle(product);
       console.log(response);
       showAlert('Exito!', 'Producto registrado exitosamente! seras redirigido al inicio');
-
+      context.fetchProducts();
       setTimeout(() => {
         navigate('/home');
       }, 3000);

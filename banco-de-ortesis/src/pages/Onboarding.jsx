@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 const Onboarding = ({ onFinish }) => {
   const [step, setStep] = useState(1);
-
+  const navigate = useNavigate();
   const nextStep = () => {
     if (step < 3) {
       setStep(step + 1);
     } else {
-      onFinish();
+      navigate('/home');
     }
   };
 
