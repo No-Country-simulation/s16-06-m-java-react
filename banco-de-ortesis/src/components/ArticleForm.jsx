@@ -8,6 +8,7 @@ import PopUpAlert from './Modals/PopUpAlert';
 import useAlert from '../hooks/useAlert';
 import ProductsContext from '../context/ProductsProvider';
 
+
 const ArticleForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -16,6 +17,7 @@ const ArticleForm = () => {
   const [categories, setCategories] = useState([]);
   const { isAlertVisible, alertMessage, showAlert, closeAlert } = useAlert();
   const context = useContext(ProductsContext);
+  
   const auth = useAuth();
   const { id_user } = auth.user;
   const formatDate = (date) => {
@@ -110,6 +112,7 @@ const ArticleForm = () => {
       console.log(response);
       showAlert('Exito!', 'Producto registrado exitosamente! seras redirigido al inicio');
       context.fetchProducts();
+
       setTimeout(() => {
         navigate('/home');
       }, 3000);

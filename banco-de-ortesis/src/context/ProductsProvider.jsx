@@ -9,10 +9,10 @@ export const ProductsProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    
 
     fetchProducts();
   }, []);
+
 
   const fetchProducts = async () => {
     try {
@@ -38,6 +38,7 @@ export const ProductsProvider = ({ children }) => {
   };
 
   return (
+
     <ProductsContext.Provider value={{ productList, showList, filterProducts, loading, fetchProducts }}>
       {children}
     </ProductsContext.Provider>
