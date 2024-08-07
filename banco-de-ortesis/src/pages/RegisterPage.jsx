@@ -16,9 +16,13 @@ const Register = () => {
     email: '',
     password: '',
     province: '',
-    repeatedPassword: ''
+    repeatedPassword: '',
+    socialWorkNumber:'',
+    disabilityCertificateNumber:''
   });
-
+  
+  const[socialInput, setSocialInput] = useState(false);
+  const[disabilityCert, setDisabilityCert] = useState(false);
 
   const [showOnboarding, setShowOnboarding] = useState(false);
   const navigate = useNavigate();
@@ -32,6 +36,10 @@ const Register = () => {
       [name]: value
     });
   };
+
+  const handleSelectChange = (e, setFunction) =>{
+    setFunction(e.target.value === 'true');
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -143,10 +151,10 @@ const Register = () => {
                 id="province"
                 value={formData.province}
                 onChange={handleInputChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3  text-gray-500 leading-tight focus:outline-none focus:shadow-outline"
               >
-                <option value="" defaultValue>Elige tu provincia </option>
-                <option value="Buenos Aires" default>Buenos Aires</option>
+                <option value="">Elige tu provincia </option>
+                <option value="Buenos Aires" defaultValue>Buenos Aires</option>
                 <option value="Catamarca">Catamarca</option>
                 <option value="Chaco">Chaco</option>
                 <option value="Chubut">Chubut</option>
@@ -170,6 +178,40 @@ const Register = () => {
                 <option value="Tierra del Fuego">Tierra del Fuego</option>
                 <option value="Tucumán">Tucumán</option>
               </select>
+            </div>
+            <div className='text-blueSecond'>
+              <label htmlFor="disabilityCertificateNumber">Tienes Certificado de Discapacidad ?</label>
+              <div className='flex gap-2'>
+                <select className=" max-w-fit pr-10 shadow appearance-none border border-gray-300 rounded w-full py-2 px-3  text-gray-500 leading-tight focus:outline-none focus:shadow-outline"
+                onChange={(e)=> handleSelectChange(e, setDisabilityCert)}
+                >
+                  <option value={false} defaultValue>No</option>
+                  <option value={true}>Si</option>
+                </select>
+                <input type="number" placeholder="Ingresa numero" disabled={!disabilityCert} value={formData.disabilityCertificateNumber}
+                  onChange={handleInputChange}
+                  name='disabilityCertificateNumber'
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                />
+              </div>
+            </div>
+            <div>
+              <label htmlFor="socialWorkNumber">Tienes Obra Social ?</label>
+              <div className='flex gap-2'>
+                <select className="max-w-fit pr-10 shadow appearance-none border border-gray-300 rounded w-full py-2 px-3  text-gray-500 leading-tight focus:outline-none focus:shadow-outline"
+              onChange={(e)=> handleSelectChange(e, setSocialInput)}
+                >
+                  <option value={false} defaultValue>No</option>
+                  <option value={true}>Si</option>
+                </select>
+                <input type="number" placeholder="Ingresa numero"
+                disabled={!socialInput}
+                name='socialWorkNumber'
+                value={formData.socialWorkNumber}
+                onChange={handleInputChange}
+                  className="flex-grow-1 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                />
+              </div>
             </div>
           </div>
 

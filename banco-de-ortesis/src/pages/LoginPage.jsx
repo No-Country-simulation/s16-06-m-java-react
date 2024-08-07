@@ -27,7 +27,6 @@ const Login = () => {
     try {
       const data = await loginUser(user);
       auth.saveSessionInfo(data);
-      navigate('/profile');
     } catch (error) {
       showAlert('Error al iniciar sesión', 'Por favor intenta de nuevo más tarde')
     }
