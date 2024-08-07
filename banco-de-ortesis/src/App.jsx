@@ -39,7 +39,7 @@ function App() {
 function AppContent() {
   const location = useLocation();
   //add routes wich wont render Header or Nav components.
-  const showHeaderNav = !['/login', '/register', '/profile', '/onboarding', '/notFound'].includes(location.pathname);
+  const showHeaderNav = ['/home'].includes(location.pathname);
 
   return (
     <>
@@ -54,8 +54,6 @@ function AppContent() {
         <Route path="/article/:id" element={<ArticlePage />} />
         <Route path="*" element={<Navigate to="notFound" />} />
         <Route path={"/notFound"} element={<ErrorPage />} />
-        <Route path={'/confirmRequest'} element={<ConfirmRequest />} />
-        <Route path='/confirmed' element={<Confirmed />} />
         {/* Protected Routes */}
         <Route element={<ProtectedNode />}>
           <Route path='/editUserData/:id' element={<EditUserData />} />
@@ -66,6 +64,8 @@ function AppContent() {
           <Route path='/userArticles' element={<UserArticles />} />
           <Route path="/donate" element={<DonationRequestForm />} />
           <Route path='/request' element={<Requests />} />
+          <Route path='/confirmed' element={<Confirmed />} />
+          <Route path='/confirmRequest' element={<ConfirmRequest />} />
         </Route>
       </Routes>
       <MobileNav />

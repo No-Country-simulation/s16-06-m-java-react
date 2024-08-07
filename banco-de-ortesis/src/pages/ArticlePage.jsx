@@ -61,9 +61,9 @@ const ArticlePage = () => {
   const items = [imageURL, imageURL, imageURL];
   return (
     <>
-      <div className='flex flex-col gap-4 mb-20'>
+      <div className='flex flex-col gap-4 mb-20 '>
         <Carousel items={items} />
-        <div className='flex flex-col gap-5 p-6 text-lg text-blueSecond'>
+        <div className='flex flex-col gap-5 p-6 lg:px-72 xl:px-40  text-lg text-blueSecond'>
           <div className='flex justify-between items-center text-xl font-bold'>
             <h2>{name}</h2>
             <UserTag userName={userName} userLastName={userLastName} />
