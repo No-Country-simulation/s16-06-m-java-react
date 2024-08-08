@@ -23,7 +23,6 @@ public class Comments {
 
     @ManyToOne(targetEntity = Users.class)
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonBackReference
     private Users user;
 
     @ManyToOne(targetEntity = Product.class)

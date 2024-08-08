@@ -1,6 +1,7 @@
 package com.nocountry.apiS16.controller;
 
 import com.nocountry.apiS16.dto.CommentsDTO;
+import com.nocountry.apiS16.dto.CommentsGetDTO;
 import com.nocountry.apiS16.model.Comments;
 import com.nocountry.apiS16.service.interfaces.ICommentsService;
 import lombok.RequiredArgsConstructor;
@@ -35,12 +36,12 @@ public class CommentsController {
         }
     }
 
-    @GetMapping("/get/{id_comments}")
-    public ResponseEntity<Comments> findComments(@PathVariable Long id_comments) {
-        Comments comments = this.commentsService.findComments(id_comments);
+    @GetMapping("/get/{id_product}")
+    public ResponseEntity<List<CommentsGetDTO>> findComments(@PathVariable Long id_product) {
+        List<CommentsGetDTO> commentsList = this.commentsService.findComments(id_product);
 
-        if (comments != null) {
-            return new ResponseEntity<>(comments, HttpStatus.OK);
+        if (commentsList != null) {
+            return new ResponseEntity<>(commentsList, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

@@ -22,14 +22,14 @@ export default function ProductCard({ product, favoriteId }) {
       })
     }
     if (favoriteId) {
-      console.log('Favorito', product.id);
+      console.log('Favorito', product.idProduct);
       setFavorite(true);
     }
-  }, []);
+  }, [auth, favoriteId]);
 
   const switchFavorite = async () => {
     if (!favorite) {
-      console.log('Agrego a lista', favArticle, favorite);
+      console.log('Agrego a lista', JSON.stringify(favArticle), favorite);
       try {
         await addFavorite(favArticle);
       } catch (error) {
