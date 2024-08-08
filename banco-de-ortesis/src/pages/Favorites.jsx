@@ -1,24 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthProvider';
 import ProductCard from '../components/ProductCard';
 import { getFavorites } from '../services/FavoritesService';
+import ProductsContext from '../context/ProductsProvider';
 
 export default function Favorites() {
     const [favoritesList, setFavoritesList] = useState([]);
     const auth = useAuth();
+    const {favorites} = useContext(ProductsContext);
     if(!auth.isAuthenticated) return null;
     // const {favoritesList} = auth.user
     useEffect(()=>{
-        const getUserFavorites = async(id)=>{
-            try {
-                const favorites = await getFavorites(id);
-                setFavoritesList(favorites);
-            } catch (error) {
-                console.error('Ocurrio un error al cargar favoritos');
-            }
-        }
         if(auth.isAuthenticated){
-            getUserFavorites(auth.user.id_user);
+            setFavoritesList(favorites);
         }
     },[])
     console.log('favoritos', favoritesList);

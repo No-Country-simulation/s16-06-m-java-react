@@ -72,24 +72,35 @@ La página en general posee un instructivo de uso (con una breve introducción d
    ```
 2. Navega al directorio del proyecto:
    ```
-   cd banco-de-ortesis
+   cd s16-06-m-java-react
    ```
-3. Configura la base de datos en MySQL y ajusta los parámetros de conexión en el archivo de configuración de Spring Boot.
-4. Ejecuta el backend:
+3. Navega al directorio de backend:
+   ```
+   cd apiS16
+   ```
+4. Configura la base de datos en MySQL y ajusta los parámetros de conexión en el archivo de configuración(application properties) de Spring Boot:
+ ```
+   spring.application.name=apiS16
+   spring.datasource.url=jdbc:url/nombre Database?serverTimezone=UTC
+   spring.datasource.username= tu usuario
+   spring.datasource.password= tu contraseña
+   ```
+1. Ejecuta el backend:
    ```
    mvn spring-boot:run
    ```
-5. Navega al directorio del frontend:
+2. Navega al directorio del frontend:
    ```
-   cd frontend
+   cd ..
+   cd banco-de-ortesis
    ```
-6. Instala las dependencias:
+3. Instala las dependencias:
    ```
    npm install
    ```
-7. Ejecuta el frontend:
+4. Ejecuta el frontend:
    ```
-   npm start
+   npm run dev || npm start
    ```
    
 ### Uso
@@ -198,14 +209,14 @@ Invitamos a todos a unirse a esta iniciativa, ya sea contribuyendo con dispositi
 
 
 ### Colaboradores
-| Nombre                   | Rol      | LinkedIn                                               |
-|--------------------------|----------|--------------------------------------------------------|
-| **Pablo Velasco**        | Frontend | [LinkedIn](https://www.linkedin.com/in/pablo-r-velasco/)  |
-| **Ramiro Gonzalez**      | Frontend | [LinkedIn](https://www.linkedin.com/in/ramiro-gonzalez-98b28722a/) |
-| **Gonzalo Bolognese**    | Backend  | [LinkedIn](https://www.linkedin.com/in/gonzalo-bolognese/) |
-| **Maria Eugenia Giraldo**| Backend  | [LinkedIn](https://www.linkedin.com/in/maria-eugenia-giraldo) |
-| **Joaquin Brassinne**    | Backend  | [LinkedIn](https://www.linkedin.com/in/joaquin-brassinne-736a2b27b) |
-| **Micaela Dallavia**     | UX/UI    | [LinkedIn](https://www.linkedin.com/in/micaela-dallavia-designer-ux-ui) |
-| **Lucia Florencia Gangi**| UX/UI    | [LinkedIn](https://www.linkedin.com/in/luciagangi/) |
+| Nombre                    | Rol      | LinkedIn                                                                |
+| ------------------------- | -------- | ----------------------------------------------------------------------- |
+| **Pablo Velasco**         | Frontend | [LinkedIn](https://www.linkedin.com/in/pablo-r-velasco/)                |
+| **Ramiro Gonzalez**       | Frontend | [LinkedIn](https://www.linkedin.com/in/ramiro-gonzalez-98b28722a/)      |
+| **Gonzalo Bolognese**     | Backend  | [LinkedIn](https://www.linkedin.com/in/gonzalo-bolognese/)              |
+| **Maria Eugenia Giraldo** | Backend  | [LinkedIn](https://www.linkedin.com/in/maria-eugenia-giraldo)           |
+| **Joaquin Brassinne**     | Backend  | [LinkedIn](https://www.linkedin.com/in/joaquin-brassinne-736a2b27b)     |
+| **Micaela Dallavia**      | UX/UI    | [LinkedIn](https://www.linkedin.com/in/micaela-dallavia-designer-ux-ui) |
+| **Lucia Florencia Gangi** | UX/UI    | [LinkedIn](https://www.linkedin.com/in/luciagangi/)                     |
 
 Gracias a [Banco Mundial](https://www.worldbank.org/) y [Censo INDEC](https://www.indec.gob.ar/) por los datos estadísticos.
