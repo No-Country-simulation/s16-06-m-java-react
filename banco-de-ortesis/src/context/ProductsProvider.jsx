@@ -22,6 +22,7 @@ export const ProductsProvider = ({ children }) => {
     }
   },[auth])
 
+
   const fetchProducts = async () => {
     try {
       const products = await getAllArticles();
@@ -33,6 +34,7 @@ export const ProductsProvider = ({ children }) => {
       setLoading(false);
     }
   };
+
 
   const getUserFavorites = async (id) => {
     try {
