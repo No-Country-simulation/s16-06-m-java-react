@@ -12,6 +12,7 @@ import { useAuth } from '../context/AuthProvider';
 import useModal from './../hooks/useModal';
 import Modal1 from '../components/Modals/Modal1';
 import { newRequest } from '../services/RequestService';
+import Comments from '../components/Comments';
 
 const ArticlePage = () => {
   const auth = useAuth();
@@ -86,6 +87,7 @@ const ArticlePage = () => {
             : <></>}
 
         </div>
+        <Comments productId={id}/>
       </div>
       <Modal1
         title={modalMessage.title}

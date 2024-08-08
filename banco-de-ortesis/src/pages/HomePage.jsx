@@ -24,6 +24,20 @@ const HomePage = () => {
 
   if (loading) return <p>Loading...</p>;
 
+  const isFavorite = (idProd)=>{
+    console.log(`producto ${idProd}`, favorites.find(fav => fav.product === idProd));
+
+    const favProd = favorites.find(fav => fav.product === idProd);
+
+    if(favProd) {
+      console.log(favProd.id_favorites);
+      return favProd.id_favorites;
+    } else{
+      return null;
+    }
+      
+  }
+
   return (
     <div className='flex flex-col w-full items-center p-4 mb-20'>
       {showList.length > 0 ?
@@ -31,9 +45,7 @@ const HomePage = () => {
           <h1 className="text-lg self-start font-bold">Más buscados</h1>
           <div className='flex w-full flex-col gap-3'>
             {showList.map(product => {
-              const favorite = favorites.find(fav => fav.product.idProduct === product.idProduct);
-              const favoriteId = favorite ? favorite.id_favorites : null;
-
+               const favoriteId = isFavorite(product.idProduct);
               return (
                 <ProductCard
                   key={product.idProduct}

@@ -17,9 +17,8 @@ public class Favorites {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_favorites;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonBackReference
+    @ManyToOne(targetEntity = Users.class)
+    @JoinColumn(name = "user_id", nullable = false)
     private Users users;
 
     @ManyToOne

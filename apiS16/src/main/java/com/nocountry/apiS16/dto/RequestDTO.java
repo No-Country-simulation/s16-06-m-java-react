@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class RequestDTO implements Serializable {
 
     private Long idRequest;

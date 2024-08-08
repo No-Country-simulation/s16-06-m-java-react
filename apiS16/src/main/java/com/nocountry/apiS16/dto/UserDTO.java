@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import java.io.Serializable;
 
 import java.time.LocalDate;
+import lombok.Builder;
 
 
 @Getter
@@ -17,6 +18,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Validated
+@Builder
 public class UserDTO implements Serializable {
 
 
