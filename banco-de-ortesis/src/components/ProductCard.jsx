@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { MdOutlineStar } from "react-icons/md";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoMdHeart } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthProvider';
 import { addFavorite, deleteFavorite } from '../services/FavoritesService';
+import ProductsContext from '../context/ProductsProvider';
 
 export default function ProductCard({ product, favoriteId }) {
   if (!product) return null;
 
   const auth = useAuth();
+
+  const {getUserFavorites} = useContext(ProductsContext);
 
   const [favorite, setFavorite] = useState(false);
   const [favArticle, setFavArticle] = useState({});
@@ -44,6 +47,7 @@ export default function ProductCard({ product, favoriteId }) {
       }
       console.log('Borro de lista', product.idProduct, favorite);
     }
+    getUserFavorites(auth.user.id_user);
     setFavorite(!favorite);
   }
 

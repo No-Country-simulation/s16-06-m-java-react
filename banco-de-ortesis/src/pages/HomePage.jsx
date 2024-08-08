@@ -7,16 +7,16 @@ import ProductsContext from '../context/ProductsProvider';
 const HomePage = () => {
   const auth = useAuth();
   // const { showList, loading } = useProducts();
-  const { productList, showList, filterProducts, loading } = useContext(ProductsContext);
-  const [favorites, setFavorites] = useState([]);
+  const { productList, showList, favorites, filterProducts, loading } = useContext(ProductsContext);
+  // const [favorites, setFavorites] = useState([]);
 
   if(!showList) return null;
 
-  useEffect(() => {
-    if (auth.isAuthenticated) {
-      setFavorites(auth.user.favoritesList);
-    }
-  }, [auth]);
+  // useEffect(() => {
+  //   if (auth.isAuthenticated) {
+  //     setFavorites(auth.user.favoritesList);
+  //   }
+  // }, [auth]);
 
   useEffect(() => {
     console.log('Current ShowList in HomePage:', showList);
@@ -25,17 +25,18 @@ const HomePage = () => {
   if (loading) return <p>Loading...</p>;
 
   const isFavorite = (idProd)=>{
-    console.log(`producto ${idProd}`, favorites.find(fav => fav.product === idProd));
-
-    const favProd = favorites.find(fav => fav.product === idProd);
-
-    if(favProd) {
-      console.log(favProd.id_favorites);
-      return favProd.id_favorites;
-    } else{
-      return null;
+    if(favorites){
+      console.log(`producto ${idProd}`, favorites.find(fav => fav.product.idProduct === idProd));
+  
+      const favProd = favorites.find(fav => fav.product.idProduct === idProd);
+  
+      if(favProd) {
+        console.log(favProd.id_favorites);
+        return favProd.id_favorites;
+      } else{
+        return null;
+      }
     }
-      
   }
 
   return (

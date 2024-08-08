@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthProvider';
 import { addComment, getComments } from '../services/CommentService';
+import UserTag from './UserTag';
 
 export default function Comments() {
     const { id } = useParams();
@@ -67,7 +68,10 @@ export default function Comments() {
             <div className="space-y-4">
                 {comentarios.map((comentario, index) => (
                     <div key={index} className="bg-white p-4 border rounded shadow-sm">
-                        <div className="font-semibold text-lg">{comentario.user.name} {comentario.user.lastName}</div>
+                        <div className="flex gap-2 items-center font-semibold text-lg">
+                            <UserTag userName={comentario.user.name} userLastName={comentario.user.lastName} />
+                            {comentario.user.name} {comentario.user.lastName}
+                        </div>
                         <p className="mt-2">{comentario.description}</p>
                         <small>{comentario.creationDate[0]}/{comentario.creationDate[1]}/{comentario.creationDate[2]}</small>
                     </div>
