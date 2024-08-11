@@ -7,22 +7,37 @@ import ProductsContext from '../context/ProductsProvider';
 const HomePage = () => {
   const auth = useAuth();
   // const { showList, loading } = useProducts();
-  const { productList, showList, filterProducts, loading } = useContext(ProductsContext);
-  const [favorites, setFavorites] = useState([]);
+  const { productList, showList, favorites, filterProducts, loading } = useContext(ProductsContext);
+  // const [favorites, setFavorites] = useState([]);
 
   if(!showList) return null;
 
-  useEffect(() => {
-    if (auth.isAuthenticated) {
-      setFavorites(auth.user.favoritesList);
-    }
-  }, [auth]);
+  // useEffect(() => {
+  //   if (auth.isAuthenticated) {
+  //     setFavorites(auth.user.favoritesList);
+  //   }
+  // }, [auth]);
 
   useEffect(() => {
     console.log('Current ShowList in HomePage:', showList);
   }, [showList]);
 
   if (loading) return <p>Loading...</p>;
+
+  const isFavorite = (idProd)=>{
+    if(favorites){
+      console.log(`producto ${idProd}`, favorites.find(fav => fav.product.idProduct === idProd));
+  
+      const favProd = favorites.find(fav => fav.product.idProduct === idProd);
+  
+      if(favProd) {
+        console.log(favProd.id_favorites);
+        return favProd.id_favorites;
+      } else{
+        return null;
+      }
+    }
+  }
 
   return (
     <div className='flex flex-col w-full items-center p-4 mb-20'>
@@ -31,9 +46,7 @@ const HomePage = () => {
           <h1 className="text-lg self-start font-bold">Más buscados</h1>
           <div className='flex w-full flex-col gap-3'>
             {showList.map(product => {
-              const favorite = favorites.find(fav => fav.product.idProduct === product.idProduct);
-              const favoriteId = favorite ? favorite.id_favorites : null;
-
+               const favoriteId = isFavorite(product.idProduct);
               return (
                 <ProductCard
                   key={product.idProduct}

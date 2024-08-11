@@ -6,13 +6,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import lombok.Builder;
 
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class FavoritesDTO implements Serializable {
-    private Long id_user;
-    private Long idProduct;
+    private Long id_favorites;
+    private UserGetDTO user;
+    private ProductDTO product;
 }

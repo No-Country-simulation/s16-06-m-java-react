@@ -14,11 +14,11 @@ export default function MobileNav() {
     <div className='fixed left-0 bottom-0 flex w-full h-16 text-base  bg-cyanMain justify-evenly items-center'>
       {auth.isAuthenticated ?
         <>
-          <Link to={'/home'} className='flex text-whiteBg flex-col items-center justify-center'>
+          <Link to={'/home'} className='flex text-whiteBg flex-col items-center justify-center transition-all duration-300'>
             <SlHome className='w-6 h-6' />
             Home
           </Link>
-          <Link to={'/favorites'} className='flex text-whiteBg flex-col items-center justify-center'>
+          <Link to={'/favorites'} className='flex text-whiteBg flex-col items-center justify-center transition-all duration-300'>
             <IoMdHeartEmpty className='w-6 h-6' />
             Favoritos
           </Link>
@@ -27,11 +27,11 @@ export default function MobileNav() {
               <AiOutlinePlus className='h-7 w-7' />
             </div>
           </Link>
-          <Link to={'/userArticles'} className='flex text-whiteBg flex-col items-center justify-center'>
+          <Link to={'/userArticles'} className='flex text-whiteBg flex-col items-center justify-center transition-all duration-300'>
             <MdOutlineDns className='w-6 h-6' />
             Publicados
           </Link>
-          <Link to={'/profile'} className='flex text-whiteBg flex-col items-center justify-center'>
+          <Link to={'/profile'} className='flex text-whiteBg flex-col items-center justify-center transition-all duration-300'>
             <FaRegUser className='w-6 h-6' />
             Perfil
           </Link>
@@ -39,9 +39,9 @@ export default function MobileNav() {
         :
         <>
         <Link to={'/register'} className='text-xl p-2.5 border border-solid border-whiteBg rounded-xl 
-        bg-cyanMain text-whiteBg  font-semibold hover:bg-whiteBg hover:text-cyanMain'>Registrarme</Link>
+        bg-cyanMain text-whiteBg  font-semibold hover:bg-whiteBg hover:text-cyanMain transition-all duration-300'>Registrarme</Link>
         <Link to={'/login'} className='text-xl p-2.5 bg-whiteBg text-cyanMain  border border-solid rounded-xl
-          font-semibold hover:bg-cyanMain hover:text-whiteBg'>Iniciar Sesión</Link>
+          font-semibold hover:bg-cyanMain hover:text-whiteBg transition-all duration-300'>Iniciar Sesión</Link>
         </>}
     </div>
   )

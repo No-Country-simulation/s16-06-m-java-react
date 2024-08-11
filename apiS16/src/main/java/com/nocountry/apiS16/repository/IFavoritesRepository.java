@@ -7,11 +7,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 @Repository
 public interface IFavoritesRepository extends JpaRepository<Favorites, Long> {
-
-    //List<FavoritesDTO> findByIdUser(Long id_user);
-
-
+    @Query("SELECT f FROM Favorites f WHERE f.users.id_user = :idUser")
+List<Favorites​> findByUser(@Param("idUser") Long id_user);
 }

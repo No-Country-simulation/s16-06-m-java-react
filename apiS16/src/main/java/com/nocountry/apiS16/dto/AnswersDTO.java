@@ -6,12 +6,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import lombok.Builder;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class AnswersDTO {
+
     private String completeName;
     private String content;
     private LocalDate creationDate;
